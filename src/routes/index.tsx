@@ -54,10 +54,7 @@ function LandingPage() {
             <img src={logoUrl} alt="Neomora" className="h-8 w-auto brightness-0 invert" />
             <span className="text-sm font-semibold text-white/80">Club Manager</span>
           </div>
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium uppercase tracking-wider text-white/90 backdrop-blur">
-            <Check className="h-3.5 w-3.5" /> Trusted by 500+ academies
-          </span>
-          <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight md:text-6xl">
+          <h1 className="text-4xl font-bold leading-tight tracking-tight md:text-6xl">
             The Complete Academy
             <br />
             <span className="text-white/80">Management Platform</span>
@@ -73,6 +70,11 @@ function LandingPage() {
             </Button>
             <Button asChild size="lg" variant="outline" className="border-white bg-transparent text-white hover:bg-white hover:text-brand">
               <Link to="/login">View Demo</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-white bg-transparent text-white hover:bg-white hover:text-brand">
+              <a href="https://neomora.zielglobal.com" target="_blank" rel="noopener noreferrer">
+                Browse Events <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
             </Button>
           </div>
         </div>
