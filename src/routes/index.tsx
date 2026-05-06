@@ -71,11 +71,6 @@ function LandingPage() {
             <Button asChild size="lg" variant="outline" className="border-white bg-transparent text-white hover:bg-white hover:text-brand">
               <Link to="/login">View Demo</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white bg-transparent text-white hover:bg-white hover:text-brand">
-              <a href="https://neomora.zielglobal.com" target="_blank" rel="noopener noreferrer">
-                Browse Events <ArrowRight className="ml-2 h-4 w-4" />
-              </a>
-            </Button>
           </div>
         </div>
       </section>
