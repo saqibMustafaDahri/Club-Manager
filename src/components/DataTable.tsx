@@ -1,8 +1,9 @@
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { Search, ArrowUpDown, Download, Plus, Filter } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { EmptyState } from "@/components/EmptyState";
 
 export interface Column<T> {
   key: keyof T | string;
@@ -25,12 +26,20 @@ interface DataTableProps<T extends { id: string }> {
 
 export function DataTable<T extends { id: string }>({
   columns, data, searchKeys, searchPlaceholder = "Search…", onAdd, addLabel = "Add",
-  filters, emptyMessage = "No results.",
+  filters, emptyMessage = "No records found",
 }: DataTableProps<T>) {
   const [query, setQuery] = useState("");
   const [sortKey, setSortKey] = useState<string | null>(null);
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
   const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [loading, setLoading] = useState(true);
+
+  // Brief artificial loading so users see the skeleton at least once
+  useEffect(() => {
+    setLoading(true);
+    const t = setTimeout(() => setLoading(false), 400);
+    return () => clearTimeout(t);
+  }, []);
 
   const filtered = useMemo(() => {
     let rows = data;
