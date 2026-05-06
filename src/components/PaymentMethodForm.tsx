@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import { CreditCard, Building2, Loader2 } from "lucide-react";
+import { CreditCard, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
-export type PaymentMethodKey = "card" | "mada" | "sadad";
+export type PaymentMethodKey = "card";
 
 interface Props {
   amount: number;
@@ -16,8 +16,6 @@ const SAR = (n: number) => `SAR ${n.toLocaleString()}`;
 
 const METHOD_LABEL: Record<PaymentMethodKey, string> = {
   card: "Credit / Debit Card",
-  mada: "MADA",
-  sadad: "SADAD",
 };
 
 export function PaymentMethodForm({ amount, processing, onPay }: Props) {
@@ -33,36 +31,10 @@ export function PaymentMethodForm({ amount, processing, onPay }: Props) {
           title="Credit / Debit Card"
           subtitle="Visa, Mastercard, AmEx"
         />
-        <MethodOption
-          active={method === "mada"}
-          onClick={() => setMethod("mada")}
-          icon={
-            <span className="inline-flex items-center justify-center rounded-full bg-brand/10 px-2 py-0.5 text-xs font-bold tracking-wider text-brand">
-              MADA
-            </span>
-          }
-          title="MADA"
-          subtitle="Saudi national debit network"
-        />
-        <MethodOption
-          active={method === "sadad"}
-          onClick={() => setMethod("sadad")}
-          icon={<Building2 className="h-5 w-5 text-brand" />}
-          title="SADAD"
-          subtitle="Pay via your online banking portal"
-        />
       </div>
 
       <div className="border-t pt-5">
-        {method === "card" && (
-          <CardForm amount={amount} processing={processing} onPay={() => onPay("card", METHOD_LABEL.card)} />
-        )}
-        {method === "mada" && (
-          <CardForm amount={amount} processing={processing} mada onPay={() => onPay("mada", METHOD_LABEL.mada)} />
-        )}
-        {method === "sadad" && (
-          <SadadForm amount={amount} processing={processing} onPay={() => onPay("sadad", METHOD_LABEL.sadad)} />
-        )}
+        <CardForm amount={amount} processing={processing} onPay={() => onPay("card", METHOD_LABEL.card)} />
       </div>
     </div>
   );
@@ -104,8 +76,8 @@ function inputBase() {
 }
 
 function CardForm({
-  amount, processing, mada, onPay,
-}: { amount: number; processing: boolean; mada?: boolean; onPay: () => void }) {
+  amount, processing, onPay,
+}: { amount: number; processing: boolean; onPay: () => void }) {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [exp, setExp] = useState("");
@@ -147,9 +119,7 @@ function CardForm({
         />
       </div>
       <div>
-        <label className="text-sm font-medium text-foreground">
-          {mada ? "MADA Card Number" : "Card Number"}
-        </label>
+        <label className="text-sm font-medium text-foreground">Card Number</label>
         <input
           className={inputBase() + " font-mono tracking-wider"}
           placeholder="1234 5678 9012 3456"
@@ -188,61 +158,6 @@ function CardForm({
       >
         {processing ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
         {processing ? "Processing…" : `Pay ${SAR(amount)}`}
-      </Button>
-    </form>
-  );
-}
-
-function SadadForm({
-  amount, processing, onPay,
-}: { amount: number; processing: boolean; onPay: () => void }) {
-  const [account, setAccount] = useState("");
-  const [billing, setBilling] = useState("");
-  const valid = account.length >= 4 && billing.length >= 4;
-
-  return (
-    <form
-      className="space-y-4"
-      onSubmit={(e) => {
-        e.preventDefault();
-        if (processing) return;
-        if (!valid) {
-          toast.error("Please enter your SADAD and billing account numbers.");
-          return;
-        }
-        onPay();
-      }}
-    >
-      <div>
-        <label className="text-sm font-medium text-foreground">SADAD Account Number</label>
-        <input
-          className={inputBase() + " font-mono"}
-          placeholder="e.g. 1234567890"
-          value={account}
-          onChange={(e) => setAccount(e.target.value.replace(/\D/g, ""))}
-          inputMode="numeric"
-        />
-      </div>
-      <div>
-        <label className="text-sm font-medium text-foreground">Billing Account Number</label>
-        <input
-          className={inputBase() + " font-mono"}
-          placeholder="Bank billing reference"
-          value={billing}
-          onChange={(e) => setBilling(e.target.value.replace(/\D/g, ""))}
-          inputMode="numeric"
-        />
-      </div>
-      <p className="rounded-md bg-amber-50 px-3 py-2 text-xs text-amber-800">
-        You will receive a SADAD bill in your online banking. Payment may take up to 24 hours to reflect.
-      </p>
-      <Button
-        type="submit"
-        disabled={processing}
-        className="w-full bg-primary hover:bg-primary/90"
-      >
-        {processing ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-        {processing ? "Generating…" : `Generate SADAD Bill`}
       </Button>
     </form>
   );
