@@ -205,7 +205,12 @@ function SadadForm({
       className="space-y-4"
       onSubmit={(e) => {
         e.preventDefault();
-        if (valid && !processing) onPay();
+        if (processing) return;
+        if (!valid) {
+          toast.error("Please enter your SADAD and billing account numbers.");
+          return;
+        }
+        onPay();
       }}
     >
       <div>
@@ -233,7 +238,7 @@ function SadadForm({
       </p>
       <Button
         type="submit"
-        disabled={!valid || processing}
+        disabled={processing}
         className="w-full bg-primary hover:bg-primary/90"
       >
         {processing ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
