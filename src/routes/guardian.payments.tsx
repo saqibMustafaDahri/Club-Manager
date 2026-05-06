@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useLocation } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Download, AlertTriangle } from "lucide-react";
 import { StatusBadge } from "@/components/StatusBadge";
@@ -25,6 +25,11 @@ const synthInvoiceId = (paymentId: string) =>
 function GuardianPayments() {
   // subscribe to payment store mutations so the page updates after success
   useGuardianPaymentsStore();
+  const location = useLocation();
+
+  if (location.pathname !== "/guardian/payments") {
+    return <Outlet />;
+  }
 
   const payments = mockPayments.filter((p) => GUARDIAN_CHILD_IDS.includes(p.participantId));
 
