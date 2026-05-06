@@ -10,6 +10,9 @@ export default defineConfig({
   tanstackStart: {
     router: {
       autoCodeSplitting: false,
+      codeSplittingOptions: {
+        defaultBehavior: [],
+      },
     },
   },
 });
