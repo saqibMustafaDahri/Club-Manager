@@ -47,7 +47,11 @@ import { Route as AdminLocationsRouteImport } from './routes/admin.locations'
 import { Route as AdminFeesRouteImport } from './routes/admin.fees'
 import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as AdminAccessRouteImport } from './routes/admin.access'
+import { Route as GuardianPaymentsPayAllRouteImport } from './routes/guardian.payments.pay-all'
 import { Route as GuardianParticipantIdRouteImport } from './routes/guardian.participant.$id'
+import { Route as GuardianPaymentsSuccessAllRouteImport } from './routes/guardian.payments.success.all'
+import { Route as GuardianPaymentsSuccessInvoiceIdRouteImport } from './routes/guardian.payments.success.$invoiceId'
+import { Route as GuardianPaymentsPayInvoiceIdRouteImport } from './routes/guardian.payments.pay.$invoiceId'
 
 const StaffRoute = StaffRouteImport.update({
   id: '/staff',
@@ -242,11 +246,34 @@ const AdminAccessRoute = AdminAccessRouteImport.update({
   path: '/access',
   getParentRoute: () => AdminRoute,
 } as any)
+const GuardianPaymentsPayAllRoute = GuardianPaymentsPayAllRouteImport.update({
+  id: '/pay-all',
+  path: '/pay-all',
+  getParentRoute: () => GuardianPaymentsRoute,
+} as any)
 const GuardianParticipantIdRoute = GuardianParticipantIdRouteImport.update({
   id: '/participant/$id',
   path: '/participant/$id',
   getParentRoute: () => GuardianRoute,
 } as any)
+const GuardianPaymentsSuccessAllRoute =
+  GuardianPaymentsSuccessAllRouteImport.update({
+    id: '/success/all',
+    path: '/success/all',
+    getParentRoute: () => GuardianPaymentsRoute,
+  } as any)
+const GuardianPaymentsSuccessInvoiceIdRoute =
+  GuardianPaymentsSuccessInvoiceIdRouteImport.update({
+    id: '/success/$invoiceId',
+    path: '/success/$invoiceId',
+    getParentRoute: () => GuardianPaymentsRoute,
+  } as any)
+const GuardianPaymentsPayInvoiceIdRoute =
+  GuardianPaymentsPayInvoiceIdRouteImport.update({
+    id: '/pay/$invoiceId',
+    path: '/pay/$invoiceId',
+    getParentRoute: () => GuardianPaymentsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -272,7 +299,7 @@ export interface FileRoutesByFullPath {
   '/finance/reports': typeof FinanceReportsRoute
   '/guardian/dashboard': typeof GuardianDashboardRoute
   '/guardian/documents': typeof GuardianDocumentsRoute
-  '/guardian/payments': typeof GuardianPaymentsRoute
+  '/guardian/payments': typeof GuardianPaymentsRouteWithChildren
   '/location-manager/communications': typeof LocationManagerCommunicationsRoute
   '/location-manager/dashboard': typeof LocationManagerDashboardRoute
   '/location-manager/participants': typeof LocationManagerParticipantsRoute
@@ -288,6 +315,10 @@ export interface FileRoutesByFullPath {
   '/location-manager/': typeof LocationManagerIndexRoute
   '/staff/': typeof StaffIndexRoute
   '/guardian/participant/$id': typeof GuardianParticipantIdRoute
+  '/guardian/payments/pay-all': typeof GuardianPaymentsPayAllRoute
+  '/guardian/payments/pay/$invoiceId': typeof GuardianPaymentsPayInvoiceIdRoute
+  '/guardian/payments/success/$invoiceId': typeof GuardianPaymentsSuccessInvoiceIdRoute
+  '/guardian/payments/success/all': typeof GuardianPaymentsSuccessAllRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -308,7 +339,7 @@ export interface FileRoutesByTo {
   '/finance/reports': typeof FinanceReportsRoute
   '/guardian/dashboard': typeof GuardianDashboardRoute
   '/guardian/documents': typeof GuardianDocumentsRoute
-  '/guardian/payments': typeof GuardianPaymentsRoute
+  '/guardian/payments': typeof GuardianPaymentsRouteWithChildren
   '/location-manager/communications': typeof LocationManagerCommunicationsRoute
   '/location-manager/dashboard': typeof LocationManagerDashboardRoute
   '/location-manager/participants': typeof LocationManagerParticipantsRoute
@@ -324,6 +355,10 @@ export interface FileRoutesByTo {
   '/location-manager': typeof LocationManagerIndexRoute
   '/staff': typeof StaffIndexRoute
   '/guardian/participant/$id': typeof GuardianParticipantIdRoute
+  '/guardian/payments/pay-all': typeof GuardianPaymentsPayAllRoute
+  '/guardian/payments/pay/$invoiceId': typeof GuardianPaymentsPayInvoiceIdRoute
+  '/guardian/payments/success/$invoiceId': typeof GuardianPaymentsSuccessInvoiceIdRoute
+  '/guardian/payments/success/all': typeof GuardianPaymentsSuccessAllRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -350,7 +385,7 @@ export interface FileRoutesById {
   '/finance/reports': typeof FinanceReportsRoute
   '/guardian/dashboard': typeof GuardianDashboardRoute
   '/guardian/documents': typeof GuardianDocumentsRoute
-  '/guardian/payments': typeof GuardianPaymentsRoute
+  '/guardian/payments': typeof GuardianPaymentsRouteWithChildren
   '/location-manager/communications': typeof LocationManagerCommunicationsRoute
   '/location-manager/dashboard': typeof LocationManagerDashboardRoute
   '/location-manager/participants': typeof LocationManagerParticipantsRoute
@@ -366,6 +401,10 @@ export interface FileRoutesById {
   '/location-manager/': typeof LocationManagerIndexRoute
   '/staff/': typeof StaffIndexRoute
   '/guardian/participant/$id': typeof GuardianParticipantIdRoute
+  '/guardian/payments/pay-all': typeof GuardianPaymentsPayAllRoute
+  '/guardian/payments/pay/$invoiceId': typeof GuardianPaymentsPayInvoiceIdRoute
+  '/guardian/payments/success/$invoiceId': typeof GuardianPaymentsSuccessInvoiceIdRoute
+  '/guardian/payments/success/all': typeof GuardianPaymentsSuccessAllRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -409,6 +448,10 @@ export interface FileRouteTypes {
     | '/location-manager/'
     | '/staff/'
     | '/guardian/participant/$id'
+    | '/guardian/payments/pay-all'
+    | '/guardian/payments/pay/$invoiceId'
+    | '/guardian/payments/success/$invoiceId'
+    | '/guardian/payments/success/all'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -445,6 +488,10 @@ export interface FileRouteTypes {
     | '/location-manager'
     | '/staff'
     | '/guardian/participant/$id'
+    | '/guardian/payments/pay-all'
+    | '/guardian/payments/pay/$invoiceId'
+    | '/guardian/payments/success/$invoiceId'
+    | '/guardian/payments/success/all'
   id:
     | '__root__'
     | '/'
@@ -486,6 +533,10 @@ export interface FileRouteTypes {
     | '/location-manager/'
     | '/staff/'
     | '/guardian/participant/$id'
+    | '/guardian/payments/pay-all'
+    | '/guardian/payments/pay/$invoiceId'
+    | '/guardian/payments/success/$invoiceId'
+    | '/guardian/payments/success/all'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -766,12 +817,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAccessRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/guardian/payments/pay-all': {
+      id: '/guardian/payments/pay-all'
+      path: '/pay-all'
+      fullPath: '/guardian/payments/pay-all'
+      preLoaderRoute: typeof GuardianPaymentsPayAllRouteImport
+      parentRoute: typeof GuardianPaymentsRoute
+    }
     '/guardian/participant/$id': {
       id: '/guardian/participant/$id'
       path: '/participant/$id'
       fullPath: '/guardian/participant/$id'
       preLoaderRoute: typeof GuardianParticipantIdRouteImport
       parentRoute: typeof GuardianRoute
+    }
+    '/guardian/payments/success/all': {
+      id: '/guardian/payments/success/all'
+      path: '/success/all'
+      fullPath: '/guardian/payments/success/all'
+      preLoaderRoute: typeof GuardianPaymentsSuccessAllRouteImport
+      parentRoute: typeof GuardianPaymentsRoute
+    }
+    '/guardian/payments/success/$invoiceId': {
+      id: '/guardian/payments/success/$invoiceId'
+      path: '/success/$invoiceId'
+      fullPath: '/guardian/payments/success/$invoiceId'
+      preLoaderRoute: typeof GuardianPaymentsSuccessInvoiceIdRouteImport
+      parentRoute: typeof GuardianPaymentsRoute
+    }
+    '/guardian/payments/pay/$invoiceId': {
+      id: '/guardian/payments/pay/$invoiceId'
+      path: '/pay/$invoiceId'
+      fullPath: '/guardian/payments/pay/$invoiceId'
+      preLoaderRoute: typeof GuardianPaymentsPayInvoiceIdRouteImport
+      parentRoute: typeof GuardianPaymentsRoute
     }
   }
 }
@@ -825,10 +904,27 @@ const FinanceRouteChildren: FinanceRouteChildren = {
 const FinanceRouteWithChildren =
   FinanceRoute._addFileChildren(FinanceRouteChildren)
 
+interface GuardianPaymentsRouteChildren {
+  GuardianPaymentsPayAllRoute: typeof GuardianPaymentsPayAllRoute
+  GuardianPaymentsPayInvoiceIdRoute: typeof GuardianPaymentsPayInvoiceIdRoute
+  GuardianPaymentsSuccessInvoiceIdRoute: typeof GuardianPaymentsSuccessInvoiceIdRoute
+  GuardianPaymentsSuccessAllRoute: typeof GuardianPaymentsSuccessAllRoute
+}
+
+const GuardianPaymentsRouteChildren: GuardianPaymentsRouteChildren = {
+  GuardianPaymentsPayAllRoute: GuardianPaymentsPayAllRoute,
+  GuardianPaymentsPayInvoiceIdRoute: GuardianPaymentsPayInvoiceIdRoute,
+  GuardianPaymentsSuccessInvoiceIdRoute: GuardianPaymentsSuccessInvoiceIdRoute,
+  GuardianPaymentsSuccessAllRoute: GuardianPaymentsSuccessAllRoute,
+}
+
+const GuardianPaymentsRouteWithChildren =
+  GuardianPaymentsRoute._addFileChildren(GuardianPaymentsRouteChildren)
+
 interface GuardianRouteChildren {
   GuardianDashboardRoute: typeof GuardianDashboardRoute
   GuardianDocumentsRoute: typeof GuardianDocumentsRoute
-  GuardianPaymentsRoute: typeof GuardianPaymentsRoute
+  GuardianPaymentsRoute: typeof GuardianPaymentsRouteWithChildren
   GuardianIndexRoute: typeof GuardianIndexRoute
   GuardianParticipantIdRoute: typeof GuardianParticipantIdRoute
 }
@@ -836,7 +932,7 @@ interface GuardianRouteChildren {
 const GuardianRouteChildren: GuardianRouteChildren = {
   GuardianDashboardRoute: GuardianDashboardRoute,
   GuardianDocumentsRoute: GuardianDocumentsRoute,
-  GuardianPaymentsRoute: GuardianPaymentsRoute,
+  GuardianPaymentsRoute: GuardianPaymentsRouteWithChildren,
   GuardianIndexRoute: GuardianIndexRoute,
   GuardianParticipantIdRoute: GuardianParticipantIdRoute,
 }
