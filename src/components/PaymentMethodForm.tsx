@@ -183,7 +183,7 @@ function CardForm({
       </div>
       <Button
         type="submit"
-        disabled={!valid || processing}
+        disabled={processing}
         className="w-full bg-primary hover:bg-primary/90"
       >
         {processing ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
