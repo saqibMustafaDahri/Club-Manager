@@ -30,7 +30,7 @@ function GuardianLayout() {
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-6">
           <Link to="/guardian" preload="render" className="flex items-center gap-3">
             <div className="flex h-9 items-center justify-center rounded-md bg-sidebar px-2">
-              <img src={logoUrl} alt="Neomora" className="h-5 w-auto" />
+              <img src={logoUrl} alt="Neomora" className="h-5 w-auto brightness-0 invert" />
             </div>
             <span className="hidden text-sm font-semibold text-sidebar md:inline">Guardian Portal</span>
           </Link>
