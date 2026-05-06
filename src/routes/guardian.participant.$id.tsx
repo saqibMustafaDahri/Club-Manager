@@ -2,13 +2,13 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Info } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { StatusBadge } from "@/components/StatusBadge";
-import { mockParticipants } from "@/data/mockParticipants";
+import { mockParticipants, type MockParticipant } from "@/data/mockParticipants";
 import { mockPayments } from "@/data/mockPayments";
 import { GUARDIAN_CHILD_IDS } from "@/data/guardianContext";
 
 export const Route = createFileRoute("/guardian/participant/$id")({
   component: ParticipantDetail,
-  loader: ({ params }) => {
+  loader: ({ params }): MockParticipant => {
     if (!GUARDIAN_CHILD_IDS.includes(params.id)) throw notFound();
     const participant = mockParticipants.find((p) => p.id === params.id);
     if (!participant) throw notFound();
