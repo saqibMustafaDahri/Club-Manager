@@ -22,8 +22,6 @@ import { Route as GuardianIndexRouteImport } from './routes/guardian.index'
 import { Route as FinanceIndexRouteImport } from './routes/finance.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as StaffSquadRouteImport } from './routes/staff.squad'
-import { Route as StaffScheduleRouteImport } from './routes/staff.schedule'
-import { Route as StaffNotesRouteImport } from './routes/staff.notes'
 import { Route as StaffAttendanceRouteImport } from './routes/staff.attendance'
 import { Route as LocationManagerWaitlistRouteImport } from './routes/location-manager.waitlist'
 import { Route as LocationManagerSessionsRouteImport } from './routes/location-manager.sessions'
@@ -110,16 +108,6 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
 const StaffSquadRoute = StaffSquadRouteImport.update({
   id: '/squad',
   path: '/squad',
-  getParentRoute: () => StaffRoute,
-} as any)
-const StaffScheduleRoute = StaffScheduleRouteImport.update({
-  id: '/schedule',
-  path: '/schedule',
-  getParentRoute: () => StaffRoute,
-} as any)
-const StaffNotesRoute = StaffNotesRouteImport.update({
-  id: '/notes',
-  path: '/notes',
   getParentRoute: () => StaffRoute,
 } as any)
 const StaffAttendanceRoute = StaffAttendanceRouteImport.update({
@@ -265,8 +253,6 @@ export interface FileRoutesByFullPath {
   '/location-manager/sessions': typeof LocationManagerSessionsRoute
   '/location-manager/waitlist': typeof LocationManagerWaitlistRoute
   '/staff/attendance': typeof StaffAttendanceRoute
-  '/staff/notes': typeof StaffNotesRoute
-  '/staff/schedule': typeof StaffScheduleRoute
   '/staff/squad': typeof StaffSquadRoute
   '/admin/': typeof AdminIndexRoute
   '/finance/': typeof FinanceIndexRoute
@@ -299,8 +285,6 @@ export interface FileRoutesByTo {
   '/location-manager/sessions': typeof LocationManagerSessionsRoute
   '/location-manager/waitlist': typeof LocationManagerWaitlistRoute
   '/staff/attendance': typeof StaffAttendanceRoute
-  '/staff/notes': typeof StaffNotesRoute
-  '/staff/schedule': typeof StaffScheduleRoute
   '/staff/squad': typeof StaffSquadRoute
   '/admin': typeof AdminIndexRoute
   '/finance': typeof FinanceIndexRoute
@@ -339,8 +323,6 @@ export interface FileRoutesById {
   '/location-manager/sessions': typeof LocationManagerSessionsRoute
   '/location-manager/waitlist': typeof LocationManagerWaitlistRoute
   '/staff/attendance': typeof StaffAttendanceRoute
-  '/staff/notes': typeof StaffNotesRoute
-  '/staff/schedule': typeof StaffScheduleRoute
   '/staff/squad': typeof StaffSquadRoute
   '/admin/': typeof AdminIndexRoute
   '/finance/': typeof FinanceIndexRoute
@@ -380,8 +362,6 @@ export interface FileRouteTypes {
     | '/location-manager/sessions'
     | '/location-manager/waitlist'
     | '/staff/attendance'
-    | '/staff/notes'
-    | '/staff/schedule'
     | '/staff/squad'
     | '/admin/'
     | '/finance/'
@@ -414,8 +394,6 @@ export interface FileRouteTypes {
     | '/location-manager/sessions'
     | '/location-manager/waitlist'
     | '/staff/attendance'
-    | '/staff/notes'
-    | '/staff/schedule'
     | '/staff/squad'
     | '/admin'
     | '/finance'
@@ -453,8 +431,6 @@ export interface FileRouteTypes {
     | '/location-manager/sessions'
     | '/location-manager/waitlist'
     | '/staff/attendance'
-    | '/staff/notes'
-    | '/staff/schedule'
     | '/staff/squad'
     | '/admin/'
     | '/finance/'
@@ -565,20 +541,6 @@ declare module '@tanstack/react-router' {
       path: '/squad'
       fullPath: '/staff/squad'
       preLoaderRoute: typeof StaffSquadRouteImport
-      parentRoute: typeof StaffRoute
-    }
-    '/staff/schedule': {
-      id: '/staff/schedule'
-      path: '/schedule'
-      fullPath: '/staff/schedule'
-      preLoaderRoute: typeof StaffScheduleRouteImport
-      parentRoute: typeof StaffRoute
-    }
-    '/staff/notes': {
-      id: '/staff/notes'
-      path: '/notes'
-      fullPath: '/staff/notes'
-      preLoaderRoute: typeof StaffNotesRouteImport
       parentRoute: typeof StaffRoute
     }
     '/staff/attendance': {
@@ -827,16 +789,12 @@ const LocationManagerRouteWithChildren = LocationManagerRoute._addFileChildren(
 
 interface StaffRouteChildren {
   StaffAttendanceRoute: typeof StaffAttendanceRoute
-  StaffNotesRoute: typeof StaffNotesRoute
-  StaffScheduleRoute: typeof StaffScheduleRoute
   StaffSquadRoute: typeof StaffSquadRoute
   StaffIndexRoute: typeof StaffIndexRoute
 }
 
 const StaffRouteChildren: StaffRouteChildren = {
   StaffAttendanceRoute: StaffAttendanceRoute,
-  StaffNotesRoute: StaffNotesRoute,
-  StaffScheduleRoute: StaffScheduleRoute,
   StaffSquadRoute: StaffSquadRoute,
   StaffIndexRoute: StaffIndexRoute,
 }
@@ -855,3 +813,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
