@@ -10,9 +10,15 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as LocationManagerRouteImport } from './routes/location-manager'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LocationManagerIndexRouteImport } from './routes/location-manager.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as LocationManagerStaffRouteImport } from './routes/location-manager.staff'
+import { Route as LocationManagerSessionsRouteImport } from './routes/location-manager.sessions'
+import { Route as LocationManagerParticipantsRouteImport } from './routes/location-manager.participants'
+import { Route as LocationManagerMessagesRouteImport } from './routes/location-manager.messages'
 import { Route as AdminStaffRouteImport } from './routes/admin.staff'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminReportsRouteImport } from './routes/admin.reports'
@@ -25,6 +31,11 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LocationManagerRoute = LocationManagerRouteImport.update({
+  id: '/location-manager',
+  path: '/location-manager',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -35,10 +46,36 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LocationManagerIndexRoute = LocationManagerIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LocationManagerRoute,
+} as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminRoute,
+} as any)
+const LocationManagerStaffRoute = LocationManagerStaffRouteImport.update({
+  id: '/staff',
+  path: '/staff',
+  getParentRoute: () => LocationManagerRoute,
+} as any)
+const LocationManagerSessionsRoute = LocationManagerSessionsRouteImport.update({
+  id: '/sessions',
+  path: '/sessions',
+  getParentRoute: () => LocationManagerRoute,
+} as any)
+const LocationManagerParticipantsRoute =
+  LocationManagerParticipantsRouteImport.update({
+    id: '/participants',
+    path: '/participants',
+    getParentRoute: () => LocationManagerRoute,
+  } as any)
+const LocationManagerMessagesRoute = LocationManagerMessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => LocationManagerRoute,
 } as any)
 const AdminStaffRoute = AdminStaffRouteImport.update({
   id: '/staff',
@@ -74,6 +111,7 @@ const AdminCommunicationsRoute = AdminCommunicationsRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/location-manager': typeof LocationManagerRouteWithChildren
   '/login': typeof LoginRoute
   '/admin/communications': typeof AdminCommunicationsRoute
   '/admin/locations': typeof AdminLocationsRoute
@@ -81,7 +119,12 @@ export interface FileRoutesByFullPath {
   '/admin/reports': typeof AdminReportsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/staff': typeof AdminStaffRoute
+  '/location-manager/messages': typeof LocationManagerMessagesRoute
+  '/location-manager/participants': typeof LocationManagerParticipantsRoute
+  '/location-manager/sessions': typeof LocationManagerSessionsRoute
+  '/location-manager/staff': typeof LocationManagerStaffRoute
   '/admin/': typeof AdminIndexRoute
+  '/location-manager/': typeof LocationManagerIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -92,12 +135,18 @@ export interface FileRoutesByTo {
   '/admin/reports': typeof AdminReportsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/staff': typeof AdminStaffRoute
+  '/location-manager/messages': typeof LocationManagerMessagesRoute
+  '/location-manager/participants': typeof LocationManagerParticipantsRoute
+  '/location-manager/sessions': typeof LocationManagerSessionsRoute
+  '/location-manager/staff': typeof LocationManagerStaffRoute
   '/admin': typeof AdminIndexRoute
+  '/location-manager': typeof LocationManagerIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/location-manager': typeof LocationManagerRouteWithChildren
   '/login': typeof LoginRoute
   '/admin/communications': typeof AdminCommunicationsRoute
   '/admin/locations': typeof AdminLocationsRoute
@@ -105,13 +154,19 @@ export interface FileRoutesById {
   '/admin/reports': typeof AdminReportsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/staff': typeof AdminStaffRoute
+  '/location-manager/messages': typeof LocationManagerMessagesRoute
+  '/location-manager/participants': typeof LocationManagerParticipantsRoute
+  '/location-manager/sessions': typeof LocationManagerSessionsRoute
+  '/location-manager/staff': typeof LocationManagerStaffRoute
   '/admin/': typeof AdminIndexRoute
+  '/location-manager/': typeof LocationManagerIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/admin'
+    | '/location-manager'
     | '/login'
     | '/admin/communications'
     | '/admin/locations'
@@ -119,7 +174,12 @@ export interface FileRouteTypes {
     | '/admin/reports'
     | '/admin/settings'
     | '/admin/staff'
+    | '/location-manager/messages'
+    | '/location-manager/participants'
+    | '/location-manager/sessions'
+    | '/location-manager/staff'
     | '/admin/'
+    | '/location-manager/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -130,11 +190,17 @@ export interface FileRouteTypes {
     | '/admin/reports'
     | '/admin/settings'
     | '/admin/staff'
+    | '/location-manager/messages'
+    | '/location-manager/participants'
+    | '/location-manager/sessions'
+    | '/location-manager/staff'
     | '/admin'
+    | '/location-manager'
   id:
     | '__root__'
     | '/'
     | '/admin'
+    | '/location-manager'
     | '/login'
     | '/admin/communications'
     | '/admin/locations'
@@ -142,12 +208,18 @@ export interface FileRouteTypes {
     | '/admin/reports'
     | '/admin/settings'
     | '/admin/staff'
+    | '/location-manager/messages'
+    | '/location-manager/participants'
+    | '/location-manager/sessions'
+    | '/location-manager/staff'
     | '/admin/'
+    | '/location-manager/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
+  LocationManagerRoute: typeof LocationManagerRouteWithChildren
   LoginRoute: typeof LoginRoute
 }
 
@@ -158,6 +230,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/location-manager': {
+      id: '/location-manager'
+      path: '/location-manager'
+      fullPath: '/location-manager'
+      preLoaderRoute: typeof LocationManagerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -174,12 +253,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/location-manager/': {
+      id: '/location-manager/'
+      path: '/'
+      fullPath: '/location-manager/'
+      preLoaderRoute: typeof LocationManagerIndexRouteImport
+      parentRoute: typeof LocationManagerRoute
+    }
     '/admin/': {
       id: '/admin/'
       path: '/'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/location-manager/staff': {
+      id: '/location-manager/staff'
+      path: '/staff'
+      fullPath: '/location-manager/staff'
+      preLoaderRoute: typeof LocationManagerStaffRouteImport
+      parentRoute: typeof LocationManagerRoute
+    }
+    '/location-manager/sessions': {
+      id: '/location-manager/sessions'
+      path: '/sessions'
+      fullPath: '/location-manager/sessions'
+      preLoaderRoute: typeof LocationManagerSessionsRouteImport
+      parentRoute: typeof LocationManagerRoute
+    }
+    '/location-manager/participants': {
+      id: '/location-manager/participants'
+      path: '/participants'
+      fullPath: '/location-manager/participants'
+      preLoaderRoute: typeof LocationManagerParticipantsRouteImport
+      parentRoute: typeof LocationManagerRoute
+    }
+    '/location-manager/messages': {
+      id: '/location-manager/messages'
+      path: '/messages'
+      fullPath: '/location-manager/messages'
+      preLoaderRoute: typeof LocationManagerMessagesRouteImport
+      parentRoute: typeof LocationManagerRoute
     }
     '/admin/staff': {
       id: '/admin/staff'
@@ -248,9 +362,30 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
+interface LocationManagerRouteChildren {
+  LocationManagerMessagesRoute: typeof LocationManagerMessagesRoute
+  LocationManagerParticipantsRoute: typeof LocationManagerParticipantsRoute
+  LocationManagerSessionsRoute: typeof LocationManagerSessionsRoute
+  LocationManagerStaffRoute: typeof LocationManagerStaffRoute
+  LocationManagerIndexRoute: typeof LocationManagerIndexRoute
+}
+
+const LocationManagerRouteChildren: LocationManagerRouteChildren = {
+  LocationManagerMessagesRoute: LocationManagerMessagesRoute,
+  LocationManagerParticipantsRoute: LocationManagerParticipantsRoute,
+  LocationManagerSessionsRoute: LocationManagerSessionsRoute,
+  LocationManagerStaffRoute: LocationManagerStaffRoute,
+  LocationManagerIndexRoute: LocationManagerIndexRoute,
+}
+
+const LocationManagerRouteWithChildren = LocationManagerRoute._addFileChildren(
+  LocationManagerRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
+  LocationManagerRoute: LocationManagerRouteWithChildren,
   LoginRoute: LoginRoute,
 }
 export const routeTree = rootRouteImport
