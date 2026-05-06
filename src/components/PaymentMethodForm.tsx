@@ -119,9 +119,9 @@ function CardForm({
 
   const valid =
     name.trim().length > 1 &&
-    number.replace(/\s/g, "").length === 16 &&
+    number.replace(/\s/g, "").length >= 12 &&
     /^\d{2}\/\d{2}$/.test(exp) &&
-    cvv.length === 3;
+    cvv.length >= 3;
 
   return (
     <form
