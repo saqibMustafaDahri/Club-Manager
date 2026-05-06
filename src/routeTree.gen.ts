@@ -11,16 +11,22 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LocationManagerRouteImport } from './routes/location-manager'
+import { Route as GuardianRouteImport } from './routes/guardian'
 import { Route as FinanceRouteImport } from './routes/finance'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocationManagerIndexRouteImport } from './routes/location-manager.index'
+import { Route as GuardianIndexRouteImport } from './routes/guardian.index'
 import { Route as FinanceIndexRouteImport } from './routes/finance.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as LocationManagerStaffRouteImport } from './routes/location-manager.staff'
 import { Route as LocationManagerSessionsRouteImport } from './routes/location-manager.sessions'
 import { Route as LocationManagerParticipantsRouteImport } from './routes/location-manager.participants'
 import { Route as LocationManagerMessagesRouteImport } from './routes/location-manager.messages'
+import { Route as GuardianSessionsRouteImport } from './routes/guardian.sessions'
+import { Route as GuardianPaymentsRouteImport } from './routes/guardian.payments'
+import { Route as GuardianMessagesRouteImport } from './routes/guardian.messages'
+import { Route as GuardianChildrenRouteImport } from './routes/guardian.children'
 import { Route as FinanceReportsRouteImport } from './routes/finance.reports'
 import { Route as FinanceRefundsRouteImport } from './routes/finance.refunds'
 import { Route as FinancePaymentsRouteImport } from './routes/finance.payments'
@@ -42,6 +48,11 @@ const LocationManagerRoute = LocationManagerRouteImport.update({
   path: '/location-manager',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuardianRoute = GuardianRouteImport.update({
+  id: '/guardian',
+  path: '/guardian',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FinanceRoute = FinanceRouteImport.update({
   id: '/finance',
   path: '/finance',
@@ -61,6 +72,11 @@ const LocationManagerIndexRoute = LocationManagerIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => LocationManagerRoute,
+} as any)
+const GuardianIndexRoute = GuardianIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => GuardianRoute,
 } as any)
 const FinanceIndexRoute = FinanceIndexRouteImport.update({
   id: '/',
@@ -92,6 +108,26 @@ const LocationManagerMessagesRoute = LocationManagerMessagesRouteImport.update({
   id: '/messages',
   path: '/messages',
   getParentRoute: () => LocationManagerRoute,
+} as any)
+const GuardianSessionsRoute = GuardianSessionsRouteImport.update({
+  id: '/sessions',
+  path: '/sessions',
+  getParentRoute: () => GuardianRoute,
+} as any)
+const GuardianPaymentsRoute = GuardianPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => GuardianRoute,
+} as any)
+const GuardianMessagesRoute = GuardianMessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => GuardianRoute,
+} as any)
+const GuardianChildrenRoute = GuardianChildrenRouteImport.update({
+  id: '/children',
+  path: '/children',
+  getParentRoute: () => GuardianRoute,
 } as any)
 const FinanceReportsRoute = FinanceReportsRouteImport.update({
   id: '/reports',
@@ -148,6 +184,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/finance': typeof FinanceRouteWithChildren
+  '/guardian': typeof GuardianRouteWithChildren
   '/location-manager': typeof LocationManagerRouteWithChildren
   '/login': typeof LoginRoute
   '/admin/communications': typeof AdminCommunicationsRoute
@@ -160,12 +197,17 @@ export interface FileRoutesByFullPath {
   '/finance/payments': typeof FinancePaymentsRoute
   '/finance/refunds': typeof FinanceRefundsRoute
   '/finance/reports': typeof FinanceReportsRoute
+  '/guardian/children': typeof GuardianChildrenRoute
+  '/guardian/messages': typeof GuardianMessagesRoute
+  '/guardian/payments': typeof GuardianPaymentsRoute
+  '/guardian/sessions': typeof GuardianSessionsRoute
   '/location-manager/messages': typeof LocationManagerMessagesRoute
   '/location-manager/participants': typeof LocationManagerParticipantsRoute
   '/location-manager/sessions': typeof LocationManagerSessionsRoute
   '/location-manager/staff': typeof LocationManagerStaffRoute
   '/admin/': typeof AdminIndexRoute
   '/finance/': typeof FinanceIndexRoute
+  '/guardian/': typeof GuardianIndexRoute
   '/location-manager/': typeof LocationManagerIndexRoute
 }
 export interface FileRoutesByTo {
@@ -181,12 +223,17 @@ export interface FileRoutesByTo {
   '/finance/payments': typeof FinancePaymentsRoute
   '/finance/refunds': typeof FinanceRefundsRoute
   '/finance/reports': typeof FinanceReportsRoute
+  '/guardian/children': typeof GuardianChildrenRoute
+  '/guardian/messages': typeof GuardianMessagesRoute
+  '/guardian/payments': typeof GuardianPaymentsRoute
+  '/guardian/sessions': typeof GuardianSessionsRoute
   '/location-manager/messages': typeof LocationManagerMessagesRoute
   '/location-manager/participants': typeof LocationManagerParticipantsRoute
   '/location-manager/sessions': typeof LocationManagerSessionsRoute
   '/location-manager/staff': typeof LocationManagerStaffRoute
   '/admin': typeof AdminIndexRoute
   '/finance': typeof FinanceIndexRoute
+  '/guardian': typeof GuardianIndexRoute
   '/location-manager': typeof LocationManagerIndexRoute
 }
 export interface FileRoutesById {
@@ -194,6 +241,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/finance': typeof FinanceRouteWithChildren
+  '/guardian': typeof GuardianRouteWithChildren
   '/location-manager': typeof LocationManagerRouteWithChildren
   '/login': typeof LoginRoute
   '/admin/communications': typeof AdminCommunicationsRoute
@@ -206,12 +254,17 @@ export interface FileRoutesById {
   '/finance/payments': typeof FinancePaymentsRoute
   '/finance/refunds': typeof FinanceRefundsRoute
   '/finance/reports': typeof FinanceReportsRoute
+  '/guardian/children': typeof GuardianChildrenRoute
+  '/guardian/messages': typeof GuardianMessagesRoute
+  '/guardian/payments': typeof GuardianPaymentsRoute
+  '/guardian/sessions': typeof GuardianSessionsRoute
   '/location-manager/messages': typeof LocationManagerMessagesRoute
   '/location-manager/participants': typeof LocationManagerParticipantsRoute
   '/location-manager/sessions': typeof LocationManagerSessionsRoute
   '/location-manager/staff': typeof LocationManagerStaffRoute
   '/admin/': typeof AdminIndexRoute
   '/finance/': typeof FinanceIndexRoute
+  '/guardian/': typeof GuardianIndexRoute
   '/location-manager/': typeof LocationManagerIndexRoute
 }
 export interface FileRouteTypes {
@@ -220,6 +273,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/finance'
+    | '/guardian'
     | '/location-manager'
     | '/login'
     | '/admin/communications'
@@ -232,12 +286,17 @@ export interface FileRouteTypes {
     | '/finance/payments'
     | '/finance/refunds'
     | '/finance/reports'
+    | '/guardian/children'
+    | '/guardian/messages'
+    | '/guardian/payments'
+    | '/guardian/sessions'
     | '/location-manager/messages'
     | '/location-manager/participants'
     | '/location-manager/sessions'
     | '/location-manager/staff'
     | '/admin/'
     | '/finance/'
+    | '/guardian/'
     | '/location-manager/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -253,18 +312,24 @@ export interface FileRouteTypes {
     | '/finance/payments'
     | '/finance/refunds'
     | '/finance/reports'
+    | '/guardian/children'
+    | '/guardian/messages'
+    | '/guardian/payments'
+    | '/guardian/sessions'
     | '/location-manager/messages'
     | '/location-manager/participants'
     | '/location-manager/sessions'
     | '/location-manager/staff'
     | '/admin'
     | '/finance'
+    | '/guardian'
     | '/location-manager'
   id:
     | '__root__'
     | '/'
     | '/admin'
     | '/finance'
+    | '/guardian'
     | '/location-manager'
     | '/login'
     | '/admin/communications'
@@ -277,12 +342,17 @@ export interface FileRouteTypes {
     | '/finance/payments'
     | '/finance/refunds'
     | '/finance/reports'
+    | '/guardian/children'
+    | '/guardian/messages'
+    | '/guardian/payments'
+    | '/guardian/sessions'
     | '/location-manager/messages'
     | '/location-manager/participants'
     | '/location-manager/sessions'
     | '/location-manager/staff'
     | '/admin/'
     | '/finance/'
+    | '/guardian/'
     | '/location-manager/'
   fileRoutesById: FileRoutesById
 }
@@ -290,6 +360,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
   FinanceRoute: typeof FinanceRouteWithChildren
+  GuardianRoute: typeof GuardianRouteWithChildren
   LocationManagerRoute: typeof LocationManagerRouteWithChildren
   LoginRoute: typeof LoginRoute
 }
@@ -308,6 +379,13 @@ declare module '@tanstack/react-router' {
       path: '/location-manager'
       fullPath: '/location-manager'
       preLoaderRoute: typeof LocationManagerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guardian': {
+      id: '/guardian'
+      path: '/guardian'
+      fullPath: '/guardian'
+      preLoaderRoute: typeof GuardianRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/finance': {
@@ -337,6 +415,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/location-manager/'
       preLoaderRoute: typeof LocationManagerIndexRouteImport
       parentRoute: typeof LocationManagerRoute
+    }
+    '/guardian/': {
+      id: '/guardian/'
+      path: '/'
+      fullPath: '/guardian/'
+      preLoaderRoute: typeof GuardianIndexRouteImport
+      parentRoute: typeof GuardianRoute
     }
     '/finance/': {
       id: '/finance/'
@@ -379,6 +464,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/location-manager/messages'
       preLoaderRoute: typeof LocationManagerMessagesRouteImport
       parentRoute: typeof LocationManagerRoute
+    }
+    '/guardian/sessions': {
+      id: '/guardian/sessions'
+      path: '/sessions'
+      fullPath: '/guardian/sessions'
+      preLoaderRoute: typeof GuardianSessionsRouteImport
+      parentRoute: typeof GuardianRoute
+    }
+    '/guardian/payments': {
+      id: '/guardian/payments'
+      path: '/payments'
+      fullPath: '/guardian/payments'
+      preLoaderRoute: typeof GuardianPaymentsRouteImport
+      parentRoute: typeof GuardianRoute
+    }
+    '/guardian/messages': {
+      id: '/guardian/messages'
+      path: '/messages'
+      fullPath: '/guardian/messages'
+      preLoaderRoute: typeof GuardianMessagesRouteImport
+      parentRoute: typeof GuardianRoute
+    }
+    '/guardian/children': {
+      id: '/guardian/children'
+      path: '/children'
+      fullPath: '/guardian/children'
+      preLoaderRoute: typeof GuardianChildrenRouteImport
+      parentRoute: typeof GuardianRoute
     }
     '/finance/reports': {
       id: '/finance/reports'
@@ -494,6 +607,26 @@ const FinanceRouteChildren: FinanceRouteChildren = {
 const FinanceRouteWithChildren =
   FinanceRoute._addFileChildren(FinanceRouteChildren)
 
+interface GuardianRouteChildren {
+  GuardianChildrenRoute: typeof GuardianChildrenRoute
+  GuardianMessagesRoute: typeof GuardianMessagesRoute
+  GuardianPaymentsRoute: typeof GuardianPaymentsRoute
+  GuardianSessionsRoute: typeof GuardianSessionsRoute
+  GuardianIndexRoute: typeof GuardianIndexRoute
+}
+
+const GuardianRouteChildren: GuardianRouteChildren = {
+  GuardianChildrenRoute: GuardianChildrenRoute,
+  GuardianMessagesRoute: GuardianMessagesRoute,
+  GuardianPaymentsRoute: GuardianPaymentsRoute,
+  GuardianSessionsRoute: GuardianSessionsRoute,
+  GuardianIndexRoute: GuardianIndexRoute,
+}
+
+const GuardianRouteWithChildren = GuardianRoute._addFileChildren(
+  GuardianRouteChildren,
+)
+
 interface LocationManagerRouteChildren {
   LocationManagerMessagesRoute: typeof LocationManagerMessagesRoute
   LocationManagerParticipantsRoute: typeof LocationManagerParticipantsRoute
@@ -518,9 +651,19 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
   FinanceRoute: FinanceRouteWithChildren,
+  GuardianRoute: GuardianRouteWithChildren,
   LocationManagerRoute: LocationManagerRouteWithChildren,
   LoginRoute: LoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
