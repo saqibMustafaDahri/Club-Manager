@@ -128,7 +128,8 @@ function LandingPage() {
             <img src={logoUrl} alt="Neomora" className="h-5 w-auto" />
             <span>© {new Date().getFullYear()} Neomora Club Manager. All rights reserved.</span>
           </div>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap items-center gap-6">
+            <a href="https://neomora.zielglobal.com" target="_blank" rel="noopener noreferrer" className="font-medium text-brand hover:underline">Discover Neomora Events</a>
             <a href="#" className="hover:text-foreground">Privacy</a>
             <a href="#" className="hover:text-foreground">Terms</a>
             <a href="#" className="hover:text-foreground">Status</a>
