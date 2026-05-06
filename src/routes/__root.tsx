@@ -41,18 +41,18 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
+      { title: "Noemora - Club Manager" },
       { name: "description", content: "Neomora Academy Hub is a React application for managing academy operations without a backend." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
+      { property: "og:title", content: "Noemora - Club Manager" },
       { property: "og:description", content: "Neomora Academy Hub is a React application for managing academy operations without a backend." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Lovable App" },
+      { name: "twitter:title", content: "Noemora - Club Manager" },
       { name: "twitter:description", content: "Neomora Academy Hub is a React application for managing academy operations without a backend." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b0039b63-2245-4359-abaf-c0f8f86e15a8/id-preview-0e7ec82a--7ecd1f3d-c679-40a1-8333-bad5eca23e3e.lovable.app-1778072630586.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b0039b63-2245-4359-abaf-c0f8f86e15a8/id-preview-0e7ec82a--7ecd1f3d-c679-40a1-8333-bad5eca23e3e.lovable.app-1778072630586.png" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/3ce4b392-7f4b-41a4-bd86-a32e557c2245" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/3ce4b392-7f4b-41a4-bd86-a32e557c2245" },
     ],
     links: [
       {
