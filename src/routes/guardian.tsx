@@ -28,7 +28,7 @@ function GuardianLayout() {
     <div className="min-h-screen w-full" style={{ background: "#F8F9FA" }}>
       <header className="sticky top-0 z-30 border-b bg-white/95 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-6">
-          <Link to="/guardian" className="flex items-center gap-3">
+          <Link to="/guardian" preload="render" className="flex items-center gap-3">
             <div className="flex h-9 items-center justify-center rounded-md bg-sidebar px-2">
               <img src={logoUrl} alt="Neomora" className="h-5 w-auto" />
             </div>
@@ -43,6 +43,7 @@ function GuardianLayout() {
                 <Link
                   key={item.to}
                   to={item.to}
+                  preload="render"
                   className={cn(
                     "flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors",
                     active
