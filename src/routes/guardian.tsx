@@ -1,5 +1,5 @@
 import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
-import { Users, Wallet, FileText } from "lucide-react";
+import { Users, Wallet, FileText, LogOut } from "lucide-react";
 import logoUrl from "@/assets/neomora-logo.png";
 import { cn } from "@/lib/utils";
 
@@ -66,6 +66,15 @@ function GuardianLayout() {
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-sidebar text-sm font-semibold text-white">
               {initials}
             </div>
+            <Link
+              to="/login"
+              preload="render"
+              title="Sign out"
+              aria-label="Sign out"
+              className="flex h-9 w-9 items-center justify-center rounded-md text-foreground/70 hover:bg-muted hover:text-foreground"
+            >
+              <LogOut className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       </header>
