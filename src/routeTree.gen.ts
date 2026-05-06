@@ -9,16 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as StaffRouteImport } from './routes/staff'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LocationManagerRouteImport } from './routes/location-manager'
 import { Route as GuardianRouteImport } from './routes/guardian'
 import { Route as FinanceRouteImport } from './routes/finance'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as StaffIndexRouteImport } from './routes/staff.index'
 import { Route as LocationManagerIndexRouteImport } from './routes/location-manager.index'
 import { Route as GuardianIndexRouteImport } from './routes/guardian.index'
 import { Route as FinanceIndexRouteImport } from './routes/finance.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as StaffSquadRouteImport } from './routes/staff.squad'
+import { Route as StaffScheduleRouteImport } from './routes/staff.schedule'
+import { Route as StaffNotesRouteImport } from './routes/staff.notes'
+import { Route as StaffAttendanceRouteImport } from './routes/staff.attendance'
 import { Route as LocationManagerStaffRouteImport } from './routes/location-manager.staff'
 import { Route as LocationManagerSessionsRouteImport } from './routes/location-manager.sessions'
 import { Route as LocationManagerParticipantsRouteImport } from './routes/location-manager.participants'
@@ -38,6 +44,11 @@ import { Route as AdminParticipantsRouteImport } from './routes/admin.participan
 import { Route as AdminLocationsRouteImport } from './routes/admin.locations'
 import { Route as AdminCommunicationsRouteImport } from './routes/admin.communications'
 
+const StaffRoute = StaffRouteImport.update({
+  id: '/staff',
+  path: '/staff',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -68,6 +79,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StaffIndexRoute = StaffIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => StaffRoute,
+} as any)
 const LocationManagerIndexRoute = LocationManagerIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -87,6 +103,26 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminRoute,
+} as any)
+const StaffSquadRoute = StaffSquadRouteImport.update({
+  id: '/squad',
+  path: '/squad',
+  getParentRoute: () => StaffRoute,
+} as any)
+const StaffScheduleRoute = StaffScheduleRouteImport.update({
+  id: '/schedule',
+  path: '/schedule',
+  getParentRoute: () => StaffRoute,
+} as any)
+const StaffNotesRoute = StaffNotesRouteImport.update({
+  id: '/notes',
+  path: '/notes',
+  getParentRoute: () => StaffRoute,
+} as any)
+const StaffAttendanceRoute = StaffAttendanceRouteImport.update({
+  id: '/attendance',
+  path: '/attendance',
+  getParentRoute: () => StaffRoute,
 } as any)
 const LocationManagerStaffRoute = LocationManagerStaffRouteImport.update({
   id: '/staff',
@@ -187,6 +223,7 @@ export interface FileRoutesByFullPath {
   '/guardian': typeof GuardianRouteWithChildren
   '/location-manager': typeof LocationManagerRouteWithChildren
   '/login': typeof LoginRoute
+  '/staff': typeof StaffRouteWithChildren
   '/admin/communications': typeof AdminCommunicationsRoute
   '/admin/locations': typeof AdminLocationsRoute
   '/admin/participants': typeof AdminParticipantsRoute
@@ -205,10 +242,15 @@ export interface FileRoutesByFullPath {
   '/location-manager/participants': typeof LocationManagerParticipantsRoute
   '/location-manager/sessions': typeof LocationManagerSessionsRoute
   '/location-manager/staff': typeof LocationManagerStaffRoute
+  '/staff/attendance': typeof StaffAttendanceRoute
+  '/staff/notes': typeof StaffNotesRoute
+  '/staff/schedule': typeof StaffScheduleRoute
+  '/staff/squad': typeof StaffSquadRoute
   '/admin/': typeof AdminIndexRoute
   '/finance/': typeof FinanceIndexRoute
   '/guardian/': typeof GuardianIndexRoute
   '/location-manager/': typeof LocationManagerIndexRoute
+  '/staff/': typeof StaffIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -231,10 +273,15 @@ export interface FileRoutesByTo {
   '/location-manager/participants': typeof LocationManagerParticipantsRoute
   '/location-manager/sessions': typeof LocationManagerSessionsRoute
   '/location-manager/staff': typeof LocationManagerStaffRoute
+  '/staff/attendance': typeof StaffAttendanceRoute
+  '/staff/notes': typeof StaffNotesRoute
+  '/staff/schedule': typeof StaffScheduleRoute
+  '/staff/squad': typeof StaffSquadRoute
   '/admin': typeof AdminIndexRoute
   '/finance': typeof FinanceIndexRoute
   '/guardian': typeof GuardianIndexRoute
   '/location-manager': typeof LocationManagerIndexRoute
+  '/staff': typeof StaffIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -244,6 +291,7 @@ export interface FileRoutesById {
   '/guardian': typeof GuardianRouteWithChildren
   '/location-manager': typeof LocationManagerRouteWithChildren
   '/login': typeof LoginRoute
+  '/staff': typeof StaffRouteWithChildren
   '/admin/communications': typeof AdminCommunicationsRoute
   '/admin/locations': typeof AdminLocationsRoute
   '/admin/participants': typeof AdminParticipantsRoute
@@ -262,10 +310,15 @@ export interface FileRoutesById {
   '/location-manager/participants': typeof LocationManagerParticipantsRoute
   '/location-manager/sessions': typeof LocationManagerSessionsRoute
   '/location-manager/staff': typeof LocationManagerStaffRoute
+  '/staff/attendance': typeof StaffAttendanceRoute
+  '/staff/notes': typeof StaffNotesRoute
+  '/staff/schedule': typeof StaffScheduleRoute
+  '/staff/squad': typeof StaffSquadRoute
   '/admin/': typeof AdminIndexRoute
   '/finance/': typeof FinanceIndexRoute
   '/guardian/': typeof GuardianIndexRoute
   '/location-manager/': typeof LocationManagerIndexRoute
+  '/staff/': typeof StaffIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -276,6 +329,7 @@ export interface FileRouteTypes {
     | '/guardian'
     | '/location-manager'
     | '/login'
+    | '/staff'
     | '/admin/communications'
     | '/admin/locations'
     | '/admin/participants'
@@ -294,10 +348,15 @@ export interface FileRouteTypes {
     | '/location-manager/participants'
     | '/location-manager/sessions'
     | '/location-manager/staff'
+    | '/staff/attendance'
+    | '/staff/notes'
+    | '/staff/schedule'
+    | '/staff/squad'
     | '/admin/'
     | '/finance/'
     | '/guardian/'
     | '/location-manager/'
+    | '/staff/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -320,10 +379,15 @@ export interface FileRouteTypes {
     | '/location-manager/participants'
     | '/location-manager/sessions'
     | '/location-manager/staff'
+    | '/staff/attendance'
+    | '/staff/notes'
+    | '/staff/schedule'
+    | '/staff/squad'
     | '/admin'
     | '/finance'
     | '/guardian'
     | '/location-manager'
+    | '/staff'
   id:
     | '__root__'
     | '/'
@@ -332,6 +396,7 @@ export interface FileRouteTypes {
     | '/guardian'
     | '/location-manager'
     | '/login'
+    | '/staff'
     | '/admin/communications'
     | '/admin/locations'
     | '/admin/participants'
@@ -350,10 +415,15 @@ export interface FileRouteTypes {
     | '/location-manager/participants'
     | '/location-manager/sessions'
     | '/location-manager/staff'
+    | '/staff/attendance'
+    | '/staff/notes'
+    | '/staff/schedule'
+    | '/staff/squad'
     | '/admin/'
     | '/finance/'
     | '/guardian/'
     | '/location-manager/'
+    | '/staff/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -363,10 +433,18 @@ export interface RootRouteChildren {
   GuardianRoute: typeof GuardianRouteWithChildren
   LocationManagerRoute: typeof LocationManagerRouteWithChildren
   LoginRoute: typeof LoginRoute
+  StaffRoute: typeof StaffRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/staff': {
+      id: '/staff'
+      path: '/staff'
+      fullPath: '/staff'
+      preLoaderRoute: typeof StaffRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -409,6 +487,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/staff/': {
+      id: '/staff/'
+      path: '/'
+      fullPath: '/staff/'
+      preLoaderRoute: typeof StaffIndexRouteImport
+      parentRoute: typeof StaffRoute
+    }
     '/location-manager/': {
       id: '/location-manager/'
       path: '/'
@@ -436,6 +521,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/staff/squad': {
+      id: '/staff/squad'
+      path: '/squad'
+      fullPath: '/staff/squad'
+      preLoaderRoute: typeof StaffSquadRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/staff/schedule': {
+      id: '/staff/schedule'
+      path: '/schedule'
+      fullPath: '/staff/schedule'
+      preLoaderRoute: typeof StaffScheduleRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/staff/notes': {
+      id: '/staff/notes'
+      path: '/notes'
+      fullPath: '/staff/notes'
+      preLoaderRoute: typeof StaffNotesRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/staff/attendance': {
+      id: '/staff/attendance'
+      path: '/attendance'
+      fullPath: '/staff/attendance'
+      preLoaderRoute: typeof StaffAttendanceRouteImport
+      parentRoute: typeof StaffRoute
     }
     '/location-manager/staff': {
       id: '/location-manager/staff'
@@ -647,6 +760,24 @@ const LocationManagerRouteWithChildren = LocationManagerRoute._addFileChildren(
   LocationManagerRouteChildren,
 )
 
+interface StaffRouteChildren {
+  StaffAttendanceRoute: typeof StaffAttendanceRoute
+  StaffNotesRoute: typeof StaffNotesRoute
+  StaffScheduleRoute: typeof StaffScheduleRoute
+  StaffSquadRoute: typeof StaffSquadRoute
+  StaffIndexRoute: typeof StaffIndexRoute
+}
+
+const StaffRouteChildren: StaffRouteChildren = {
+  StaffAttendanceRoute: StaffAttendanceRoute,
+  StaffNotesRoute: StaffNotesRoute,
+  StaffScheduleRoute: StaffScheduleRoute,
+  StaffSquadRoute: StaffSquadRoute,
+  StaffIndexRoute: StaffIndexRoute,
+}
+
+const StaffRouteWithChildren = StaffRoute._addFileChildren(StaffRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
@@ -654,7 +785,17 @@ const rootRouteChildren: RootRouteChildren = {
   GuardianRoute: GuardianRouteWithChildren,
   LocationManagerRoute: LocationManagerRouteWithChildren,
   LoginRoute: LoginRoute,
+  StaffRoute: StaffRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
