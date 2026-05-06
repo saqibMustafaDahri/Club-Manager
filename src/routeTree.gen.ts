@@ -23,6 +23,7 @@ import { Route as FinanceIndexRouteImport } from './routes/finance.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as StaffSquadRouteImport } from './routes/staff.squad'
 import { Route as StaffSessionsRouteImport } from './routes/staff.sessions'
+import { Route as StaffDashboardRouteImport } from './routes/staff.dashboard'
 import { Route as StaffAttendanceRouteImport } from './routes/staff.attendance'
 import { Route as LocationManagerWaitlistRouteImport } from './routes/location-manager.waitlist'
 import { Route as LocationManagerSessionsRouteImport } from './routes/location-manager.sessions'
@@ -31,10 +32,12 @@ import { Route as LocationManagerDashboardRouteImport } from './routes/location-
 import { Route as LocationManagerCommunicationsRouteImport } from './routes/location-manager.communications'
 import { Route as GuardianPaymentsRouteImport } from './routes/guardian.payments'
 import { Route as GuardianDocumentsRouteImport } from './routes/guardian.documents'
+import { Route as GuardianDashboardRouteImport } from './routes/guardian.dashboard'
 import { Route as FinanceReportsRouteImport } from './routes/finance.reports'
 import { Route as FinanceRemindersRouteImport } from './routes/finance.reminders'
 import { Route as FinancePlansRouteImport } from './routes/finance.plans'
 import { Route as FinanceInvoicesRouteImport } from './routes/finance.invoices'
+import { Route as FinanceDashboardRouteImport } from './routes/finance.dashboard'
 import { Route as FinanceCollectionRouteImport } from './routes/finance.collection'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminSessionsRouteImport } from './routes/admin.sessions'
@@ -116,6 +119,11 @@ const StaffSessionsRoute = StaffSessionsRouteImport.update({
   path: '/sessions',
   getParentRoute: () => StaffRoute,
 } as any)
+const StaffDashboardRoute = StaffDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => StaffRoute,
+} as any)
 const StaffAttendanceRoute = StaffAttendanceRouteImport.update({
   id: '/attendance',
   path: '/attendance',
@@ -159,6 +167,11 @@ const GuardianDocumentsRoute = GuardianDocumentsRouteImport.update({
   path: '/documents',
   getParentRoute: () => GuardianRoute,
 } as any)
+const GuardianDashboardRoute = GuardianDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => GuardianRoute,
+} as any)
 const FinanceReportsRoute = FinanceReportsRouteImport.update({
   id: '/reports',
   path: '/reports',
@@ -177,6 +190,11 @@ const FinancePlansRoute = FinancePlansRouteImport.update({
 const FinanceInvoicesRoute = FinanceInvoicesRouteImport.update({
   id: '/invoices',
   path: '/invoices',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinanceDashboardRoute = FinanceDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => FinanceRoute,
 } as any)
 const FinanceCollectionRoute = FinanceCollectionRouteImport.update({
@@ -247,10 +265,12 @@ export interface FileRoutesByFullPath {
   '/admin/sessions': typeof AdminSessionsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/finance/collection': typeof FinanceCollectionRoute
+  '/finance/dashboard': typeof FinanceDashboardRoute
   '/finance/invoices': typeof FinanceInvoicesRoute
   '/finance/plans': typeof FinancePlansRoute
   '/finance/reminders': typeof FinanceRemindersRoute
   '/finance/reports': typeof FinanceReportsRoute
+  '/guardian/dashboard': typeof GuardianDashboardRoute
   '/guardian/documents': typeof GuardianDocumentsRoute
   '/guardian/payments': typeof GuardianPaymentsRoute
   '/location-manager/communications': typeof LocationManagerCommunicationsRoute
@@ -259,6 +279,7 @@ export interface FileRoutesByFullPath {
   '/location-manager/sessions': typeof LocationManagerSessionsRoute
   '/location-manager/waitlist': typeof LocationManagerWaitlistRoute
   '/staff/attendance': typeof StaffAttendanceRoute
+  '/staff/dashboard': typeof StaffDashboardRoute
   '/staff/sessions': typeof StaffSessionsRoute
   '/staff/squad': typeof StaffSquadRoute
   '/admin/': typeof AdminIndexRoute
@@ -280,10 +301,12 @@ export interface FileRoutesByTo {
   '/admin/sessions': typeof AdminSessionsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/finance/collection': typeof FinanceCollectionRoute
+  '/finance/dashboard': typeof FinanceDashboardRoute
   '/finance/invoices': typeof FinanceInvoicesRoute
   '/finance/plans': typeof FinancePlansRoute
   '/finance/reminders': typeof FinanceRemindersRoute
   '/finance/reports': typeof FinanceReportsRoute
+  '/guardian/dashboard': typeof GuardianDashboardRoute
   '/guardian/documents': typeof GuardianDocumentsRoute
   '/guardian/payments': typeof GuardianPaymentsRoute
   '/location-manager/communications': typeof LocationManagerCommunicationsRoute
@@ -292,6 +315,7 @@ export interface FileRoutesByTo {
   '/location-manager/sessions': typeof LocationManagerSessionsRoute
   '/location-manager/waitlist': typeof LocationManagerWaitlistRoute
   '/staff/attendance': typeof StaffAttendanceRoute
+  '/staff/dashboard': typeof StaffDashboardRoute
   '/staff/sessions': typeof StaffSessionsRoute
   '/staff/squad': typeof StaffSquadRoute
   '/admin': typeof AdminIndexRoute
@@ -319,10 +343,12 @@ export interface FileRoutesById {
   '/admin/sessions': typeof AdminSessionsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/finance/collection': typeof FinanceCollectionRoute
+  '/finance/dashboard': typeof FinanceDashboardRoute
   '/finance/invoices': typeof FinanceInvoicesRoute
   '/finance/plans': typeof FinancePlansRoute
   '/finance/reminders': typeof FinanceRemindersRoute
   '/finance/reports': typeof FinanceReportsRoute
+  '/guardian/dashboard': typeof GuardianDashboardRoute
   '/guardian/documents': typeof GuardianDocumentsRoute
   '/guardian/payments': typeof GuardianPaymentsRoute
   '/location-manager/communications': typeof LocationManagerCommunicationsRoute
@@ -331,6 +357,7 @@ export interface FileRoutesById {
   '/location-manager/sessions': typeof LocationManagerSessionsRoute
   '/location-manager/waitlist': typeof LocationManagerWaitlistRoute
   '/staff/attendance': typeof StaffAttendanceRoute
+  '/staff/dashboard': typeof StaffDashboardRoute
   '/staff/sessions': typeof StaffSessionsRoute
   '/staff/squad': typeof StaffSquadRoute
   '/admin/': typeof AdminIndexRoute
@@ -359,10 +386,12 @@ export interface FileRouteTypes {
     | '/admin/sessions'
     | '/admin/settings'
     | '/finance/collection'
+    | '/finance/dashboard'
     | '/finance/invoices'
     | '/finance/plans'
     | '/finance/reminders'
     | '/finance/reports'
+    | '/guardian/dashboard'
     | '/guardian/documents'
     | '/guardian/payments'
     | '/location-manager/communications'
@@ -371,6 +400,7 @@ export interface FileRouteTypes {
     | '/location-manager/sessions'
     | '/location-manager/waitlist'
     | '/staff/attendance'
+    | '/staff/dashboard'
     | '/staff/sessions'
     | '/staff/squad'
     | '/admin/'
@@ -392,10 +422,12 @@ export interface FileRouteTypes {
     | '/admin/sessions'
     | '/admin/settings'
     | '/finance/collection'
+    | '/finance/dashboard'
     | '/finance/invoices'
     | '/finance/plans'
     | '/finance/reminders'
     | '/finance/reports'
+    | '/guardian/dashboard'
     | '/guardian/documents'
     | '/guardian/payments'
     | '/location-manager/communications'
@@ -404,6 +436,7 @@ export interface FileRouteTypes {
     | '/location-manager/sessions'
     | '/location-manager/waitlist'
     | '/staff/attendance'
+    | '/staff/dashboard'
     | '/staff/sessions'
     | '/staff/squad'
     | '/admin'
@@ -430,10 +463,12 @@ export interface FileRouteTypes {
     | '/admin/sessions'
     | '/admin/settings'
     | '/finance/collection'
+    | '/finance/dashboard'
     | '/finance/invoices'
     | '/finance/plans'
     | '/finance/reminders'
     | '/finance/reports'
+    | '/guardian/dashboard'
     | '/guardian/documents'
     | '/guardian/payments'
     | '/location-manager/communications'
@@ -442,6 +477,7 @@ export interface FileRouteTypes {
     | '/location-manager/sessions'
     | '/location-manager/waitlist'
     | '/staff/attendance'
+    | '/staff/dashboard'
     | '/staff/sessions'
     | '/staff/squad'
     | '/admin/'
@@ -562,6 +598,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffSessionsRouteImport
       parentRoute: typeof StaffRoute
     }
+    '/staff/dashboard': {
+      id: '/staff/dashboard'
+      path: '/dashboard'
+      fullPath: '/staff/dashboard'
+      preLoaderRoute: typeof StaffDashboardRouteImport
+      parentRoute: typeof StaffRoute
+    }
     '/staff/attendance': {
       id: '/staff/attendance'
       path: '/attendance'
@@ -618,6 +661,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuardianDocumentsRouteImport
       parentRoute: typeof GuardianRoute
     }
+    '/guardian/dashboard': {
+      id: '/guardian/dashboard'
+      path: '/dashboard'
+      fullPath: '/guardian/dashboard'
+      preLoaderRoute: typeof GuardianDashboardRouteImport
+      parentRoute: typeof GuardianRoute
+    }
     '/finance/reports': {
       id: '/finance/reports'
       path: '/reports'
@@ -644,6 +694,13 @@ declare module '@tanstack/react-router' {
       path: '/invoices'
       fullPath: '/finance/invoices'
       preLoaderRoute: typeof FinanceInvoicesRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/dashboard': {
+      id: '/finance/dashboard'
+      path: '/dashboard'
+      fullPath: '/finance/dashboard'
+      preLoaderRoute: typeof FinanceDashboardRouteImport
       parentRoute: typeof FinanceRoute
     }
     '/finance/collection': {
@@ -747,6 +804,7 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface FinanceRouteChildren {
   FinanceCollectionRoute: typeof FinanceCollectionRoute
+  FinanceDashboardRoute: typeof FinanceDashboardRoute
   FinanceInvoicesRoute: typeof FinanceInvoicesRoute
   FinancePlansRoute: typeof FinancePlansRoute
   FinanceRemindersRoute: typeof FinanceRemindersRoute
@@ -756,6 +814,7 @@ interface FinanceRouteChildren {
 
 const FinanceRouteChildren: FinanceRouteChildren = {
   FinanceCollectionRoute: FinanceCollectionRoute,
+  FinanceDashboardRoute: FinanceDashboardRoute,
   FinanceInvoicesRoute: FinanceInvoicesRoute,
   FinancePlansRoute: FinancePlansRoute,
   FinanceRemindersRoute: FinanceRemindersRoute,
@@ -767,6 +826,7 @@ const FinanceRouteWithChildren =
   FinanceRoute._addFileChildren(FinanceRouteChildren)
 
 interface GuardianRouteChildren {
+  GuardianDashboardRoute: typeof GuardianDashboardRoute
   GuardianDocumentsRoute: typeof GuardianDocumentsRoute
   GuardianPaymentsRoute: typeof GuardianPaymentsRoute
   GuardianIndexRoute: typeof GuardianIndexRoute
@@ -774,6 +834,7 @@ interface GuardianRouteChildren {
 }
 
 const GuardianRouteChildren: GuardianRouteChildren = {
+  GuardianDashboardRoute: GuardianDashboardRoute,
   GuardianDocumentsRoute: GuardianDocumentsRoute,
   GuardianPaymentsRoute: GuardianPaymentsRoute,
   GuardianIndexRoute: GuardianIndexRoute,
@@ -808,6 +869,7 @@ const LocationManagerRouteWithChildren = LocationManagerRoute._addFileChildren(
 
 interface StaffRouteChildren {
   StaffAttendanceRoute: typeof StaffAttendanceRoute
+  StaffDashboardRoute: typeof StaffDashboardRoute
   StaffSessionsRoute: typeof StaffSessionsRoute
   StaffSquadRoute: typeof StaffSquadRoute
   StaffIndexRoute: typeof StaffIndexRoute
@@ -815,6 +877,7 @@ interface StaffRouteChildren {
 
 const StaffRouteChildren: StaffRouteChildren = {
   StaffAttendanceRoute: StaffAttendanceRoute,
+  StaffDashboardRoute: StaffDashboardRoute,
   StaffSessionsRoute: StaffSessionsRoute,
   StaffSquadRoute: StaffSquadRoute,
   StaffIndexRoute: StaffIndexRoute,

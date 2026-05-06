@@ -1,23 +1,34 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { Toaster } from "@/components/ui/sonner";
+import { Home, ArrowLeft } from "lucide-react";
+import logoUrl from "@/assets/neomora-logo.png";
 
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+    <div className="flex min-h-screen items-center justify-center bg-background px-6">
+      <div className="w-full max-w-md text-center">
+        <div className="mx-auto mb-8 flex h-12 items-center justify-center rounded-md bg-sidebar px-4">
+          <img src={logoUrl} alt="Neomora" className="h-6 w-auto" />
+        </div>
+        <p className="text-sm font-semibold uppercase tracking-widest text-brand">404</p>
+        <h1 className="mt-2 text-3xl font-bold tracking-tight">Page not found</h1>
+        <p className="mt-3 text-sm text-muted-foreground">
+          The page you're looking for doesn't exist or may have been moved.
         </p>
-        <div className="mt-6">
+        <div className="mt-8 flex items-center justify-center gap-3">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center gap-2 rounded-md bg-brand px-4 py-2.5 text-sm font-medium text-brand-foreground transition-colors hover:bg-brand/90"
           >
-            Go home
+            <Home className="h-4 w-4" /> Back to Home
+          </Link>
+          <Link
+            to="/login"
+            className="inline-flex items-center gap-2 rounded-md border bg-card px-4 py-2.5 text-sm font-medium hover:bg-muted"
+          >
+            <ArrowLeft className="h-4 w-4" /> Go to Sign In
           </Link>
         </div>
       </div>
