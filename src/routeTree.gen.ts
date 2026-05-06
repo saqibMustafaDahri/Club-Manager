@@ -35,8 +35,6 @@ import { Route as GuardianPaymentsRouteImport } from './routes/guardian.payments
 import { Route as GuardianMessagesRouteImport } from './routes/guardian.messages'
 import { Route as GuardianChildrenRouteImport } from './routes/guardian.children'
 import { Route as FinanceReportsRouteImport } from './routes/finance.reports'
-import { Route as FinanceRefundsRouteImport } from './routes/finance.refunds'
-import { Route as FinancePaymentsRouteImport } from './routes/finance.payments'
 import { Route as FinanceInvoicesRouteImport } from './routes/finance.invoices'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminSessionsRouteImport } from './routes/admin.sessions'
@@ -180,16 +178,6 @@ const FinanceReportsRoute = FinanceReportsRouteImport.update({
   path: '/reports',
   getParentRoute: () => FinanceRoute,
 } as any)
-const FinanceRefundsRoute = FinanceRefundsRouteImport.update({
-  id: '/refunds',
-  path: '/refunds',
-  getParentRoute: () => FinanceRoute,
-} as any)
-const FinancePaymentsRoute = FinancePaymentsRouteImport.update({
-  id: '/payments',
-  path: '/payments',
-  getParentRoute: () => FinanceRoute,
-} as any)
 const FinanceInvoicesRoute = FinanceInvoicesRouteImport.update({
   id: '/invoices',
   path: '/invoices',
@@ -253,8 +241,6 @@ export interface FileRoutesByFullPath {
   '/admin/sessions': typeof AdminSessionsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/finance/invoices': typeof FinanceInvoicesRoute
-  '/finance/payments': typeof FinancePaymentsRoute
-  '/finance/refunds': typeof FinanceRefundsRoute
   '/finance/reports': typeof FinanceReportsRoute
   '/guardian/children': typeof GuardianChildrenRoute
   '/guardian/messages': typeof GuardianMessagesRoute
@@ -287,8 +273,6 @@ export interface FileRoutesByTo {
   '/admin/sessions': typeof AdminSessionsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/finance/invoices': typeof FinanceInvoicesRoute
-  '/finance/payments': typeof FinancePaymentsRoute
-  '/finance/refunds': typeof FinanceRefundsRoute
   '/finance/reports': typeof FinanceReportsRoute
   '/guardian/children': typeof GuardianChildrenRoute
   '/guardian/messages': typeof GuardianMessagesRoute
@@ -327,8 +311,6 @@ export interface FileRoutesById {
   '/admin/sessions': typeof AdminSessionsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/finance/invoices': typeof FinanceInvoicesRoute
-  '/finance/payments': typeof FinancePaymentsRoute
-  '/finance/refunds': typeof FinanceRefundsRoute
   '/finance/reports': typeof FinanceReportsRoute
   '/guardian/children': typeof GuardianChildrenRoute
   '/guardian/messages': typeof GuardianMessagesRoute
@@ -368,8 +350,6 @@ export interface FileRouteTypes {
     | '/admin/sessions'
     | '/admin/settings'
     | '/finance/invoices'
-    | '/finance/payments'
-    | '/finance/refunds'
     | '/finance/reports'
     | '/guardian/children'
     | '/guardian/messages'
@@ -402,8 +382,6 @@ export interface FileRouteTypes {
     | '/admin/sessions'
     | '/admin/settings'
     | '/finance/invoices'
-    | '/finance/payments'
-    | '/finance/refunds'
     | '/finance/reports'
     | '/guardian/children'
     | '/guardian/messages'
@@ -441,8 +419,6 @@ export interface FileRouteTypes {
     | '/admin/sessions'
     | '/admin/settings'
     | '/finance/invoices'
-    | '/finance/payments'
-    | '/finance/refunds'
     | '/finance/reports'
     | '/guardian/children'
     | '/guardian/messages'
@@ -658,20 +634,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FinanceReportsRouteImport
       parentRoute: typeof FinanceRoute
     }
-    '/finance/refunds': {
-      id: '/finance/refunds'
-      path: '/refunds'
-      fullPath: '/finance/refunds'
-      preLoaderRoute: typeof FinanceRefundsRouteImport
-      parentRoute: typeof FinanceRoute
-    }
-    '/finance/payments': {
-      id: '/finance/payments'
-      path: '/payments'
-      fullPath: '/finance/payments'
-      preLoaderRoute: typeof FinancePaymentsRouteImport
-      parentRoute: typeof FinanceRoute
-    }
     '/finance/invoices': {
       id: '/finance/invoices'
       path: '/invoices'
@@ -766,16 +728,12 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface FinanceRouteChildren {
   FinanceInvoicesRoute: typeof FinanceInvoicesRoute
-  FinancePaymentsRoute: typeof FinancePaymentsRoute
-  FinanceRefundsRoute: typeof FinanceRefundsRoute
   FinanceReportsRoute: typeof FinanceReportsRoute
   FinanceIndexRoute: typeof FinanceIndexRoute
 }
 
 const FinanceRouteChildren: FinanceRouteChildren = {
   FinanceInvoicesRoute: FinanceInvoicesRoute,
-  FinancePaymentsRoute: FinancePaymentsRoute,
-  FinanceRefundsRoute: FinanceRefundsRoute,
   FinanceReportsRoute: FinanceReportsRoute,
   FinanceIndexRoute: FinanceIndexRoute,
 }
@@ -855,3 +813,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
