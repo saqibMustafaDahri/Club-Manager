@@ -129,7 +129,12 @@ function CardForm({
       className="space-y-4"
       onSubmit={(e) => {
         e.preventDefault();
-        if (valid && !processing) onPay();
+        if (processing) return;
+        if (!valid) {
+          toast.error("Please complete all card fields to continue.");
+          return;
+        }
+        onPay();
       }}
     >
       <div>
