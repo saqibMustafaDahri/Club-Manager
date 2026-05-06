@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "sonner";
 import { CreditCard, Building2, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -119,16 +120,21 @@ function CardForm({
 
   const valid =
     name.trim().length > 1 &&
-    number.replace(/\s/g, "").length === 16 &&
+    number.replace(/\s/g, "").length >= 12 &&
     /^\d{2}\/\d{2}$/.test(exp) &&
-    cvv.length === 3;
+    cvv.length >= 3;
 
   return (
     <form
       className="space-y-4"
       onSubmit={(e) => {
         e.preventDefault();
-        if (valid && !processing) onPay();
+        if (processing) return;
+        if (!valid) {
+          toast.error("Please complete all card fields to continue.");
+          return;
+        }
+        onPay();
       }}
     >
       <div>
@@ -177,7 +183,7 @@ function CardForm({
       </div>
       <Button
         type="submit"
-        disabled={!valid || processing}
+        disabled={processing}
         className="w-full bg-primary hover:bg-primary/90"
       >
         {processing ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
@@ -199,7 +205,12 @@ function SadadForm({
       className="space-y-4"
       onSubmit={(e) => {
         e.preventDefault();
-        if (valid && !processing) onPay();
+        if (processing) return;
+        if (!valid) {
+          toast.error("Please enter your SADAD and billing account numbers.");
+          return;
+        }
+        onPay();
       }}
     >
       <div>
@@ -227,7 +238,7 @@ function SadadForm({
       </p>
       <Button
         type="submit"
-        disabled={!valid || processing}
+        disabled={processing}
         className="w-full bg-primary hover:bg-primary/90"
       >
         {processing ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
