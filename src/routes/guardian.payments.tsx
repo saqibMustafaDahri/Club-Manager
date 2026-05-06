@@ -2,7 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Download, AlertTriangle } from "lucide-react";
 import { StatusBadge } from "@/components/StatusBadge";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { mockPayments } from "@/data/mockPayments";
 import { GUARDIAN_CHILD_IDS } from "@/data/guardianContext";
 import {
@@ -167,14 +168,14 @@ function GuardianPayments() {
                           {SAR(p.balance)}
                         </p>
                       </div>
-                      <Button asChild size="sm" className="bg-primary hover:bg-primary/90">
-                        <Link
-                          to="/guardian/payments/pay/$invoiceId"
-                          params={{ invoiceId: inv.invoiceId }}
-                        >
-                          Pay Now
-                        </Link>
-                      </Button>
+                      <Link
+                        to="/guardian/payments/pay/$invoiceId"
+                        params={{ invoiceId: inv.invoiceId }}
+                        preload="intent"
+                        className={cn(buttonVariants({ size: "sm" }), "bg-primary hover:bg-primary/90")}
+                      >
+                        Pay Now
+                      </Link>
                     </div>
                   </div>
                 );
