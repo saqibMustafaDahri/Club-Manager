@@ -9,38 +9,477 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as StaffRouteImport } from './routes/staff'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as LocationManagerRouteImport } from './routes/location-manager'
+import { Route as GuardianRouteImport } from './routes/guardian'
+import { Route as FinanceRouteImport } from './routes/finance'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as StaffIndexRouteImport } from './routes/staff.index'
+import { Route as LocationManagerIndexRouteImport } from './routes/location-manager.index'
+import { Route as GuardianIndexRouteImport } from './routes/guardian.index'
+import { Route as FinanceIndexRouteImport } from './routes/finance.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as StaffSquadRouteImport } from './routes/staff.squad'
+import { Route as StaffScheduleRouteImport } from './routes/staff.schedule'
+import { Route as StaffNotesRouteImport } from './routes/staff.notes'
+import { Route as StaffAttendanceRouteImport } from './routes/staff.attendance'
+import { Route as LocationManagerStaffRouteImport } from './routes/location-manager.staff'
+import { Route as LocationManagerSessionsRouteImport } from './routes/location-manager.sessions'
+import { Route as LocationManagerParticipantsRouteImport } from './routes/location-manager.participants'
+import { Route as LocationManagerMessagesRouteImport } from './routes/location-manager.messages'
+import { Route as GuardianSessionsRouteImport } from './routes/guardian.sessions'
+import { Route as GuardianPaymentsRouteImport } from './routes/guardian.payments'
+import { Route as GuardianMessagesRouteImport } from './routes/guardian.messages'
+import { Route as GuardianChildrenRouteImport } from './routes/guardian.children'
+import { Route as FinanceReportsRouteImport } from './routes/finance.reports'
+import { Route as FinanceRefundsRouteImport } from './routes/finance.refunds'
+import { Route as FinancePaymentsRouteImport } from './routes/finance.payments'
+import { Route as FinanceInvoicesRouteImport } from './routes/finance.invoices'
+import { Route as AdminStaffRouteImport } from './routes/admin.staff'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminReportsRouteImport } from './routes/admin.reports'
+import { Route as AdminParticipantsRouteImport } from './routes/admin.participants'
+import { Route as AdminLocationsRouteImport } from './routes/admin.locations'
+import { Route as AdminCommunicationsRouteImport } from './routes/admin.communications'
 
+const StaffRoute = StaffRouteImport.update({
+  id: '/staff',
+  path: '/staff',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocationManagerRoute = LocationManagerRouteImport.update({
+  id: '/location-manager',
+  path: '/location-manager',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuardianRoute = GuardianRouteImport.update({
+  id: '/guardian',
+  path: '/guardian',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FinanceRoute = FinanceRouteImport.update({
+  id: '/finance',
+  path: '/finance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StaffIndexRoute = StaffIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => StaffRoute,
+} as any)
+const LocationManagerIndexRoute = LocationManagerIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LocationManagerRoute,
+} as any)
+const GuardianIndexRoute = GuardianIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => GuardianRoute,
+} as any)
+const FinanceIndexRoute = FinanceIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const StaffSquadRoute = StaffSquadRouteImport.update({
+  id: '/squad',
+  path: '/squad',
+  getParentRoute: () => StaffRoute,
+} as any)
+const StaffScheduleRoute = StaffScheduleRouteImport.update({
+  id: '/schedule',
+  path: '/schedule',
+  getParentRoute: () => StaffRoute,
+} as any)
+const StaffNotesRoute = StaffNotesRouteImport.update({
+  id: '/notes',
+  path: '/notes',
+  getParentRoute: () => StaffRoute,
+} as any)
+const StaffAttendanceRoute = StaffAttendanceRouteImport.update({
+  id: '/attendance',
+  path: '/attendance',
+  getParentRoute: () => StaffRoute,
+} as any)
+const LocationManagerStaffRoute = LocationManagerStaffRouteImport.update({
+  id: '/staff',
+  path: '/staff',
+  getParentRoute: () => LocationManagerRoute,
+} as any)
+const LocationManagerSessionsRoute = LocationManagerSessionsRouteImport.update({
+  id: '/sessions',
+  path: '/sessions',
+  getParentRoute: () => LocationManagerRoute,
+} as any)
+const LocationManagerParticipantsRoute =
+  LocationManagerParticipantsRouteImport.update({
+    id: '/participants',
+    path: '/participants',
+    getParentRoute: () => LocationManagerRoute,
+  } as any)
+const LocationManagerMessagesRoute = LocationManagerMessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => LocationManagerRoute,
+} as any)
+const GuardianSessionsRoute = GuardianSessionsRouteImport.update({
+  id: '/sessions',
+  path: '/sessions',
+  getParentRoute: () => GuardianRoute,
+} as any)
+const GuardianPaymentsRoute = GuardianPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => GuardianRoute,
+} as any)
+const GuardianMessagesRoute = GuardianMessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => GuardianRoute,
+} as any)
+const GuardianChildrenRoute = GuardianChildrenRouteImport.update({
+  id: '/children',
+  path: '/children',
+  getParentRoute: () => GuardianRoute,
+} as any)
+const FinanceReportsRoute = FinanceReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinanceRefundsRoute = FinanceRefundsRouteImport.update({
+  id: '/refunds',
+  path: '/refunds',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinancePaymentsRoute = FinancePaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinanceInvoicesRoute = FinanceInvoicesRouteImport.update({
+  id: '/invoices',
+  path: '/invoices',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const AdminStaffRoute = AdminStaffRouteImport.update({
+  id: '/staff',
+  path: '/staff',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminReportsRoute = AdminReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminParticipantsRoute = AdminParticipantsRouteImport.update({
+  id: '/participants',
+  path: '/participants',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLocationsRoute = AdminLocationsRouteImport.update({
+  id: '/locations',
+  path: '/locations',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCommunicationsRoute = AdminCommunicationsRouteImport.update({
+  id: '/communications',
+  path: '/communications',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/finance': typeof FinanceRouteWithChildren
+  '/guardian': typeof GuardianRouteWithChildren
+  '/location-manager': typeof LocationManagerRouteWithChildren
+  '/login': typeof LoginRoute
+  '/staff': typeof StaffRouteWithChildren
+  '/admin/communications': typeof AdminCommunicationsRoute
+  '/admin/locations': typeof AdminLocationsRoute
+  '/admin/participants': typeof AdminParticipantsRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/staff': typeof AdminStaffRoute
+  '/finance/invoices': typeof FinanceInvoicesRoute
+  '/finance/payments': typeof FinancePaymentsRoute
+  '/finance/refunds': typeof FinanceRefundsRoute
+  '/finance/reports': typeof FinanceReportsRoute
+  '/guardian/children': typeof GuardianChildrenRoute
+  '/guardian/messages': typeof GuardianMessagesRoute
+  '/guardian/payments': typeof GuardianPaymentsRoute
+  '/guardian/sessions': typeof GuardianSessionsRoute
+  '/location-manager/messages': typeof LocationManagerMessagesRoute
+  '/location-manager/participants': typeof LocationManagerParticipantsRoute
+  '/location-manager/sessions': typeof LocationManagerSessionsRoute
+  '/location-manager/staff': typeof LocationManagerStaffRoute
+  '/staff/attendance': typeof StaffAttendanceRoute
+  '/staff/notes': typeof StaffNotesRoute
+  '/staff/schedule': typeof StaffScheduleRoute
+  '/staff/squad': typeof StaffSquadRoute
+  '/admin/': typeof AdminIndexRoute
+  '/finance/': typeof FinanceIndexRoute
+  '/guardian/': typeof GuardianIndexRoute
+  '/location-manager/': typeof LocationManagerIndexRoute
+  '/staff/': typeof StaffIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/admin/communications': typeof AdminCommunicationsRoute
+  '/admin/locations': typeof AdminLocationsRoute
+  '/admin/participants': typeof AdminParticipantsRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/staff': typeof AdminStaffRoute
+  '/finance/invoices': typeof FinanceInvoicesRoute
+  '/finance/payments': typeof FinancePaymentsRoute
+  '/finance/refunds': typeof FinanceRefundsRoute
+  '/finance/reports': typeof FinanceReportsRoute
+  '/guardian/children': typeof GuardianChildrenRoute
+  '/guardian/messages': typeof GuardianMessagesRoute
+  '/guardian/payments': typeof GuardianPaymentsRoute
+  '/guardian/sessions': typeof GuardianSessionsRoute
+  '/location-manager/messages': typeof LocationManagerMessagesRoute
+  '/location-manager/participants': typeof LocationManagerParticipantsRoute
+  '/location-manager/sessions': typeof LocationManagerSessionsRoute
+  '/location-manager/staff': typeof LocationManagerStaffRoute
+  '/staff/attendance': typeof StaffAttendanceRoute
+  '/staff/notes': typeof StaffNotesRoute
+  '/staff/schedule': typeof StaffScheduleRoute
+  '/staff/squad': typeof StaffSquadRoute
+  '/admin': typeof AdminIndexRoute
+  '/finance': typeof FinanceIndexRoute
+  '/guardian': typeof GuardianIndexRoute
+  '/location-manager': typeof LocationManagerIndexRoute
+  '/staff': typeof StaffIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/finance': typeof FinanceRouteWithChildren
+  '/guardian': typeof GuardianRouteWithChildren
+  '/location-manager': typeof LocationManagerRouteWithChildren
+  '/login': typeof LoginRoute
+  '/staff': typeof StaffRouteWithChildren
+  '/admin/communications': typeof AdminCommunicationsRoute
+  '/admin/locations': typeof AdminLocationsRoute
+  '/admin/participants': typeof AdminParticipantsRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/staff': typeof AdminStaffRoute
+  '/finance/invoices': typeof FinanceInvoicesRoute
+  '/finance/payments': typeof FinancePaymentsRoute
+  '/finance/refunds': typeof FinanceRefundsRoute
+  '/finance/reports': typeof FinanceReportsRoute
+  '/guardian/children': typeof GuardianChildrenRoute
+  '/guardian/messages': typeof GuardianMessagesRoute
+  '/guardian/payments': typeof GuardianPaymentsRoute
+  '/guardian/sessions': typeof GuardianSessionsRoute
+  '/location-manager/messages': typeof LocationManagerMessagesRoute
+  '/location-manager/participants': typeof LocationManagerParticipantsRoute
+  '/location-manager/sessions': typeof LocationManagerSessionsRoute
+  '/location-manager/staff': typeof LocationManagerStaffRoute
+  '/staff/attendance': typeof StaffAttendanceRoute
+  '/staff/notes': typeof StaffNotesRoute
+  '/staff/schedule': typeof StaffScheduleRoute
+  '/staff/squad': typeof StaffSquadRoute
+  '/admin/': typeof AdminIndexRoute
+  '/finance/': typeof FinanceIndexRoute
+  '/guardian/': typeof GuardianIndexRoute
+  '/location-manager/': typeof LocationManagerIndexRoute
+  '/staff/': typeof StaffIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/finance'
+    | '/guardian'
+    | '/location-manager'
+    | '/login'
+    | '/staff'
+    | '/admin/communications'
+    | '/admin/locations'
+    | '/admin/participants'
+    | '/admin/reports'
+    | '/admin/settings'
+    | '/admin/staff'
+    | '/finance/invoices'
+    | '/finance/payments'
+    | '/finance/refunds'
+    | '/finance/reports'
+    | '/guardian/children'
+    | '/guardian/messages'
+    | '/guardian/payments'
+    | '/guardian/sessions'
+    | '/location-manager/messages'
+    | '/location-manager/participants'
+    | '/location-manager/sessions'
+    | '/location-manager/staff'
+    | '/staff/attendance'
+    | '/staff/notes'
+    | '/staff/schedule'
+    | '/staff/squad'
+    | '/admin/'
+    | '/finance/'
+    | '/guardian/'
+    | '/location-manager/'
+    | '/staff/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/login'
+    | '/admin/communications'
+    | '/admin/locations'
+    | '/admin/participants'
+    | '/admin/reports'
+    | '/admin/settings'
+    | '/admin/staff'
+    | '/finance/invoices'
+    | '/finance/payments'
+    | '/finance/refunds'
+    | '/finance/reports'
+    | '/guardian/children'
+    | '/guardian/messages'
+    | '/guardian/payments'
+    | '/guardian/sessions'
+    | '/location-manager/messages'
+    | '/location-manager/participants'
+    | '/location-manager/sessions'
+    | '/location-manager/staff'
+    | '/staff/attendance'
+    | '/staff/notes'
+    | '/staff/schedule'
+    | '/staff/squad'
+    | '/admin'
+    | '/finance'
+    | '/guardian'
+    | '/location-manager'
+    | '/staff'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/finance'
+    | '/guardian'
+    | '/location-manager'
+    | '/login'
+    | '/staff'
+    | '/admin/communications'
+    | '/admin/locations'
+    | '/admin/participants'
+    | '/admin/reports'
+    | '/admin/settings'
+    | '/admin/staff'
+    | '/finance/invoices'
+    | '/finance/payments'
+    | '/finance/refunds'
+    | '/finance/reports'
+    | '/guardian/children'
+    | '/guardian/messages'
+    | '/guardian/payments'
+    | '/guardian/sessions'
+    | '/location-manager/messages'
+    | '/location-manager/participants'
+    | '/location-manager/sessions'
+    | '/location-manager/staff'
+    | '/staff/attendance'
+    | '/staff/notes'
+    | '/staff/schedule'
+    | '/staff/squad'
+    | '/admin/'
+    | '/finance/'
+    | '/guardian/'
+    | '/location-manager/'
+    | '/staff/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  FinanceRoute: typeof FinanceRouteWithChildren
+  GuardianRoute: typeof GuardianRouteWithChildren
+  LocationManagerRoute: typeof LocationManagerRouteWithChildren
+  LoginRoute: typeof LoginRoute
+  StaffRoute: typeof StaffRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/staff': {
+      id: '/staff'
+      path: '/staff'
+      fullPath: '/staff'
+      preLoaderRoute: typeof StaffRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/location-manager': {
+      id: '/location-manager'
+      path: '/location-manager'
+      fullPath: '/location-manager'
+      preLoaderRoute: typeof LocationManagerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guardian': {
+      id: '/guardian'
+      path: '/guardian'
+      fullPath: '/guardian'
+      preLoaderRoute: typeof GuardianRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/finance': {
+      id: '/finance'
+      path: '/finance'
+      fullPath: '/finance'
+      preLoaderRoute: typeof FinanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,21 +487,306 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/staff/': {
+      id: '/staff/'
+      path: '/'
+      fullPath: '/staff/'
+      preLoaderRoute: typeof StaffIndexRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/location-manager/': {
+      id: '/location-manager/'
+      path: '/'
+      fullPath: '/location-manager/'
+      preLoaderRoute: typeof LocationManagerIndexRouteImport
+      parentRoute: typeof LocationManagerRoute
+    }
+    '/guardian/': {
+      id: '/guardian/'
+      path: '/'
+      fullPath: '/guardian/'
+      preLoaderRoute: typeof GuardianIndexRouteImport
+      parentRoute: typeof GuardianRoute
+    }
+    '/finance/': {
+      id: '/finance/'
+      path: '/'
+      fullPath: '/finance/'
+      preLoaderRoute: typeof FinanceIndexRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/staff/squad': {
+      id: '/staff/squad'
+      path: '/squad'
+      fullPath: '/staff/squad'
+      preLoaderRoute: typeof StaffSquadRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/staff/schedule': {
+      id: '/staff/schedule'
+      path: '/schedule'
+      fullPath: '/staff/schedule'
+      preLoaderRoute: typeof StaffScheduleRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/staff/notes': {
+      id: '/staff/notes'
+      path: '/notes'
+      fullPath: '/staff/notes'
+      preLoaderRoute: typeof StaffNotesRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/staff/attendance': {
+      id: '/staff/attendance'
+      path: '/attendance'
+      fullPath: '/staff/attendance'
+      preLoaderRoute: typeof StaffAttendanceRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/location-manager/staff': {
+      id: '/location-manager/staff'
+      path: '/staff'
+      fullPath: '/location-manager/staff'
+      preLoaderRoute: typeof LocationManagerStaffRouteImport
+      parentRoute: typeof LocationManagerRoute
+    }
+    '/location-manager/sessions': {
+      id: '/location-manager/sessions'
+      path: '/sessions'
+      fullPath: '/location-manager/sessions'
+      preLoaderRoute: typeof LocationManagerSessionsRouteImport
+      parentRoute: typeof LocationManagerRoute
+    }
+    '/location-manager/participants': {
+      id: '/location-manager/participants'
+      path: '/participants'
+      fullPath: '/location-manager/participants'
+      preLoaderRoute: typeof LocationManagerParticipantsRouteImport
+      parentRoute: typeof LocationManagerRoute
+    }
+    '/location-manager/messages': {
+      id: '/location-manager/messages'
+      path: '/messages'
+      fullPath: '/location-manager/messages'
+      preLoaderRoute: typeof LocationManagerMessagesRouteImport
+      parentRoute: typeof LocationManagerRoute
+    }
+    '/guardian/sessions': {
+      id: '/guardian/sessions'
+      path: '/sessions'
+      fullPath: '/guardian/sessions'
+      preLoaderRoute: typeof GuardianSessionsRouteImport
+      parentRoute: typeof GuardianRoute
+    }
+    '/guardian/payments': {
+      id: '/guardian/payments'
+      path: '/payments'
+      fullPath: '/guardian/payments'
+      preLoaderRoute: typeof GuardianPaymentsRouteImport
+      parentRoute: typeof GuardianRoute
+    }
+    '/guardian/messages': {
+      id: '/guardian/messages'
+      path: '/messages'
+      fullPath: '/guardian/messages'
+      preLoaderRoute: typeof GuardianMessagesRouteImport
+      parentRoute: typeof GuardianRoute
+    }
+    '/guardian/children': {
+      id: '/guardian/children'
+      path: '/children'
+      fullPath: '/guardian/children'
+      preLoaderRoute: typeof GuardianChildrenRouteImport
+      parentRoute: typeof GuardianRoute
+    }
+    '/finance/reports': {
+      id: '/finance/reports'
+      path: '/reports'
+      fullPath: '/finance/reports'
+      preLoaderRoute: typeof FinanceReportsRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/refunds': {
+      id: '/finance/refunds'
+      path: '/refunds'
+      fullPath: '/finance/refunds'
+      preLoaderRoute: typeof FinanceRefundsRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/payments': {
+      id: '/finance/payments'
+      path: '/payments'
+      fullPath: '/finance/payments'
+      preLoaderRoute: typeof FinancePaymentsRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/invoices': {
+      id: '/finance/invoices'
+      path: '/invoices'
+      fullPath: '/finance/invoices'
+      preLoaderRoute: typeof FinanceInvoicesRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/admin/staff': {
+      id: '/admin/staff'
+      path: '/staff'
+      fullPath: '/admin/staff'
+      preLoaderRoute: typeof AdminStaffRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/reports': {
+      id: '/admin/reports'
+      path: '/reports'
+      fullPath: '/admin/reports'
+      preLoaderRoute: typeof AdminReportsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/participants': {
+      id: '/admin/participants'
+      path: '/participants'
+      fullPath: '/admin/participants'
+      preLoaderRoute: typeof AdminParticipantsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/locations': {
+      id: '/admin/locations'
+      path: '/locations'
+      fullPath: '/admin/locations'
+      preLoaderRoute: typeof AdminLocationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/communications': {
+      id: '/admin/communications'
+      path: '/communications'
+      fullPath: '/admin/communications'
+      preLoaderRoute: typeof AdminCommunicationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminCommunicationsRoute: typeof AdminCommunicationsRoute
+  AdminLocationsRoute: typeof AdminLocationsRoute
+  AdminParticipantsRoute: typeof AdminParticipantsRoute
+  AdminReportsRoute: typeof AdminReportsRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminStaffRoute: typeof AdminStaffRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminCommunicationsRoute: AdminCommunicationsRoute,
+  AdminLocationsRoute: AdminLocationsRoute,
+  AdminParticipantsRoute: AdminParticipantsRoute,
+  AdminReportsRoute: AdminReportsRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminStaffRoute: AdminStaffRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface FinanceRouteChildren {
+  FinanceInvoicesRoute: typeof FinanceInvoicesRoute
+  FinancePaymentsRoute: typeof FinancePaymentsRoute
+  FinanceRefundsRoute: typeof FinanceRefundsRoute
+  FinanceReportsRoute: typeof FinanceReportsRoute
+  FinanceIndexRoute: typeof FinanceIndexRoute
+}
+
+const FinanceRouteChildren: FinanceRouteChildren = {
+  FinanceInvoicesRoute: FinanceInvoicesRoute,
+  FinancePaymentsRoute: FinancePaymentsRoute,
+  FinanceRefundsRoute: FinanceRefundsRoute,
+  FinanceReportsRoute: FinanceReportsRoute,
+  FinanceIndexRoute: FinanceIndexRoute,
+}
+
+const FinanceRouteWithChildren =
+  FinanceRoute._addFileChildren(FinanceRouteChildren)
+
+interface GuardianRouteChildren {
+  GuardianChildrenRoute: typeof GuardianChildrenRoute
+  GuardianMessagesRoute: typeof GuardianMessagesRoute
+  GuardianPaymentsRoute: typeof GuardianPaymentsRoute
+  GuardianSessionsRoute: typeof GuardianSessionsRoute
+  GuardianIndexRoute: typeof GuardianIndexRoute
+}
+
+const GuardianRouteChildren: GuardianRouteChildren = {
+  GuardianChildrenRoute: GuardianChildrenRoute,
+  GuardianMessagesRoute: GuardianMessagesRoute,
+  GuardianPaymentsRoute: GuardianPaymentsRoute,
+  GuardianSessionsRoute: GuardianSessionsRoute,
+  GuardianIndexRoute: GuardianIndexRoute,
+}
+
+const GuardianRouteWithChildren = GuardianRoute._addFileChildren(
+  GuardianRouteChildren,
+)
+
+interface LocationManagerRouteChildren {
+  LocationManagerMessagesRoute: typeof LocationManagerMessagesRoute
+  LocationManagerParticipantsRoute: typeof LocationManagerParticipantsRoute
+  LocationManagerSessionsRoute: typeof LocationManagerSessionsRoute
+  LocationManagerStaffRoute: typeof LocationManagerStaffRoute
+  LocationManagerIndexRoute: typeof LocationManagerIndexRoute
+}
+
+const LocationManagerRouteChildren: LocationManagerRouteChildren = {
+  LocationManagerMessagesRoute: LocationManagerMessagesRoute,
+  LocationManagerParticipantsRoute: LocationManagerParticipantsRoute,
+  LocationManagerSessionsRoute: LocationManagerSessionsRoute,
+  LocationManagerStaffRoute: LocationManagerStaffRoute,
+  LocationManagerIndexRoute: LocationManagerIndexRoute,
+}
+
+const LocationManagerRouteWithChildren = LocationManagerRoute._addFileChildren(
+  LocationManagerRouteChildren,
+)
+
+interface StaffRouteChildren {
+  StaffAttendanceRoute: typeof StaffAttendanceRoute
+  StaffNotesRoute: typeof StaffNotesRoute
+  StaffScheduleRoute: typeof StaffScheduleRoute
+  StaffSquadRoute: typeof StaffSquadRoute
+  StaffIndexRoute: typeof StaffIndexRoute
+}
+
+const StaffRouteChildren: StaffRouteChildren = {
+  StaffAttendanceRoute: StaffAttendanceRoute,
+  StaffNotesRoute: StaffNotesRoute,
+  StaffScheduleRoute: StaffScheduleRoute,
+  StaffSquadRoute: StaffSquadRoute,
+  StaffIndexRoute: StaffIndexRoute,
+}
+
+const StaffRouteWithChildren = StaffRoute._addFileChildren(StaffRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
+  FinanceRoute: FinanceRouteWithChildren,
+  GuardianRoute: GuardianRouteWithChildren,
+  LocationManagerRoute: LocationManagerRouteWithChildren,
+  LoginRoute: LoginRoute,
+  StaffRoute: StaffRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
