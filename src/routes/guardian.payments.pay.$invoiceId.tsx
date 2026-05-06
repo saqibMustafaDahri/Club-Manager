@@ -77,7 +77,7 @@ function PayInvoicePage() {
           <div className="mt-auto flex items-center justify-between gap-4 border-t pt-5">
             <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
               <ShieldCheck className="h-4 w-4 text-brand" />
-              Secure payment powered by Moyasar
+              Secure payments
             </p>
             <div className="flex h-7 items-center rounded-md bg-sidebar px-2">
               <img src={logoUrl} alt="Neomora" className="h-4 w-auto brightness-0 invert" />

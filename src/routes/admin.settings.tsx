@@ -16,7 +16,7 @@ export const Route = createFileRoute("/admin/settings")({
 
 const events = ["Registration", "Document Request", "Fee Invoice", "Payment Reminder", "Session Start"];
 const gateways = [
-  { name: "Moyasar", connected: true },
+  { name: "Secure Payments", connected: true },
   { name: "PayTabs", connected: false },
   { name: "HyperPay", connected: false },
 ];
