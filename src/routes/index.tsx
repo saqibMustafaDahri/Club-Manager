@@ -47,8 +47,8 @@ function LandingPage() {
           height={1280}
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-brand/80" />
-        <div className="absolute inset-0 bg-gradient-to-b from-brand/60 via-brand/70 to-brand" />
+        <div className="absolute inset-0 bg-brand/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-brand/30 via-brand/40 to-brand/70" />
         <div className="relative mx-auto max-w-5xl px-6 pb-24 pt-16 text-center md:pb-32 md:pt-24">
           <div className="mb-10 flex items-center justify-center gap-3">
             <img src={logoUrl} alt="Neomora" className="h-8 w-auto brightness-0 invert" />
@@ -75,18 +75,6 @@ function LandingPage() {
               <Link to="/login">View Demo</Link>
             </Button>
           </div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="-mt-12 px-6">
-        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-4 md:grid-cols-4">
-          {stats.map((s) => (
-            <div key={s.label} className="rounded-xl border-l-4 border-success bg-card p-5 shadow-md">
-              <p className="text-3xl font-bold text-foreground">{s.value}</p>
-              <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
-            </div>
-          ))}
         </div>
       </section>
 
