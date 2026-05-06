@@ -102,7 +102,7 @@ function LandingPage() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-sm font-semibold uppercase tracking-wider text-brand">Portals</p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">A purpose-built portal for every role</h2>
+            <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">A purpose-built system for every role</h2>
           </div>
           <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {PORTALS.map((p) => (
@@ -126,7 +126,7 @@ function LandingPage() {
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-8 text-sm text-muted-foreground md:flex-row">
           <div className="flex items-center gap-3">
             <img src={logoUrl} alt="Neomora" className="h-5 w-auto" />
-            <span>© {new Date().getFullYear()} Neomora Club Manager. All rights reserved.</span>
+            <span>© {new Date().getFullYear()} Neomora. All rights reserved.</span>
           </div>
           <div className="flex flex-wrap items-center gap-6">
             <a href="https://neomora.zielglobal.com" target="_blank" rel="noopener noreferrer" className="font-medium text-brand hover:underline">Discover Neomora Events</a>
