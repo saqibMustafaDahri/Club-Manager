@@ -30,10 +30,8 @@ import { Route as LocationManagerSessionsRouteImport } from './routes/location-m
 import { Route as LocationManagerParticipantsRouteImport } from './routes/location-manager.participants'
 import { Route as LocationManagerDashboardRouteImport } from './routes/location-manager.dashboard'
 import { Route as LocationManagerCommunicationsRouteImport } from './routes/location-manager.communications'
-import { Route as GuardianSessionsRouteImport } from './routes/guardian.sessions'
 import { Route as GuardianPaymentsRouteImport } from './routes/guardian.payments'
-import { Route as GuardianMessagesRouteImport } from './routes/guardian.messages'
-import { Route as GuardianChildrenRouteImport } from './routes/guardian.children'
+import { Route as GuardianDocumentsRouteImport } from './routes/guardian.documents'
 import { Route as FinanceReportsRouteImport } from './routes/finance.reports'
 import { Route as FinanceRemindersRouteImport } from './routes/finance.reminders'
 import { Route as FinancePlansRouteImport } from './routes/finance.plans'
@@ -47,6 +45,7 @@ import { Route as AdminLocationsRouteImport } from './routes/admin.locations'
 import { Route as AdminFeesRouteImport } from './routes/admin.fees'
 import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as AdminAccessRouteImport } from './routes/admin.access'
+import { Route as GuardianParticipantIdRouteImport } from './routes/guardian.participant.$id'
 
 const StaffRoute = StaffRouteImport.update({
   id: '/staff',
@@ -156,24 +155,14 @@ const LocationManagerCommunicationsRoute =
     path: '/communications',
     getParentRoute: () => LocationManagerRoute,
   } as any)
-const GuardianSessionsRoute = GuardianSessionsRouteImport.update({
-  id: '/sessions',
-  path: '/sessions',
-  getParentRoute: () => GuardianRoute,
-} as any)
 const GuardianPaymentsRoute = GuardianPaymentsRouteImport.update({
   id: '/payments',
   path: '/payments',
   getParentRoute: () => GuardianRoute,
 } as any)
-const GuardianMessagesRoute = GuardianMessagesRouteImport.update({
-  id: '/messages',
-  path: '/messages',
-  getParentRoute: () => GuardianRoute,
-} as any)
-const GuardianChildrenRoute = GuardianChildrenRouteImport.update({
-  id: '/children',
-  path: '/children',
+const GuardianDocumentsRoute = GuardianDocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
   getParentRoute: () => GuardianRoute,
 } as any)
 const FinanceReportsRoute = FinanceReportsRouteImport.update({
@@ -241,6 +230,11 @@ const AdminAccessRoute = AdminAccessRouteImport.update({
   path: '/access',
   getParentRoute: () => AdminRoute,
 } as any)
+const GuardianParticipantIdRoute = GuardianParticipantIdRouteImport.update({
+  id: '/participant/$id',
+  path: '/participant/$id',
+  getParentRoute: () => GuardianRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -263,10 +257,8 @@ export interface FileRoutesByFullPath {
   '/finance/plans': typeof FinancePlansRoute
   '/finance/reminders': typeof FinanceRemindersRoute
   '/finance/reports': typeof FinanceReportsRoute
-  '/guardian/children': typeof GuardianChildrenRoute
-  '/guardian/messages': typeof GuardianMessagesRoute
+  '/guardian/documents': typeof GuardianDocumentsRoute
   '/guardian/payments': typeof GuardianPaymentsRoute
-  '/guardian/sessions': typeof GuardianSessionsRoute
   '/location-manager/communications': typeof LocationManagerCommunicationsRoute
   '/location-manager/dashboard': typeof LocationManagerDashboardRoute
   '/location-manager/participants': typeof LocationManagerParticipantsRoute
@@ -281,6 +273,7 @@ export interface FileRoutesByFullPath {
   '/guardian/': typeof GuardianIndexRoute
   '/location-manager/': typeof LocationManagerIndexRoute
   '/staff/': typeof StaffIndexRoute
+  '/guardian/participant/$id': typeof GuardianParticipantIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -298,10 +291,8 @@ export interface FileRoutesByTo {
   '/finance/plans': typeof FinancePlansRoute
   '/finance/reminders': typeof FinanceRemindersRoute
   '/finance/reports': typeof FinanceReportsRoute
-  '/guardian/children': typeof GuardianChildrenRoute
-  '/guardian/messages': typeof GuardianMessagesRoute
+  '/guardian/documents': typeof GuardianDocumentsRoute
   '/guardian/payments': typeof GuardianPaymentsRoute
-  '/guardian/sessions': typeof GuardianSessionsRoute
   '/location-manager/communications': typeof LocationManagerCommunicationsRoute
   '/location-manager/dashboard': typeof LocationManagerDashboardRoute
   '/location-manager/participants': typeof LocationManagerParticipantsRoute
@@ -316,6 +307,7 @@ export interface FileRoutesByTo {
   '/guardian': typeof GuardianIndexRoute
   '/location-manager': typeof LocationManagerIndexRoute
   '/staff': typeof StaffIndexRoute
+  '/guardian/participant/$id': typeof GuardianParticipantIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -339,10 +331,8 @@ export interface FileRoutesById {
   '/finance/plans': typeof FinancePlansRoute
   '/finance/reminders': typeof FinanceRemindersRoute
   '/finance/reports': typeof FinanceReportsRoute
-  '/guardian/children': typeof GuardianChildrenRoute
-  '/guardian/messages': typeof GuardianMessagesRoute
+  '/guardian/documents': typeof GuardianDocumentsRoute
   '/guardian/payments': typeof GuardianPaymentsRoute
-  '/guardian/sessions': typeof GuardianSessionsRoute
   '/location-manager/communications': typeof LocationManagerCommunicationsRoute
   '/location-manager/dashboard': typeof LocationManagerDashboardRoute
   '/location-manager/participants': typeof LocationManagerParticipantsRoute
@@ -357,6 +347,7 @@ export interface FileRoutesById {
   '/guardian/': typeof GuardianIndexRoute
   '/location-manager/': typeof LocationManagerIndexRoute
   '/staff/': typeof StaffIndexRoute
+  '/guardian/participant/$id': typeof GuardianParticipantIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -381,10 +372,8 @@ export interface FileRouteTypes {
     | '/finance/plans'
     | '/finance/reminders'
     | '/finance/reports'
-    | '/guardian/children'
-    | '/guardian/messages'
+    | '/guardian/documents'
     | '/guardian/payments'
-    | '/guardian/sessions'
     | '/location-manager/communications'
     | '/location-manager/dashboard'
     | '/location-manager/participants'
@@ -399,6 +388,7 @@ export interface FileRouteTypes {
     | '/guardian/'
     | '/location-manager/'
     | '/staff/'
+    | '/guardian/participant/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -416,10 +406,8 @@ export interface FileRouteTypes {
     | '/finance/plans'
     | '/finance/reminders'
     | '/finance/reports'
-    | '/guardian/children'
-    | '/guardian/messages'
+    | '/guardian/documents'
     | '/guardian/payments'
-    | '/guardian/sessions'
     | '/location-manager/communications'
     | '/location-manager/dashboard'
     | '/location-manager/participants'
@@ -434,6 +422,7 @@ export interface FileRouteTypes {
     | '/guardian'
     | '/location-manager'
     | '/staff'
+    | '/guardian/participant/$id'
   id:
     | '__root__'
     | '/'
@@ -456,10 +445,8 @@ export interface FileRouteTypes {
     | '/finance/plans'
     | '/finance/reminders'
     | '/finance/reports'
-    | '/guardian/children'
-    | '/guardian/messages'
+    | '/guardian/documents'
     | '/guardian/payments'
-    | '/guardian/sessions'
     | '/location-manager/communications'
     | '/location-manager/dashboard'
     | '/location-manager/participants'
@@ -474,6 +461,7 @@ export interface FileRouteTypes {
     | '/guardian/'
     | '/location-manager/'
     | '/staff/'
+    | '/guardian/participant/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -635,13 +623,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocationManagerCommunicationsRouteImport
       parentRoute: typeof LocationManagerRoute
     }
-    '/guardian/sessions': {
-      id: '/guardian/sessions'
-      path: '/sessions'
-      fullPath: '/guardian/sessions'
-      preLoaderRoute: typeof GuardianSessionsRouteImport
-      parentRoute: typeof GuardianRoute
-    }
     '/guardian/payments': {
       id: '/guardian/payments'
       path: '/payments'
@@ -649,18 +630,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuardianPaymentsRouteImport
       parentRoute: typeof GuardianRoute
     }
-    '/guardian/messages': {
-      id: '/guardian/messages'
-      path: '/messages'
-      fullPath: '/guardian/messages'
-      preLoaderRoute: typeof GuardianMessagesRouteImport
-      parentRoute: typeof GuardianRoute
-    }
-    '/guardian/children': {
-      id: '/guardian/children'
-      path: '/children'
-      fullPath: '/guardian/children'
-      preLoaderRoute: typeof GuardianChildrenRouteImport
+    '/guardian/documents': {
+      id: '/guardian/documents'
+      path: '/documents'
+      fullPath: '/guardian/documents'
+      preLoaderRoute: typeof GuardianDocumentsRouteImport
       parentRoute: typeof GuardianRoute
     }
     '/finance/reports': {
@@ -754,6 +728,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAccessRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/guardian/participant/$id': {
+      id: '/guardian/participant/$id'
+      path: '/participant/$id'
+      fullPath: '/guardian/participant/$id'
+      preLoaderRoute: typeof GuardianParticipantIdRouteImport
+      parentRoute: typeof GuardianRoute
+    }
   }
 }
 
@@ -805,19 +786,17 @@ const FinanceRouteWithChildren =
   FinanceRoute._addFileChildren(FinanceRouteChildren)
 
 interface GuardianRouteChildren {
-  GuardianChildrenRoute: typeof GuardianChildrenRoute
-  GuardianMessagesRoute: typeof GuardianMessagesRoute
+  GuardianDocumentsRoute: typeof GuardianDocumentsRoute
   GuardianPaymentsRoute: typeof GuardianPaymentsRoute
-  GuardianSessionsRoute: typeof GuardianSessionsRoute
   GuardianIndexRoute: typeof GuardianIndexRoute
+  GuardianParticipantIdRoute: typeof GuardianParticipantIdRoute
 }
 
 const GuardianRouteChildren: GuardianRouteChildren = {
-  GuardianChildrenRoute: GuardianChildrenRoute,
-  GuardianMessagesRoute: GuardianMessagesRoute,
+  GuardianDocumentsRoute: GuardianDocumentsRoute,
   GuardianPaymentsRoute: GuardianPaymentsRoute,
-  GuardianSessionsRoute: GuardianSessionsRoute,
   GuardianIndexRoute: GuardianIndexRoute,
+  GuardianParticipantIdRoute: GuardianParticipantIdRoute,
 }
 
 const GuardianRouteWithChildren = GuardianRoute._addFileChildren(
