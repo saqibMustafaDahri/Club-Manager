@@ -137,15 +137,29 @@ export function DataTable<T extends { id: string }>({
             </tr>
           </thead>
           <tbody>
-            {filtered.length === 0 && (
+            {loading && (
+              Array.from({ length: 5 }).map((_, i) => (
+                <tr key={`sk-${i}`} className="border-b last:border-0">
+                  <td className="px-4 py-3">
+                    <div className="h-4 w-4 animate-pulse rounded bg-muted" />
+                  </td>
+                  {columns.map((col) => (
+                    <td key={String(col.key)} className="px-4 py-3">
+                      <div className="h-4 w-3/4 animate-pulse rounded bg-muted" />
+                    </td>
+                  ))}
+                </tr>
+              ))
+            )}
+            {!loading && filtered.length === 0 && (
               <tr>
-                <td colSpan={columns.length + 1} className="px-4 py-12 text-center text-sm text-muted-foreground">
-                  {emptyMessage}
+                <td colSpan={columns.length + 1} className="px-0 py-0">
+                  <EmptyState title={emptyMessage} description="Try adjusting your filters or search to find what you're looking for." />
                 </td>
               </tr>
             )}
-            {filtered.map((row) => (
-              <tr key={row.id} className="border-b last:border-0 hover:bg-muted/30">
+            {!loading && filtered.map((row) => (
+              <tr key={row.id} className="border-b transition-colors last:border-0 hover:bg-gray-50">
                 <td className="px-4 py-3">
                   <Checkbox
                     checked={selected.has(row.id)}
