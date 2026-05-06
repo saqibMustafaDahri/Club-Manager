@@ -11,14 +11,20 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LocationManagerRouteImport } from './routes/location-manager'
+import { Route as FinanceRouteImport } from './routes/finance'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocationManagerIndexRouteImport } from './routes/location-manager.index'
+import { Route as FinanceIndexRouteImport } from './routes/finance.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as LocationManagerStaffRouteImport } from './routes/location-manager.staff'
 import { Route as LocationManagerSessionsRouteImport } from './routes/location-manager.sessions'
 import { Route as LocationManagerParticipantsRouteImport } from './routes/location-manager.participants'
 import { Route as LocationManagerMessagesRouteImport } from './routes/location-manager.messages'
+import { Route as FinanceReportsRouteImport } from './routes/finance.reports'
+import { Route as FinanceRefundsRouteImport } from './routes/finance.refunds'
+import { Route as FinancePaymentsRouteImport } from './routes/finance.payments'
+import { Route as FinanceInvoicesRouteImport } from './routes/finance.invoices'
 import { Route as AdminStaffRouteImport } from './routes/admin.staff'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminReportsRouteImport } from './routes/admin.reports'
@@ -36,6 +42,11 @@ const LocationManagerRoute = LocationManagerRouteImport.update({
   path: '/location-manager',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FinanceRoute = FinanceRouteImport.update({
+  id: '/finance',
+  path: '/finance',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -50,6 +61,11 @@ const LocationManagerIndexRoute = LocationManagerIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => LocationManagerRoute,
+} as any)
+const FinanceIndexRoute = FinanceIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => FinanceRoute,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
@@ -76,6 +92,26 @@ const LocationManagerMessagesRoute = LocationManagerMessagesRouteImport.update({
   id: '/messages',
   path: '/messages',
   getParentRoute: () => LocationManagerRoute,
+} as any)
+const FinanceReportsRoute = FinanceReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinanceRefundsRoute = FinanceRefundsRouteImport.update({
+  id: '/refunds',
+  path: '/refunds',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinancePaymentsRoute = FinancePaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinanceInvoicesRoute = FinanceInvoicesRouteImport.update({
+  id: '/invoices',
+  path: '/invoices',
+  getParentRoute: () => FinanceRoute,
 } as any)
 const AdminStaffRoute = AdminStaffRouteImport.update({
   id: '/staff',
@@ -111,6 +147,7 @@ const AdminCommunicationsRoute = AdminCommunicationsRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/finance': typeof FinanceRouteWithChildren
   '/location-manager': typeof LocationManagerRouteWithChildren
   '/login': typeof LoginRoute
   '/admin/communications': typeof AdminCommunicationsRoute
@@ -119,11 +156,16 @@ export interface FileRoutesByFullPath {
   '/admin/reports': typeof AdminReportsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/staff': typeof AdminStaffRoute
+  '/finance/invoices': typeof FinanceInvoicesRoute
+  '/finance/payments': typeof FinancePaymentsRoute
+  '/finance/refunds': typeof FinanceRefundsRoute
+  '/finance/reports': typeof FinanceReportsRoute
   '/location-manager/messages': typeof LocationManagerMessagesRoute
   '/location-manager/participants': typeof LocationManagerParticipantsRoute
   '/location-manager/sessions': typeof LocationManagerSessionsRoute
   '/location-manager/staff': typeof LocationManagerStaffRoute
   '/admin/': typeof AdminIndexRoute
+  '/finance/': typeof FinanceIndexRoute
   '/location-manager/': typeof LocationManagerIndexRoute
 }
 export interface FileRoutesByTo {
@@ -135,17 +177,23 @@ export interface FileRoutesByTo {
   '/admin/reports': typeof AdminReportsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/staff': typeof AdminStaffRoute
+  '/finance/invoices': typeof FinanceInvoicesRoute
+  '/finance/payments': typeof FinancePaymentsRoute
+  '/finance/refunds': typeof FinanceRefundsRoute
+  '/finance/reports': typeof FinanceReportsRoute
   '/location-manager/messages': typeof LocationManagerMessagesRoute
   '/location-manager/participants': typeof LocationManagerParticipantsRoute
   '/location-manager/sessions': typeof LocationManagerSessionsRoute
   '/location-manager/staff': typeof LocationManagerStaffRoute
   '/admin': typeof AdminIndexRoute
+  '/finance': typeof FinanceIndexRoute
   '/location-manager': typeof LocationManagerIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/finance': typeof FinanceRouteWithChildren
   '/location-manager': typeof LocationManagerRouteWithChildren
   '/login': typeof LoginRoute
   '/admin/communications': typeof AdminCommunicationsRoute
@@ -154,11 +202,16 @@ export interface FileRoutesById {
   '/admin/reports': typeof AdminReportsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/staff': typeof AdminStaffRoute
+  '/finance/invoices': typeof FinanceInvoicesRoute
+  '/finance/payments': typeof FinancePaymentsRoute
+  '/finance/refunds': typeof FinanceRefundsRoute
+  '/finance/reports': typeof FinanceReportsRoute
   '/location-manager/messages': typeof LocationManagerMessagesRoute
   '/location-manager/participants': typeof LocationManagerParticipantsRoute
   '/location-manager/sessions': typeof LocationManagerSessionsRoute
   '/location-manager/staff': typeof LocationManagerStaffRoute
   '/admin/': typeof AdminIndexRoute
+  '/finance/': typeof FinanceIndexRoute
   '/location-manager/': typeof LocationManagerIndexRoute
 }
 export interface FileRouteTypes {
@@ -166,6 +219,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/finance'
     | '/location-manager'
     | '/login'
     | '/admin/communications'
@@ -174,11 +228,16 @@ export interface FileRouteTypes {
     | '/admin/reports'
     | '/admin/settings'
     | '/admin/staff'
+    | '/finance/invoices'
+    | '/finance/payments'
+    | '/finance/refunds'
+    | '/finance/reports'
     | '/location-manager/messages'
     | '/location-manager/participants'
     | '/location-manager/sessions'
     | '/location-manager/staff'
     | '/admin/'
+    | '/finance/'
     | '/location-manager/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -190,16 +249,22 @@ export interface FileRouteTypes {
     | '/admin/reports'
     | '/admin/settings'
     | '/admin/staff'
+    | '/finance/invoices'
+    | '/finance/payments'
+    | '/finance/refunds'
+    | '/finance/reports'
     | '/location-manager/messages'
     | '/location-manager/participants'
     | '/location-manager/sessions'
     | '/location-manager/staff'
     | '/admin'
+    | '/finance'
     | '/location-manager'
   id:
     | '__root__'
     | '/'
     | '/admin'
+    | '/finance'
     | '/location-manager'
     | '/login'
     | '/admin/communications'
@@ -208,17 +273,23 @@ export interface FileRouteTypes {
     | '/admin/reports'
     | '/admin/settings'
     | '/admin/staff'
+    | '/finance/invoices'
+    | '/finance/payments'
+    | '/finance/refunds'
+    | '/finance/reports'
     | '/location-manager/messages'
     | '/location-manager/participants'
     | '/location-manager/sessions'
     | '/location-manager/staff'
     | '/admin/'
+    | '/finance/'
     | '/location-manager/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
+  FinanceRoute: typeof FinanceRouteWithChildren
   LocationManagerRoute: typeof LocationManagerRouteWithChildren
   LoginRoute: typeof LoginRoute
 }
@@ -237,6 +308,13 @@ declare module '@tanstack/react-router' {
       path: '/location-manager'
       fullPath: '/location-manager'
       preLoaderRoute: typeof LocationManagerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/finance': {
+      id: '/finance'
+      path: '/finance'
+      fullPath: '/finance'
+      preLoaderRoute: typeof FinanceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -259,6 +337,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/location-manager/'
       preLoaderRoute: typeof LocationManagerIndexRouteImport
       parentRoute: typeof LocationManagerRoute
+    }
+    '/finance/': {
+      id: '/finance/'
+      path: '/'
+      fullPath: '/finance/'
+      preLoaderRoute: typeof FinanceIndexRouteImport
+      parentRoute: typeof FinanceRoute
     }
     '/admin/': {
       id: '/admin/'
@@ -294,6 +379,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/location-manager/messages'
       preLoaderRoute: typeof LocationManagerMessagesRouteImport
       parentRoute: typeof LocationManagerRoute
+    }
+    '/finance/reports': {
+      id: '/finance/reports'
+      path: '/reports'
+      fullPath: '/finance/reports'
+      preLoaderRoute: typeof FinanceReportsRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/refunds': {
+      id: '/finance/refunds'
+      path: '/refunds'
+      fullPath: '/finance/refunds'
+      preLoaderRoute: typeof FinanceRefundsRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/payments': {
+      id: '/finance/payments'
+      path: '/payments'
+      fullPath: '/finance/payments'
+      preLoaderRoute: typeof FinancePaymentsRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/invoices': {
+      id: '/finance/invoices'
+      path: '/invoices'
+      fullPath: '/finance/invoices'
+      preLoaderRoute: typeof FinanceInvoicesRouteImport
+      parentRoute: typeof FinanceRoute
     }
     '/admin/staff': {
       id: '/admin/staff'
@@ -362,6 +475,25 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
+interface FinanceRouteChildren {
+  FinanceInvoicesRoute: typeof FinanceInvoicesRoute
+  FinancePaymentsRoute: typeof FinancePaymentsRoute
+  FinanceRefundsRoute: typeof FinanceRefundsRoute
+  FinanceReportsRoute: typeof FinanceReportsRoute
+  FinanceIndexRoute: typeof FinanceIndexRoute
+}
+
+const FinanceRouteChildren: FinanceRouteChildren = {
+  FinanceInvoicesRoute: FinanceInvoicesRoute,
+  FinancePaymentsRoute: FinancePaymentsRoute,
+  FinanceRefundsRoute: FinanceRefundsRoute,
+  FinanceReportsRoute: FinanceReportsRoute,
+  FinanceIndexRoute: FinanceIndexRoute,
+}
+
+const FinanceRouteWithChildren =
+  FinanceRoute._addFileChildren(FinanceRouteChildren)
+
 interface LocationManagerRouteChildren {
   LocationManagerMessagesRoute: typeof LocationManagerMessagesRoute
   LocationManagerParticipantsRoute: typeof LocationManagerParticipantsRoute
@@ -385,6 +517,7 @@ const LocationManagerRouteWithChildren = LocationManagerRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
+  FinanceRoute: FinanceRouteWithChildren,
   LocationManagerRoute: LocationManagerRouteWithChildren,
   LoginRoute: LoginRoute,
 }
