@@ -1,11 +1,29 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { PORTALS } from "@/data/portals";
+import { PORTALS, type PortalKey } from "@/data/portals";
+import { cn } from "@/lib/utils";
 import logoUrl from "@/assets/neomora-logo.png";
 
+const PORTAL_DASHBOARDS: Record<PortalKey, string> = {
+  "admin": "/admin/dashboard",
+  "location-manager": "/location-manager/dashboard",
+  "finance": "/finance/dashboard",
+  "guardian": "/guardian/dashboard",
+  "staff": "/staff/dashboard",
+};
+
+const VALID_ROLES: PortalKey[] = ["admin", "location-manager", "finance", "guardian", "staff"];
+
 export const Route = createFileRoute("/login")({
+  validateSearch: (search: Record<string, unknown>): { role?: PortalKey } => {
+    const r = search.role;
+    return typeof r === "string" && (VALID_ROLES as string[]).includes(r)
+      ? { role: r as PortalKey }
+      : {};
+  },
   head: () => ({
     meta: [
       { title: "Sign In — Neomora Club Manager" },
@@ -17,9 +35,17 @@ export const Route = createFileRoute("/login")({
 
 function LoginPage() {
   const navigate = useNavigate();
+  const { role } = Route.useSearch();
+  const [selected, setSelected] = useState<PortalKey | null>(role ?? null);
+
+  useEffect(() => { if (role) setSelected(role); }, [role]);
+
+  const goToPortal = (key: PortalKey) => {
+    navigate({ to: PORTAL_DASHBOARDS[key] });
+  };
+
   return (
     <div className="flex min-h-screen w-full bg-background">
-      {/* Left brand panel */}
       <div className="relative hidden w-2/5 flex-col justify-between overflow-hidden bg-brand p-10 text-white md:flex">
         <div
           className="absolute inset-0 opacity-[0.06]"
@@ -45,7 +71,6 @@ function LoginPage() {
         <p className="relative text-xs text-white/50">© {new Date().getFullYear()} Neomora Club Manager</p>
       </div>
 
-      {/* Right form */}
       <div className="flex flex-1 items-center justify-center p-6 md:p-10">
         <div className="w-full max-w-md">
           <div className="mb-8 text-center md:hidden">
@@ -55,7 +80,7 @@ function LoginPage() {
           <p className="mt-1 text-sm text-muted-foreground">Sign in to your Club Manager account.</p>
 
           <form
-            onSubmit={(e) => { e.preventDefault(); navigate({ to: "/admin" }); }}
+            onSubmit={(e) => { e.preventDefault(); goToPortal(selected ?? "admin"); }}
             className="mt-6 space-y-4 rounded-xl border bg-card p-6 shadow-sm"
           >
             <div className="space-y-2">
@@ -80,18 +105,25 @@ function LoginPage() {
             </div>
             <p className="mb-3 text-xs text-muted-foreground">Select your role to preview the demo:</p>
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-              {PORTALS.map((p) => (
-                <Link
-                  key={p.key}
-                  to={p.path}
-                  className="flex items-center gap-3 rounded-md border bg-card px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-brand hover:bg-brand/5"
-                >
-                  <span className="flex h-8 w-8 items-center justify-center rounded-md bg-brand/10 text-brand">
-                    <p.icon className="h-4 w-4" />
-                  </span>
-                  <span className="flex-1">{p.name}</span>
-                </Link>
-              ))}
+              {PORTALS.map((p) => {
+                const isSelected = selected === p.key;
+                return (
+                  <button
+                    key={p.key}
+                    type="button"
+                    onClick={() => { setSelected(p.key); goToPortal(p.key); }}
+                    className={cn(
+                      "flex items-center gap-3 rounded-md border bg-card px-3 py-2.5 text-left text-sm font-medium text-foreground transition-colors hover:border-brand hover:bg-brand/5",
+                      isSelected && "border-brand bg-brand/5 ring-2 ring-brand/30"
+                    )}
+                  >
+                    <span className="flex h-8 w-8 items-center justify-center rounded-md bg-brand/10 text-brand">
+                      <p.icon className="h-4 w-4" />
+                    </span>
+                    <span className="flex-1">{p.name}</span>
+                  </button>
+                );
+              })}
             </div>
           </div>
 
