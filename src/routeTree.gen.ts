@@ -35,9 +35,10 @@ import { Route as GuardianPaymentsRouteImport } from './routes/guardian.payments
 import { Route as GuardianMessagesRouteImport } from './routes/guardian.messages'
 import { Route as GuardianChildrenRouteImport } from './routes/guardian.children'
 import { Route as FinanceReportsRouteImport } from './routes/finance.reports'
-import { Route as FinanceRefundsRouteImport } from './routes/finance.refunds'
-import { Route as FinancePaymentsRouteImport } from './routes/finance.payments'
+import { Route as FinanceRemindersRouteImport } from './routes/finance.reminders'
+import { Route as FinancePlansRouteImport } from './routes/finance.plans'
 import { Route as FinanceInvoicesRouteImport } from './routes/finance.invoices'
+import { Route as FinanceCollectionRouteImport } from './routes/finance.collection'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminSessionsRouteImport } from './routes/admin.sessions'
 import { Route as AdminReportsRouteImport } from './routes/admin.reports'
@@ -180,19 +181,24 @@ const FinanceReportsRoute = FinanceReportsRouteImport.update({
   path: '/reports',
   getParentRoute: () => FinanceRoute,
 } as any)
-const FinanceRefundsRoute = FinanceRefundsRouteImport.update({
-  id: '/refunds',
-  path: '/refunds',
+const FinanceRemindersRoute = FinanceRemindersRouteImport.update({
+  id: '/reminders',
+  path: '/reminders',
   getParentRoute: () => FinanceRoute,
 } as any)
-const FinancePaymentsRoute = FinancePaymentsRouteImport.update({
-  id: '/payments',
-  path: '/payments',
+const FinancePlansRoute = FinancePlansRouteImport.update({
+  id: '/plans',
+  path: '/plans',
   getParentRoute: () => FinanceRoute,
 } as any)
 const FinanceInvoicesRoute = FinanceInvoicesRouteImport.update({
   id: '/invoices',
   path: '/invoices',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinanceCollectionRoute = FinanceCollectionRouteImport.update({
+  id: '/collection',
+  path: '/collection',
   getParentRoute: () => FinanceRoute,
 } as any)
 const AdminSettingsRoute = AdminSettingsRouteImport.update({
@@ -252,9 +258,10 @@ export interface FileRoutesByFullPath {
   '/admin/reports': typeof AdminReportsRoute
   '/admin/sessions': typeof AdminSessionsRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/finance/collection': typeof FinanceCollectionRoute
   '/finance/invoices': typeof FinanceInvoicesRoute
-  '/finance/payments': typeof FinancePaymentsRoute
-  '/finance/refunds': typeof FinanceRefundsRoute
+  '/finance/plans': typeof FinancePlansRoute
+  '/finance/reminders': typeof FinanceRemindersRoute
   '/finance/reports': typeof FinanceReportsRoute
   '/guardian/children': typeof GuardianChildrenRoute
   '/guardian/messages': typeof GuardianMessagesRoute
@@ -286,9 +293,10 @@ export interface FileRoutesByTo {
   '/admin/reports': typeof AdminReportsRoute
   '/admin/sessions': typeof AdminSessionsRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/finance/collection': typeof FinanceCollectionRoute
   '/finance/invoices': typeof FinanceInvoicesRoute
-  '/finance/payments': typeof FinancePaymentsRoute
-  '/finance/refunds': typeof FinanceRefundsRoute
+  '/finance/plans': typeof FinancePlansRoute
+  '/finance/reminders': typeof FinanceRemindersRoute
   '/finance/reports': typeof FinanceReportsRoute
   '/guardian/children': typeof GuardianChildrenRoute
   '/guardian/messages': typeof GuardianMessagesRoute
@@ -326,9 +334,10 @@ export interface FileRoutesById {
   '/admin/reports': typeof AdminReportsRoute
   '/admin/sessions': typeof AdminSessionsRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/finance/collection': typeof FinanceCollectionRoute
   '/finance/invoices': typeof FinanceInvoicesRoute
-  '/finance/payments': typeof FinancePaymentsRoute
-  '/finance/refunds': typeof FinanceRefundsRoute
+  '/finance/plans': typeof FinancePlansRoute
+  '/finance/reminders': typeof FinanceRemindersRoute
   '/finance/reports': typeof FinanceReportsRoute
   '/guardian/children': typeof GuardianChildrenRoute
   '/guardian/messages': typeof GuardianMessagesRoute
@@ -367,9 +376,10 @@ export interface FileRouteTypes {
     | '/admin/reports'
     | '/admin/sessions'
     | '/admin/settings'
+    | '/finance/collection'
     | '/finance/invoices'
-    | '/finance/payments'
-    | '/finance/refunds'
+    | '/finance/plans'
+    | '/finance/reminders'
     | '/finance/reports'
     | '/guardian/children'
     | '/guardian/messages'
@@ -401,9 +411,10 @@ export interface FileRouteTypes {
     | '/admin/reports'
     | '/admin/sessions'
     | '/admin/settings'
+    | '/finance/collection'
     | '/finance/invoices'
-    | '/finance/payments'
-    | '/finance/refunds'
+    | '/finance/plans'
+    | '/finance/reminders'
     | '/finance/reports'
     | '/guardian/children'
     | '/guardian/messages'
@@ -440,9 +451,10 @@ export interface FileRouteTypes {
     | '/admin/reports'
     | '/admin/sessions'
     | '/admin/settings'
+    | '/finance/collection'
     | '/finance/invoices'
-    | '/finance/payments'
-    | '/finance/refunds'
+    | '/finance/plans'
+    | '/finance/reminders'
     | '/finance/reports'
     | '/guardian/children'
     | '/guardian/messages'
@@ -658,18 +670,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FinanceReportsRouteImport
       parentRoute: typeof FinanceRoute
     }
-    '/finance/refunds': {
-      id: '/finance/refunds'
-      path: '/refunds'
-      fullPath: '/finance/refunds'
-      preLoaderRoute: typeof FinanceRefundsRouteImport
+    '/finance/reminders': {
+      id: '/finance/reminders'
+      path: '/reminders'
+      fullPath: '/finance/reminders'
+      preLoaderRoute: typeof FinanceRemindersRouteImport
       parentRoute: typeof FinanceRoute
     }
-    '/finance/payments': {
-      id: '/finance/payments'
-      path: '/payments'
-      fullPath: '/finance/payments'
-      preLoaderRoute: typeof FinancePaymentsRouteImport
+    '/finance/plans': {
+      id: '/finance/plans'
+      path: '/plans'
+      fullPath: '/finance/plans'
+      preLoaderRoute: typeof FinancePlansRouteImport
       parentRoute: typeof FinanceRoute
     }
     '/finance/invoices': {
@@ -677,6 +689,13 @@ declare module '@tanstack/react-router' {
       path: '/invoices'
       fullPath: '/finance/invoices'
       preLoaderRoute: typeof FinanceInvoicesRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/collection': {
+      id: '/finance/collection'
+      path: '/collection'
+      fullPath: '/finance/collection'
+      preLoaderRoute: typeof FinanceCollectionRouteImport
       parentRoute: typeof FinanceRoute
     }
     '/admin/settings': {
@@ -765,17 +784,19 @@ const AdminRouteChildren: AdminRouteChildren = {
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface FinanceRouteChildren {
+  FinanceCollectionRoute: typeof FinanceCollectionRoute
   FinanceInvoicesRoute: typeof FinanceInvoicesRoute
-  FinancePaymentsRoute: typeof FinancePaymentsRoute
-  FinanceRefundsRoute: typeof FinanceRefundsRoute
+  FinancePlansRoute: typeof FinancePlansRoute
+  FinanceRemindersRoute: typeof FinanceRemindersRoute
   FinanceReportsRoute: typeof FinanceReportsRoute
   FinanceIndexRoute: typeof FinanceIndexRoute
 }
 
 const FinanceRouteChildren: FinanceRouteChildren = {
+  FinanceCollectionRoute: FinanceCollectionRoute,
   FinanceInvoicesRoute: FinanceInvoicesRoute,
-  FinancePaymentsRoute: FinancePaymentsRoute,
-  FinanceRefundsRoute: FinanceRefundsRoute,
+  FinancePlansRoute: FinancePlansRoute,
+  FinanceRemindersRoute: FinanceRemindersRoute,
   FinanceReportsRoute: FinanceReportsRoute,
   FinanceIndexRoute: FinanceIndexRoute,
 }

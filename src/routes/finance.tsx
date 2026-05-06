@@ -1,12 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { LayoutDashboard, FileText, CreditCard, Undo2, BarChart3 } from "lucide-react";
+import { LayoutDashboard, Wallet, CalendarClock, FileText, BellRing, BarChart3 } from "lucide-react";
 import { SidebarLayout } from "@/components/SidebarLayout";
 
 const navItems = [
   { label: "Dashboard", to: "/finance", icon: LayoutDashboard },
+  { label: "Fee Collection", to: "/finance/collection", icon: Wallet },
+  { label: "Payment Plans", to: "/finance/plans", icon: CalendarClock },
   { label: "Invoices", to: "/finance/invoices", icon: FileText },
-  { label: "Payments", to: "/finance/payments", icon: CreditCard },
-  { label: "Refunds", to: "/finance/refunds", icon: Undo2 },
+  { label: "Reminders", to: "/finance/reminders", icon: BellRing },
   { label: "Reports", to: "/finance/reports", icon: BarChart3 },
 ];
 
@@ -15,7 +16,7 @@ export const Route = createFileRoute("/finance")({
     <SidebarLayout
       navItems={navItems}
       portalLabel="Finance"
-      user={{ name: "Helena Brady", role: "Finance Officer" }}
+      user={{ name: "Khalid Finance", role: "khalid@neomora.com" }}
     />
   ),
 });
