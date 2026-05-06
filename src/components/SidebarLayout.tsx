@@ -1,4 +1,4 @@
-import { Link, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
+import { Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import { LogOut, Menu, X } from "lucide-react";
@@ -22,7 +22,6 @@ interface SidebarLayoutProps {
 }
 
 export function SidebarLayout({ navItems, user, portalLabel, homePath, children }: SidebarLayoutProps) {
-  const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -48,7 +47,6 @@ export function SidebarLayout({ navItems, user, portalLabel, homePath, children 
           isActive={isActive}
           portalRoot={portalRoot}
           onNavClick={() => {}}
-          onSignOut={() => navigate({ to: "/login" })}
         />
       </aside>
 
@@ -72,7 +70,6 @@ export function SidebarLayout({ navItems, user, portalLabel, homePath, children 
           isActive={isActive}
           portalRoot={portalRoot}
           onNavClick={() => setMobileOpen(false)}
-          onSignOut={() => navigate({ to: "/login" })}
           onClose={() => setMobileOpen(false)}
         />
       </aside>
@@ -105,11 +102,10 @@ interface InnerProps {
   isActive: (to: string) => boolean;
   portalRoot: string;
   onNavClick: () => void;
-  onSignOut: () => void;
   onClose?: () => void;
 }
 
-function SidebarInner({ portalLabel, navItems, user, isActive, portalRoot, onNavClick, onSignOut, onClose }: InnerProps) {
+function SidebarInner({ portalLabel, navItems, user, isActive, portalRoot, onNavClick, onClose }: InnerProps) {
   return (
     <>
       <div className="relative flex flex-col gap-1 border-b border-sidebar-border px-5 py-5">
@@ -122,7 +118,7 @@ function SidebarInner({ portalLabel, navItems, user, isActive, portalRoot, onNav
             <X className="h-4 w-4" />
           </button>
         )}
-        <Link to={portalRoot} className="flex h-10 items-center justify-center rounded-md bg-white/95 px-3" onClick={onNavClick}>
+        <Link to={portalRoot} preload="render" className="flex h-10 items-center justify-center rounded-md bg-white/95 px-3" onClick={onNavClick}>
           <img src={logoUrl} alt="Neomora" className="h-6 w-auto" />
         </Link>
         <p className="mt-2 text-center text-[11px] font-medium uppercase tracking-widest text-white/60">
@@ -138,6 +134,7 @@ function SidebarInner({ portalLabel, navItems, user, isActive, portalRoot, onNav
             <Link
               key={item.to}
               to={item.to}
+              preload="render"
               onClick={onNavClick}
               className={cn(
                 "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
@@ -162,14 +159,15 @@ function SidebarInner({ portalLabel, navItems, user, isActive, portalRoot, onNav
             <p className="truncate text-sm font-medium">{user.name}</p>
             <p className="truncate text-xs text-white/60">{user.role}</p>
           </div>
-          <button
-            onClick={onSignOut}
+          <Link
+            to="/login"
+            preload="render"
             title="Sign out"
             aria-label="Sign out"
             className="rounded-md p-1.5 text-white/70 hover:bg-white/10 hover:text-white"
           >
             <LogOut className="h-4 w-4" />
-          </button>
+          </Link>
         </div>
       </div>
     </>
