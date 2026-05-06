@@ -24,8 +24,8 @@ export interface GuardianInvoice {
 }
 
 export const guardianInvoices: GuardianInvoice[] = [
-  { id: "INV-2026-0500", child: "Aria Walsh", description: "May 2026 — Football U10", amount: 180, dueAt: "2026-05-15", status: "Paid" },
-  { id: "INV-2026-0501", child: "Cian Walsh", description: "May 2026 — Football U12", amount: 220, dueAt: "2026-05-15", status: "Pending" },
-  { id: "INV-2026-0480", child: "Aria Walsh", description: "Apr 2026 — Football U10", amount: 180, dueAt: "2026-04-15", status: "Paid" },
-  { id: "INV-2026-0481", child: "Cian Walsh", description: "Apr 2026 — Football U12", amount: 220, dueAt: "2026-04-15", status: "Paid" },
+  { id: "INV-2026-0500", child: "Aria Walsh", description: "May 2026 · Football U10", amount: 180, dueAt: "2026-05-15", status: "Paid" },
+  { id: "INV-2026-0501", child: "Cian Walsh", description: "May 2026 · Football U12", amount: 220, dueAt: "2026-05-15", status: "Pending" },
+  { id: "INV-2026-0480", child: "Aria Walsh", description: "Apr 2026 · Football U10", amount: 180, dueAt: "2026-04-15", status: "Paid" },
+  { id: "INV-2026-0481", child: "Cian Walsh", description: "Apr 2026 · Football U12", amount: 220, dueAt: "2026-04-15", status: "Paid" },
 ];

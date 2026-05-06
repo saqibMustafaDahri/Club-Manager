@@ -145,7 +145,7 @@ function AdminDashboard() {
               })}
               {unresolvedAlerts.length === 0 && (
                 <li className="flex items-center gap-2 px-5 py-6 text-sm text-muted-foreground">
-                  <CheckCircle2 className="h-4 w-4 text-success" /> All clear — no pending alerts.
+                  <CheckCircle2 className="h-4 w-4 text-success" /> All clear. No pending alerts.
                 </li>
               )}
             </ul>
@@ -167,7 +167,7 @@ function AdminDashboard() {
                     </div>
                     <div className="flex-1">
                       <p className="text-sm text-foreground">
-                        <span className="font-medium">{a.action}</span> — {a.subject}
+                        <span className="font-medium">{a.action}</span>: {a.subject}
                       </p>
                       <p className="mt-0.5 text-xs text-muted-foreground">{timeAgo(a.timestamp)}</p>
                     </div>

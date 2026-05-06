@@ -41,9 +41,9 @@ function SettingsPage() {
                 <Select defaultValue="SAR">
                   <SelectTrigger className="w-48"><SelectValue /></SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="SAR">SAR — Saudi Riyal</SelectItem>
-                    <SelectItem value="AED">AED — UAE Dirham</SelectItem>
-                    <SelectItem value="USD">USD — US Dollar</SelectItem>
+                    <SelectItem value="SAR">SAR · Saudi Riyal</SelectItem>
+                    <SelectItem value="AED">AED · UAE Dirham</SelectItem>
+                    <SelectItem value="USD">USD · US Dollar</SelectItem>
                   </SelectContent>
                 </Select>
               </Field>
