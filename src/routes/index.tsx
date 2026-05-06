@@ -128,7 +128,7 @@ function LandingPage() {
                 <h3 className="mt-4 text-base font-semibold">{p.name}</h3>
                 <p className="mt-2 flex-1 text-sm text-muted-foreground">{p.description}</p>
                 <Button asChild variant="outline" size="sm" className="mt-5">
-                  <Link to="/login">Access Portal <ArrowRight className="ml-1.5 h-3.5 w-3.5" /></Link>
+                  <Link to="/login" search={{ role: p.key }}>Access Portal <ArrowRight className="ml-1.5 h-3.5 w-3.5" /></Link>
                 </Button>
               </div>
             ))}

@@ -1,8 +1,9 @@
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { Search, ArrowUpDown, Download, Plus, Filter } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { EmptyState } from "@/components/EmptyState";
 
 export interface Column<T> {
   key: keyof T | string;
@@ -25,12 +26,20 @@ interface DataTableProps<T extends { id: string }> {
 
 export function DataTable<T extends { id: string }>({
   columns, data, searchKeys, searchPlaceholder = "Search…", onAdd, addLabel = "Add",
-  filters, emptyMessage = "No results.",
+  filters, emptyMessage = "No records found",
 }: DataTableProps<T>) {
   const [query, setQuery] = useState("");
   const [sortKey, setSortKey] = useState<string | null>(null);
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
   const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [loading, setLoading] = useState(true);
+
+  // Brief artificial loading so users see the skeleton at least once
+  useEffect(() => {
+    setLoading(true);
+    const t = setTimeout(() => setLoading(false), 400);
+    return () => clearTimeout(t);
+  }, []);
 
   const filtered = useMemo(() => {
     let rows = data;
@@ -128,15 +137,29 @@ export function DataTable<T extends { id: string }>({
             </tr>
           </thead>
           <tbody>
-            {filtered.length === 0 && (
+            {loading && (
+              Array.from({ length: 5 }).map((_, i) => (
+                <tr key={`sk-${i}`} className="border-b last:border-0">
+                  <td className="px-4 py-3">
+                    <div className="h-4 w-4 animate-pulse rounded bg-muted" />
+                  </td>
+                  {columns.map((col) => (
+                    <td key={String(col.key)} className="px-4 py-3">
+                      <div className="h-4 w-3/4 animate-pulse rounded bg-muted" />
+                    </td>
+                  ))}
+                </tr>
+              ))
+            )}
+            {!loading && filtered.length === 0 && (
               <tr>
-                <td colSpan={columns.length + 1} className="px-4 py-12 text-center text-sm text-muted-foreground">
-                  {emptyMessage}
+                <td colSpan={columns.length + 1} className="px-0 py-0">
+                  <EmptyState title={emptyMessage} description="Try adjusting your filters or search to find what you're looking for." />
                 </td>
               </tr>
             )}
-            {filtered.map((row) => (
-              <tr key={row.id} className="border-b last:border-0 hover:bg-muted/30">
+            {!loading && filtered.map((row) => (
+              <tr key={row.id} className="border-b transition-colors last:border-0 hover:bg-gray-50">
                 <td className="px-4 py-3">
                   <Checkbox
                     checked={selected.has(row.id)}
