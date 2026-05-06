@@ -136,17 +136,6 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section id="contact" className="mx-auto max-w-5xl px-6 py-24">
-        <div className="rounded-2xl bg-brand p-10 text-center text-white md:p-16">
-          <h2 className="text-3xl font-bold md:text-4xl">Ready to see Neomora in action?</h2>
-          <p className="mx-auto mt-4 max-w-xl text-white/80">Pick any role on the login screen to explore a fully populated demo portal.</p>
-          <Button asChild size="lg" className="mt-8 bg-white text-brand hover:bg-white/90">
-            <Link to="/login">Launch the Demo</Link>
-          </Button>
-        </div>
-      </section>
-
       {/* Footer */}
       <footer className="border-t bg-card">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-8 text-sm text-muted-foreground md:flex-row">
