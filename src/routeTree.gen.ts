@@ -35,7 +35,10 @@ import { Route as GuardianPaymentsRouteImport } from './routes/guardian.payments
 import { Route as GuardianMessagesRouteImport } from './routes/guardian.messages'
 import { Route as GuardianChildrenRouteImport } from './routes/guardian.children'
 import { Route as FinanceReportsRouteImport } from './routes/finance.reports'
+import { Route as FinanceRemindersRouteImport } from './routes/finance.reminders'
+import { Route as FinancePlansRouteImport } from './routes/finance.plans'
 import { Route as FinanceInvoicesRouteImport } from './routes/finance.invoices'
+import { Route as FinanceCollectionRouteImport } from './routes/finance.collection'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminSessionsRouteImport } from './routes/admin.sessions'
 import { Route as AdminReportsRouteImport } from './routes/admin.reports'
@@ -178,9 +181,24 @@ const FinanceReportsRoute = FinanceReportsRouteImport.update({
   path: '/reports',
   getParentRoute: () => FinanceRoute,
 } as any)
+const FinanceRemindersRoute = FinanceRemindersRouteImport.update({
+  id: '/reminders',
+  path: '/reminders',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinancePlansRoute = FinancePlansRouteImport.update({
+  id: '/plans',
+  path: '/plans',
+  getParentRoute: () => FinanceRoute,
+} as any)
 const FinanceInvoicesRoute = FinanceInvoicesRouteImport.update({
   id: '/invoices',
   path: '/invoices',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinanceCollectionRoute = FinanceCollectionRouteImport.update({
+  id: '/collection',
+  path: '/collection',
   getParentRoute: () => FinanceRoute,
 } as any)
 const AdminSettingsRoute = AdminSettingsRouteImport.update({
@@ -240,7 +258,10 @@ export interface FileRoutesByFullPath {
   '/admin/reports': typeof AdminReportsRoute
   '/admin/sessions': typeof AdminSessionsRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/finance/collection': typeof FinanceCollectionRoute
   '/finance/invoices': typeof FinanceInvoicesRoute
+  '/finance/plans': typeof FinancePlansRoute
+  '/finance/reminders': typeof FinanceRemindersRoute
   '/finance/reports': typeof FinanceReportsRoute
   '/guardian/children': typeof GuardianChildrenRoute
   '/guardian/messages': typeof GuardianMessagesRoute
@@ -272,7 +293,10 @@ export interface FileRoutesByTo {
   '/admin/reports': typeof AdminReportsRoute
   '/admin/sessions': typeof AdminSessionsRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/finance/collection': typeof FinanceCollectionRoute
   '/finance/invoices': typeof FinanceInvoicesRoute
+  '/finance/plans': typeof FinancePlansRoute
+  '/finance/reminders': typeof FinanceRemindersRoute
   '/finance/reports': typeof FinanceReportsRoute
   '/guardian/children': typeof GuardianChildrenRoute
   '/guardian/messages': typeof GuardianMessagesRoute
@@ -310,7 +334,10 @@ export interface FileRoutesById {
   '/admin/reports': typeof AdminReportsRoute
   '/admin/sessions': typeof AdminSessionsRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/finance/collection': typeof FinanceCollectionRoute
   '/finance/invoices': typeof FinanceInvoicesRoute
+  '/finance/plans': typeof FinancePlansRoute
+  '/finance/reminders': typeof FinanceRemindersRoute
   '/finance/reports': typeof FinanceReportsRoute
   '/guardian/children': typeof GuardianChildrenRoute
   '/guardian/messages': typeof GuardianMessagesRoute
@@ -349,7 +376,10 @@ export interface FileRouteTypes {
     | '/admin/reports'
     | '/admin/sessions'
     | '/admin/settings'
+    | '/finance/collection'
     | '/finance/invoices'
+    | '/finance/plans'
+    | '/finance/reminders'
     | '/finance/reports'
     | '/guardian/children'
     | '/guardian/messages'
@@ -381,7 +411,10 @@ export interface FileRouteTypes {
     | '/admin/reports'
     | '/admin/sessions'
     | '/admin/settings'
+    | '/finance/collection'
     | '/finance/invoices'
+    | '/finance/plans'
+    | '/finance/reminders'
     | '/finance/reports'
     | '/guardian/children'
     | '/guardian/messages'
@@ -418,7 +451,10 @@ export interface FileRouteTypes {
     | '/admin/reports'
     | '/admin/sessions'
     | '/admin/settings'
+    | '/finance/collection'
     | '/finance/invoices'
+    | '/finance/plans'
+    | '/finance/reminders'
     | '/finance/reports'
     | '/guardian/children'
     | '/guardian/messages'
@@ -634,11 +670,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FinanceReportsRouteImport
       parentRoute: typeof FinanceRoute
     }
+    '/finance/reminders': {
+      id: '/finance/reminders'
+      path: '/reminders'
+      fullPath: '/finance/reminders'
+      preLoaderRoute: typeof FinanceRemindersRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/plans': {
+      id: '/finance/plans'
+      path: '/plans'
+      fullPath: '/finance/plans'
+      preLoaderRoute: typeof FinancePlansRouteImport
+      parentRoute: typeof FinanceRoute
+    }
     '/finance/invoices': {
       id: '/finance/invoices'
       path: '/invoices'
       fullPath: '/finance/invoices'
       preLoaderRoute: typeof FinanceInvoicesRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/collection': {
+      id: '/finance/collection'
+      path: '/collection'
+      fullPath: '/finance/collection'
+      preLoaderRoute: typeof FinanceCollectionRouteImport
       parentRoute: typeof FinanceRoute
     }
     '/admin/settings': {
@@ -727,13 +784,19 @@ const AdminRouteChildren: AdminRouteChildren = {
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface FinanceRouteChildren {
+  FinanceCollectionRoute: typeof FinanceCollectionRoute
   FinanceInvoicesRoute: typeof FinanceInvoicesRoute
+  FinancePlansRoute: typeof FinancePlansRoute
+  FinanceRemindersRoute: typeof FinanceRemindersRoute
   FinanceReportsRoute: typeof FinanceReportsRoute
   FinanceIndexRoute: typeof FinanceIndexRoute
 }
 
 const FinanceRouteChildren: FinanceRouteChildren = {
+  FinanceCollectionRoute: FinanceCollectionRoute,
   FinanceInvoicesRoute: FinanceInvoicesRoute,
+  FinancePlansRoute: FinancePlansRoute,
+  FinanceRemindersRoute: FinanceRemindersRoute,
   FinanceReportsRoute: FinanceReportsRoute,
   FinanceIndexRoute: FinanceIndexRoute,
 }
