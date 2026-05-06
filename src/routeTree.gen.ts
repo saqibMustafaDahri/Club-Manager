@@ -37,12 +37,14 @@ import { Route as FinanceReportsRouteImport } from './routes/finance.reports'
 import { Route as FinanceRefundsRouteImport } from './routes/finance.refunds'
 import { Route as FinancePaymentsRouteImport } from './routes/finance.payments'
 import { Route as FinanceInvoicesRouteImport } from './routes/finance.invoices'
-import { Route as AdminStaffRouteImport } from './routes/admin.staff'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminSessionsRouteImport } from './routes/admin.sessions'
 import { Route as AdminReportsRouteImport } from './routes/admin.reports'
 import { Route as AdminParticipantsRouteImport } from './routes/admin.participants'
 import { Route as AdminLocationsRouteImport } from './routes/admin.locations'
-import { Route as AdminCommunicationsRouteImport } from './routes/admin.communications'
+import { Route as AdminFeesRouteImport } from './routes/admin.fees'
+import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
+import { Route as AdminAccessRouteImport } from './routes/admin.access'
 
 const StaffRoute = StaffRouteImport.update({
   id: '/staff',
@@ -185,14 +187,14 @@ const FinanceInvoicesRoute = FinanceInvoicesRouteImport.update({
   path: '/invoices',
   getParentRoute: () => FinanceRoute,
 } as any)
-const AdminStaffRoute = AdminStaffRouteImport.update({
-  id: '/staff',
-  path: '/staff',
-  getParentRoute: () => AdminRoute,
-} as any)
 const AdminSettingsRoute = AdminSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSessionsRoute = AdminSessionsRouteImport.update({
+  id: '/sessions',
+  path: '/sessions',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminReportsRoute = AdminReportsRouteImport.update({
@@ -210,9 +212,19 @@ const AdminLocationsRoute = AdminLocationsRouteImport.update({
   path: '/locations',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminCommunicationsRoute = AdminCommunicationsRouteImport.update({
-  id: '/communications',
-  path: '/communications',
+const AdminFeesRoute = AdminFeesRouteImport.update({
+  id: '/fees',
+  path: '/fees',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAccessRoute = AdminAccessRouteImport.update({
+  id: '/access',
+  path: '/access',
   getParentRoute: () => AdminRoute,
 } as any)
 
@@ -224,12 +236,14 @@ export interface FileRoutesByFullPath {
   '/location-manager': typeof LocationManagerRouteWithChildren
   '/login': typeof LoginRoute
   '/staff': typeof StaffRouteWithChildren
-  '/admin/communications': typeof AdminCommunicationsRoute
+  '/admin/access': typeof AdminAccessRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/fees': typeof AdminFeesRoute
   '/admin/locations': typeof AdminLocationsRoute
   '/admin/participants': typeof AdminParticipantsRoute
   '/admin/reports': typeof AdminReportsRoute
+  '/admin/sessions': typeof AdminSessionsRoute
   '/admin/settings': typeof AdminSettingsRoute
-  '/admin/staff': typeof AdminStaffRoute
   '/finance/invoices': typeof FinanceInvoicesRoute
   '/finance/payments': typeof FinancePaymentsRoute
   '/finance/refunds': typeof FinanceRefundsRoute
@@ -255,12 +269,14 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
-  '/admin/communications': typeof AdminCommunicationsRoute
+  '/admin/access': typeof AdminAccessRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/fees': typeof AdminFeesRoute
   '/admin/locations': typeof AdminLocationsRoute
   '/admin/participants': typeof AdminParticipantsRoute
   '/admin/reports': typeof AdminReportsRoute
+  '/admin/sessions': typeof AdminSessionsRoute
   '/admin/settings': typeof AdminSettingsRoute
-  '/admin/staff': typeof AdminStaffRoute
   '/finance/invoices': typeof FinanceInvoicesRoute
   '/finance/payments': typeof FinancePaymentsRoute
   '/finance/refunds': typeof FinanceRefundsRoute
@@ -292,12 +308,14 @@ export interface FileRoutesById {
   '/location-manager': typeof LocationManagerRouteWithChildren
   '/login': typeof LoginRoute
   '/staff': typeof StaffRouteWithChildren
-  '/admin/communications': typeof AdminCommunicationsRoute
+  '/admin/access': typeof AdminAccessRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/fees': typeof AdminFeesRoute
   '/admin/locations': typeof AdminLocationsRoute
   '/admin/participants': typeof AdminParticipantsRoute
   '/admin/reports': typeof AdminReportsRoute
+  '/admin/sessions': typeof AdminSessionsRoute
   '/admin/settings': typeof AdminSettingsRoute
-  '/admin/staff': typeof AdminStaffRoute
   '/finance/invoices': typeof FinanceInvoicesRoute
   '/finance/payments': typeof FinancePaymentsRoute
   '/finance/refunds': typeof FinanceRefundsRoute
@@ -330,12 +348,14 @@ export interface FileRouteTypes {
     | '/location-manager'
     | '/login'
     | '/staff'
-    | '/admin/communications'
+    | '/admin/access'
+    | '/admin/dashboard'
+    | '/admin/fees'
     | '/admin/locations'
     | '/admin/participants'
     | '/admin/reports'
+    | '/admin/sessions'
     | '/admin/settings'
-    | '/admin/staff'
     | '/finance/invoices'
     | '/finance/payments'
     | '/finance/refunds'
@@ -361,12 +381,14 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/login'
-    | '/admin/communications'
+    | '/admin/access'
+    | '/admin/dashboard'
+    | '/admin/fees'
     | '/admin/locations'
     | '/admin/participants'
     | '/admin/reports'
+    | '/admin/sessions'
     | '/admin/settings'
-    | '/admin/staff'
     | '/finance/invoices'
     | '/finance/payments'
     | '/finance/refunds'
@@ -397,12 +419,14 @@ export interface FileRouteTypes {
     | '/location-manager'
     | '/login'
     | '/staff'
-    | '/admin/communications'
+    | '/admin/access'
+    | '/admin/dashboard'
+    | '/admin/fees'
     | '/admin/locations'
     | '/admin/participants'
     | '/admin/reports'
+    | '/admin/sessions'
     | '/admin/settings'
-    | '/admin/staff'
     | '/finance/invoices'
     | '/finance/payments'
     | '/finance/refunds'
@@ -634,18 +658,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FinanceInvoicesRouteImport
       parentRoute: typeof FinanceRoute
     }
-    '/admin/staff': {
-      id: '/admin/staff'
-      path: '/staff'
-      fullPath: '/admin/staff'
-      preLoaderRoute: typeof AdminStaffRouteImport
-      parentRoute: typeof AdminRoute
-    }
     '/admin/settings': {
       id: '/admin/settings'
       path: '/settings'
       fullPath: '/admin/settings'
       preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/sessions': {
+      id: '/admin/sessions'
+      path: '/sessions'
+      fullPath: '/admin/sessions'
+      preLoaderRoute: typeof AdminSessionsRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/reports': {
@@ -669,33 +693,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLocationsRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/communications': {
-      id: '/admin/communications'
-      path: '/communications'
-      fullPath: '/admin/communications'
-      preLoaderRoute: typeof AdminCommunicationsRouteImport
+    '/admin/fees': {
+      id: '/admin/fees'
+      path: '/fees'
+      fullPath: '/admin/fees'
+      preLoaderRoute: typeof AdminFeesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/access': {
+      id: '/admin/access'
+      path: '/access'
+      fullPath: '/admin/access'
+      preLoaderRoute: typeof AdminAccessRouteImport
       parentRoute: typeof AdminRoute
     }
   }
 }
 
 interface AdminRouteChildren {
-  AdminCommunicationsRoute: typeof AdminCommunicationsRoute
+  AdminAccessRoute: typeof AdminAccessRoute
+  AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminFeesRoute: typeof AdminFeesRoute
   AdminLocationsRoute: typeof AdminLocationsRoute
   AdminParticipantsRoute: typeof AdminParticipantsRoute
   AdminReportsRoute: typeof AdminReportsRoute
+  AdminSessionsRoute: typeof AdminSessionsRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
-  AdminStaffRoute: typeof AdminStaffRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
-  AdminCommunicationsRoute: AdminCommunicationsRoute,
+  AdminAccessRoute: AdminAccessRoute,
+  AdminDashboardRoute: AdminDashboardRoute,
+  AdminFeesRoute: AdminFeesRoute,
   AdminLocationsRoute: AdminLocationsRoute,
   AdminParticipantsRoute: AdminParticipantsRoute,
   AdminReportsRoute: AdminReportsRoute,
+  AdminSessionsRoute: AdminSessionsRoute,
   AdminSettingsRoute: AdminSettingsRoute,
-  AdminStaffRoute: AdminStaffRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
