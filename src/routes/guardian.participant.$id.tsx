@@ -32,7 +32,8 @@ const statusToBadge = (s: string) =>
   s === "Withdrawn" ? "Withdrawn" : "Pending";
 
 function ParticipantDetail() {
-  const child = Route.useLoaderData();
+  const { id } = Route.useParams();
+  const child = mockParticipants.find((p) => p.id === id) as MockParticipant;
   const payments = mockPayments.filter((p) => p.participantId === child.id);
 
   const totalFee = payments.reduce((a, p) => a + p.totalFee, 0);
