@@ -40,7 +40,7 @@ function FinanceDashboard() {
 
   return (
     <>
-      <PageHeader title="Finance Dashboard" subtitle={todayStr} />
+      <PageHeader title="Finance Dashboard" description={todayStr} />
       <div className="space-y-6 p-6">
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           <StatCard label="Total Invoiced" value={SAR(totalInvoiced)} icon={Receipt} accent="primary" />
