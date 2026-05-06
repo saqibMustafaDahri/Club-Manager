@@ -25,8 +25,11 @@ import { Route as StaffSquadRouteImport } from './routes/staff.squad'
 import { Route as StaffScheduleRouteImport } from './routes/staff.schedule'
 import { Route as StaffNotesRouteImport } from './routes/staff.notes'
 import { Route as StaffAttendanceRouteImport } from './routes/staff.attendance'
+import { Route as LocationManagerWaitlistRouteImport } from './routes/location-manager.waitlist'
 import { Route as LocationManagerSessionsRouteImport } from './routes/location-manager.sessions'
 import { Route as LocationManagerParticipantsRouteImport } from './routes/location-manager.participants'
+import { Route as LocationManagerDashboardRouteImport } from './routes/location-manager.dashboard'
+import { Route as LocationManagerCommunicationsRouteImport } from './routes/location-manager.communications'
 import { Route as GuardianSessionsRouteImport } from './routes/guardian.sessions'
 import { Route as GuardianPaymentsRouteImport } from './routes/guardian.payments'
 import { Route as GuardianMessagesRouteImport } from './routes/guardian.messages'
@@ -124,6 +127,11 @@ const StaffAttendanceRoute = StaffAttendanceRouteImport.update({
   path: '/attendance',
   getParentRoute: () => StaffRoute,
 } as any)
+const LocationManagerWaitlistRoute = LocationManagerWaitlistRouteImport.update({
+  id: '/waitlist',
+  path: '/waitlist',
+  getParentRoute: () => LocationManagerRoute,
+} as any)
 const LocationManagerSessionsRoute = LocationManagerSessionsRouteImport.update({
   id: '/sessions',
   path: '/sessions',
@@ -133,6 +141,18 @@ const LocationManagerParticipantsRoute =
   LocationManagerParticipantsRouteImport.update({
     id: '/participants',
     path: '/participants',
+    getParentRoute: () => LocationManagerRoute,
+  } as any)
+const LocationManagerDashboardRoute =
+  LocationManagerDashboardRouteImport.update({
+    id: '/dashboard',
+    path: '/dashboard',
+    getParentRoute: () => LocationManagerRoute,
+  } as any)
+const LocationManagerCommunicationsRoute =
+  LocationManagerCommunicationsRouteImport.update({
+    id: '/communications',
+    path: '/communications',
     getParentRoute: () => LocationManagerRoute,
   } as any)
 const GuardianSessionsRoute = GuardianSessionsRouteImport.update({
@@ -240,8 +260,11 @@ export interface FileRoutesByFullPath {
   '/guardian/messages': typeof GuardianMessagesRoute
   '/guardian/payments': typeof GuardianPaymentsRoute
   '/guardian/sessions': typeof GuardianSessionsRoute
+  '/location-manager/communications': typeof LocationManagerCommunicationsRoute
+  '/location-manager/dashboard': typeof LocationManagerDashboardRoute
   '/location-manager/participants': typeof LocationManagerParticipantsRoute
   '/location-manager/sessions': typeof LocationManagerSessionsRoute
+  '/location-manager/waitlist': typeof LocationManagerWaitlistRoute
   '/staff/attendance': typeof StaffAttendanceRoute
   '/staff/notes': typeof StaffNotesRoute
   '/staff/schedule': typeof StaffScheduleRoute
@@ -271,8 +294,11 @@ export interface FileRoutesByTo {
   '/guardian/messages': typeof GuardianMessagesRoute
   '/guardian/payments': typeof GuardianPaymentsRoute
   '/guardian/sessions': typeof GuardianSessionsRoute
+  '/location-manager/communications': typeof LocationManagerCommunicationsRoute
+  '/location-manager/dashboard': typeof LocationManagerDashboardRoute
   '/location-manager/participants': typeof LocationManagerParticipantsRoute
   '/location-manager/sessions': typeof LocationManagerSessionsRoute
+  '/location-manager/waitlist': typeof LocationManagerWaitlistRoute
   '/staff/attendance': typeof StaffAttendanceRoute
   '/staff/notes': typeof StaffNotesRoute
   '/staff/schedule': typeof StaffScheduleRoute
@@ -308,8 +334,11 @@ export interface FileRoutesById {
   '/guardian/messages': typeof GuardianMessagesRoute
   '/guardian/payments': typeof GuardianPaymentsRoute
   '/guardian/sessions': typeof GuardianSessionsRoute
+  '/location-manager/communications': typeof LocationManagerCommunicationsRoute
+  '/location-manager/dashboard': typeof LocationManagerDashboardRoute
   '/location-manager/participants': typeof LocationManagerParticipantsRoute
   '/location-manager/sessions': typeof LocationManagerSessionsRoute
+  '/location-manager/waitlist': typeof LocationManagerWaitlistRoute
   '/staff/attendance': typeof StaffAttendanceRoute
   '/staff/notes': typeof StaffNotesRoute
   '/staff/schedule': typeof StaffScheduleRoute
@@ -346,8 +375,11 @@ export interface FileRouteTypes {
     | '/guardian/messages'
     | '/guardian/payments'
     | '/guardian/sessions'
+    | '/location-manager/communications'
+    | '/location-manager/dashboard'
     | '/location-manager/participants'
     | '/location-manager/sessions'
+    | '/location-manager/waitlist'
     | '/staff/attendance'
     | '/staff/notes'
     | '/staff/schedule'
@@ -377,8 +409,11 @@ export interface FileRouteTypes {
     | '/guardian/messages'
     | '/guardian/payments'
     | '/guardian/sessions'
+    | '/location-manager/communications'
+    | '/location-manager/dashboard'
     | '/location-manager/participants'
     | '/location-manager/sessions'
+    | '/location-manager/waitlist'
     | '/staff/attendance'
     | '/staff/notes'
     | '/staff/schedule'
@@ -413,8 +448,11 @@ export interface FileRouteTypes {
     | '/guardian/messages'
     | '/guardian/payments'
     | '/guardian/sessions'
+    | '/location-manager/communications'
+    | '/location-manager/dashboard'
     | '/location-manager/participants'
     | '/location-manager/sessions'
+    | '/location-manager/waitlist'
     | '/staff/attendance'
     | '/staff/notes'
     | '/staff/schedule'
@@ -550,6 +588,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffAttendanceRouteImport
       parentRoute: typeof StaffRoute
     }
+    '/location-manager/waitlist': {
+      id: '/location-manager/waitlist'
+      path: '/waitlist'
+      fullPath: '/location-manager/waitlist'
+      preLoaderRoute: typeof LocationManagerWaitlistRouteImport
+      parentRoute: typeof LocationManagerRoute
+    }
     '/location-manager/sessions': {
       id: '/location-manager/sessions'
       path: '/sessions'
@@ -562,6 +607,20 @@ declare module '@tanstack/react-router' {
       path: '/participants'
       fullPath: '/location-manager/participants'
       preLoaderRoute: typeof LocationManagerParticipantsRouteImport
+      parentRoute: typeof LocationManagerRoute
+    }
+    '/location-manager/dashboard': {
+      id: '/location-manager/dashboard'
+      path: '/dashboard'
+      fullPath: '/location-manager/dashboard'
+      preLoaderRoute: typeof LocationManagerDashboardRouteImport
+      parentRoute: typeof LocationManagerRoute
+    }
+    '/location-manager/communications': {
+      id: '/location-manager/communications'
+      path: '/communications'
+      fullPath: '/location-manager/communications'
+      preLoaderRoute: typeof LocationManagerCommunicationsRouteImport
       parentRoute: typeof LocationManagerRoute
     }
     '/guardian/sessions': {
@@ -745,14 +804,20 @@ const GuardianRouteWithChildren = GuardianRoute._addFileChildren(
 )
 
 interface LocationManagerRouteChildren {
+  LocationManagerCommunicationsRoute: typeof LocationManagerCommunicationsRoute
+  LocationManagerDashboardRoute: typeof LocationManagerDashboardRoute
   LocationManagerParticipantsRoute: typeof LocationManagerParticipantsRoute
   LocationManagerSessionsRoute: typeof LocationManagerSessionsRoute
+  LocationManagerWaitlistRoute: typeof LocationManagerWaitlistRoute
   LocationManagerIndexRoute: typeof LocationManagerIndexRoute
 }
 
 const LocationManagerRouteChildren: LocationManagerRouteChildren = {
+  LocationManagerCommunicationsRoute: LocationManagerCommunicationsRoute,
+  LocationManagerDashboardRoute: LocationManagerDashboardRoute,
   LocationManagerParticipantsRoute: LocationManagerParticipantsRoute,
   LocationManagerSessionsRoute: LocationManagerSessionsRoute,
+  LocationManagerWaitlistRoute: LocationManagerWaitlistRoute,
   LocationManagerIndexRoute: LocationManagerIndexRoute,
 }
 
@@ -790,3 +855,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
