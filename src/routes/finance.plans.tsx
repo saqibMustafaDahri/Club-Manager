@@ -29,8 +29,8 @@ function PlansPage() {
   const monthlyExpected = monthly.reduce((a, p) => a + (p.totalFee - p.paidAmount), 0);
   const nextSeasonalDate = seasonal
     .map((p) => p.nextDueDate)
-    .filter((d) => d !== "—")
-    .sort()[0] ?? "—";
+    .filter((d) => d !== "-")
+    .sort()[0] ?? "-";
 
   const filtered = useMemo(
     () => mockPayments.filter((p) => planFilter === "all" || p.plan === planFilter),

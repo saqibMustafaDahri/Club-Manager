@@ -26,7 +26,7 @@ function GuardianDashboard() {
   const childPayments = mockPayments.filter((p) => GUARDIAN_CHILD_IDS.includes(p.participantId));
 
   const upcomingFees = childPayments
-    .filter((p) => p.balance > 0 && p.nextDueDate !== "—")
+    .filter((p) => p.balance > 0 && p.nextDueDate !== "-")
     .sort((a, b) => a.nextDueDate.localeCompare(b.nextDueDate))
     .slice(0, 3);
 
@@ -46,7 +46,7 @@ function GuardianDashboard() {
 
       <div className="grid gap-5 md:grid-cols-2">
         {children.map((child) => {
-          const upcoming = childPayments.find((p) => p.participantId === child.id && p.balance > 0 && p.nextDueDate !== "—");
+          const upcoming = childPayments.find((p) => p.participantId === child.id && p.balance > 0 && p.nextDueDate !== "-");
           return (
             <Link
               key={child.id}
