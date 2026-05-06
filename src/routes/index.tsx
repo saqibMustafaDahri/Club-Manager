@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import { PORTALS } from "@/data/portals";
 import logoUrl from "@/assets/neomora-logo.png";
+import heroBg from "@/assets/hero-bg.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -37,39 +38,23 @@ const stats = [
 function LandingPage() {
   return (
     <div className="min-h-screen bg-background">
-      {/* Navbar */}
-      <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-          <div className="flex h-9 items-center">
-            <img src={logoUrl} alt="Neomora" className="h-7 w-auto" />
-            <span className="ml-3 hidden text-sm font-semibold text-muted-foreground sm:inline">
-              Club Manager
-            </span>
-          </div>
-          <nav className="hidden items-center gap-8 text-sm font-medium text-muted-foreground md:flex">
-            <a href="#features" className="hover:text-foreground">Features</a>
-            <a href="#portals" className="hover:text-foreground">Portals</a>
-            <a href="#contact" className="hover:text-foreground">Contact</a>
-          </nav>
-          <Button asChild>
-            <Link to="/login">Sign In</Link>
-          </Button>
-        </div>
-      </header>
-
       {/* Hero */}
-      <section className="relative overflow-hidden bg-brand text-white">
-        <div
-          className="absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 25% 25%, white 1px, transparent 1px), radial-gradient(circle at 75% 75%, white 1px, transparent 1px)",
-            backgroundSize: "44px 44px, 64px 64px",
-          }}
+      <section className="relative overflow-hidden text-white">
+        <img
+          src={heroBg}
+          alt="Academy training session at golden hour"
+          width={1920}
+          height={1280}
+          className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-brand" />
-        <div className="relative mx-auto max-w-5xl px-6 py-24 text-center md:py-32">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs font-medium uppercase tracking-wider text-white/80">
+        <div className="absolute inset-0 bg-brand/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-brand/60 via-brand/70 to-brand" />
+        <div className="relative mx-auto max-w-5xl px-6 pb-24 pt-16 text-center md:pb-32 md:pt-24">
+          <div className="mb-10 flex items-center justify-center gap-3">
+            <img src={logoUrl} alt="Neomora" className="h-8 w-auto brightness-0 invert" />
+            <span className="text-sm font-semibold text-white/80">Club Manager</span>
+          </div>
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium uppercase tracking-wider text-white/90 backdrop-blur">
             <Check className="h-3.5 w-3.5" /> Trusted by 500+ academies
           </span>
           <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight md:text-6xl">
@@ -81,7 +66,7 @@ function LandingPage() {
             Manage participants, sessions, fees, and communications — all in one place.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <Button asChild size="lg">
+            <Button asChild size="lg" className="bg-white text-brand hover:bg-white/90">
               <Link to="/login">
                 Get Started <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
@@ -148,17 +133,6 @@ function LandingPage() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section id="contact" className="mx-auto max-w-5xl px-6 py-24">
-        <div className="rounded-2xl bg-brand p-10 text-center text-white md:p-16">
-          <h2 className="text-3xl font-bold md:text-4xl">Ready to see Neomora in action?</h2>
-          <p className="mx-auto mt-4 max-w-xl text-white/80">Pick any role on the login screen to explore a fully populated demo portal.</p>
-          <Button asChild size="lg" className="mt-8 bg-white text-brand hover:bg-white/90">
-            <Link to="/login">Launch the Demo</Link>
-          </Button>
         </div>
       </section>
 
