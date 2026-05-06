@@ -39,14 +39,14 @@ function InvoicesPage() {
           status: "Paid",
         });
       }
-      if (p.balance > 0 && p.nextDueDate !== "—") {
+      if (p.balance > 0 && p.nextDueDate !== "-") {
         r.push({
           id: `INV-PEND-${p.id.slice(-3)}`,
           participant: p.participantName,
           session: p.session,
           amount: p.balance,
           date: p.nextDueDate,
-          method: "—",
+          method: "-",
           status: "Pending",
         });
       }

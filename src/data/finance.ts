@@ -52,7 +52,7 @@ export interface Refund {
 }
 
 export const refunds: Refund[] = [
-  { id: "REF-301", invoiceId: "INV-2026-0399", guardian: "Aoife O'Connor", amount: 60, reason: "Cancelled session — coach unavailable", status: "Approved", requestedAt: "2026-03-20" },
+  { id: "REF-301", invoiceId: "INV-2026-0399", guardian: "Aoife O'Connor", amount: 60, reason: "Cancelled session (coach unavailable)", status: "Approved", requestedAt: "2026-03-20" },
   { id: "REF-302", invoiceId: "INV-2026-0414", guardian: "Hannah Schmidt", amount: 60, reason: "Withdrew within trial week", status: "Pending", requestedAt: "2026-04-25" },
   { id: "REF-303", invoiceId: "INV-2026-0421", guardian: "Lars Andersen", amount: 30, reason: "Sibling discount adjustment", status: "Pending", requestedAt: "2026-05-02" },
 ];

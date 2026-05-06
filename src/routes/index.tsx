@@ -10,7 +10,7 @@ import heroBg from "@/assets/hero-bg.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Neomora Club Manager — The Complete Academy Management Platform" },
+      { title: "Neomora Club Manager: The Complete Academy Management Platform" },
       { name: "description", content: "Manage participants, sessions, fees, and communications for your sports academy in one platform." },
       { property: "og:title", content: "Neomora Club Manager" },
       { property: "og:description", content: "The complete academy management platform." },
@@ -63,7 +63,7 @@ function LandingPage() {
             <span className="text-white/80">Management Platform</span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-white/80">
-            Manage participants, sessions, fees, and communications — all in one place.
+            Manage participants, sessions, fees, and communications, all in one place.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             <Button asChild size="lg" className="bg-white text-brand hover:bg-white/90">
@@ -84,7 +84,7 @@ function LandingPage() {
           <p className="text-sm font-semibold uppercase tracking-wider text-brand">Features</p>
           <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">Everything you need to run a modern academy</h2>
           <p className="mt-4 text-base text-muted-foreground">
-            From your first enquiry to your hundredth invoice — Neomora handles the operations so your coaches can coach.
+            From your first enquiry to your hundredth invoice, Neomora handles the operations so your coaches can coach.
           </p>
         </div>
         <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">

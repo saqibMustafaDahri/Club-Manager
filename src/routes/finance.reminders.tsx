@@ -51,7 +51,7 @@ function RemindersPage() {
     { key: "participantName", header: "Participant", sortable: true },
     { key: "balance", header: "Balance", render: (r) => SAR(r.balance) },
     { key: "nextDueDate", header: "Due Date", sortable: true },
-    { key: "lastPaymentDate", header: "Last Reminded", render: (r) => r.lastPaymentDate === "—" ? "Never" : r.lastPaymentDate },
+    { key: "lastPaymentDate", header: "Last Reminded", render: (r) => r.lastPaymentDate === "-" ? "Never" : r.lastPaymentDate },
     { key: "channel", header: "Channel", render: () => channelLabel() },
     {
       key: "actions", header: "Actions",

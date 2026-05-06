@@ -37,7 +37,7 @@ function StaffDashboard() {
       return {
         id: `al-${p.id}`,
         title: p.fullName,
-        message: isHold ? "Status: On Hold — please follow up." : `Missing documents: ${missing.join(", ")}`,
+        message: isHold ? "Status: On Hold. Please follow up." : `Missing documents: ${missing.join(", ")}`,
         severity: isHold ? "warning" as const : "danger" as const,
         time: p.session,
       };

@@ -24,14 +24,14 @@ function FinanceDashboard() {
 
   const overdue = mockPayments.filter((p) => p.status === "Overdue");
   const dueThisWeek = mockPayments.filter((p) => {
-    if (p.nextDueDate === "—") return false;
+    if (p.nextDueDate === "-") return false;
     const d = new Date(p.nextDueDate);
     const diff = daysBetween(d, today);
     return diff >= 0 && diff <= 7;
   });
 
   const recent = [...mockPayments]
-    .filter((p) => p.lastPaymentDate !== "—")
+    .filter((p) => p.lastPaymentDate !== "-")
     .sort((a, b) => b.lastPaymentDate.localeCompare(a.lastPaymentDate))
     .slice(0, 6);
 
@@ -62,7 +62,7 @@ function FinanceDashboard() {
             ) : (
               <ul className="divide-y">
                 {overdue.map((p) => {
-                  const d = p.nextDueDate !== "—" ? Math.max(0, daysBetween(today, new Date(p.nextDueDate))) : 0;
+                  const d = p.nextDueDate !== "-" ? Math.max(0, daysBetween(today, new Date(p.nextDueDate))) : 0;
                   return (
                     <li key={p.id} className="flex items-center justify-between py-3">
                       <div>
@@ -86,7 +86,7 @@ function FinanceDashboard() {
                   <li key={p.id} className="flex items-center justify-between py-3">
                     <div>
                       <p className="text-sm font-medium">{p.participantName}</p>
-                      <p className="text-xs text-muted-foreground">{last?.method ?? "—"} • {p.lastPaymentDate}</p>
+                      <p className="text-xs text-muted-foreground">{last?.method ?? "-"} • {p.lastPaymentDate}</p>
                     </div>
                     <span className="text-sm font-semibold">{SAR(last?.amount ?? p.paidAmount)}</span>
                   </li>

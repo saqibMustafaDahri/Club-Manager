@@ -41,8 +41,8 @@ function FeesPage() {
     if (sesFilter !== "all" && p.session !== sesFilter) return false;
     if (planFilter !== "all" && p.plan !== planFilter) return false;
     if (statusFilter !== "all" && p.status !== statusFilter) return false;
-    if (from && p.lastPaymentDate !== "—" && p.lastPaymentDate < from) return false;
-    if (to && p.lastPaymentDate !== "—" && p.lastPaymentDate > to) return false;
+    if (from && p.lastPaymentDate !== "-" && p.lastPaymentDate < from) return false;
+    if (to && p.lastPaymentDate !== "-" && p.lastPaymentDate > to) return false;
     return true;
   }), [locFilter, sesFilter, planFilter, statusFilter, from, to]);
 

@@ -26,7 +26,7 @@ export const Route = createFileRoute("/login")({
   },
   head: () => ({
     meta: [
-      { title: "Sign In — Neomora Club Manager" },
+      { title: "Sign In · Neomora Club Manager" },
       { name: "description", content: "Sign in to your Neomora Club Manager portal." },
     ],
   }),
@@ -64,7 +64,7 @@ function LoginPage() {
             <br /> like a pro club.
           </h2>
           <p className="mt-4 max-w-sm text-white/80">
-            One platform for participants, sessions, fees, and family communication —
+            One platform for participants, sessions, fees, and family communication.
             across every location.
           </p>
         </div>

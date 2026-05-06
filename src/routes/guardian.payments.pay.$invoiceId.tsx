@@ -53,7 +53,7 @@ function PayInvoicePage() {
       </Link>
 
       <div className="grid gap-6 lg:grid-cols-[55fr_45fr]">
-        {/* LEFT — Summary */}
+        {/* LEFT: Summary */}
         <div className="flex flex-col rounded-2xl border bg-white p-6 shadow-sm">
           <h2 className="text-lg font-semibold">Payment Summary</h2>
           <div className="mt-4 space-y-3 text-sm">
@@ -85,7 +85,7 @@ function PayInvoicePage() {
           </div>
         </div>
 
-        {/* RIGHT — Payment Method */}
+        {/* RIGHT: Payment Method */}
         <div className="relative rounded-2xl border bg-white p-6 shadow-sm">
           <h2 className="text-lg font-semibold">Choose Payment Method</h2>
           <div className="mt-4">
