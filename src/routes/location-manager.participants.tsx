@@ -115,7 +115,7 @@ function ParticipantsPage() {
         <DataTable data={filtered} columns={columns} searchPlaceholder="Quick search…" filters={filters} />
       </div>
 
-      <Sheet open={!!selected} onOpenChange={(o) => !o && setSelected(null)}>
+      {/* <Sheet open={!!selected} onOpenChange={(o) => !o && setSelected(null)}>
         <SheetContent className="w-full sm:max-w-2xl">
           {selected && <Detail p={selected} />}
         </SheetContent>
@@ -159,6 +159,72 @@ function ParticipantsPage() {
             <SheetFooter>
               <Button type="button" variant="outline" onClick={() => setAddOpen(false)}>Cancel</Button>
               <Button type="submit">Create</Button>
+            </SheetFooter>
+          </form>
+        </SheetContent>
+      </Sheet> */}
+      <Sheet open={addOpen} onOpenChange={setAddOpen}>
+        <SheetContent className="w-full sm:max-w-lg">
+          <SheetHeader className="my-4">
+            <SheetTitle>Add Participant</SheetTitle>
+            <SheetDescription>Register a new participant.</SheetDescription>
+          </SheetHeader>
+          
+          <form className="space-y-3 pb-6" onSubmit={(e) => { e.preventDefault(); setAddOpen(false); }}>
+            
+            {/* Name Fields */}
+            <div className="grid grid-cols-2 gap-3">
+              <Field label="First Name (En)"><Input name="firstNameEn" placeholder="Ahmed" /></Field>
+              <Field label="Last Name (En)"><Input name="lastNameEn" placeholder="Ali" /></Field>
+            </div>
+      
+            {/* DOB & Gender */}
+            <div className="grid grid-cols-2 gap-3">
+              <Field label="Date of Birth"><Input name="dateOfBirth" type="date" /></Field>
+              <Field label="Gender">
+                <Select name="gender">
+                  <SelectTrigger><SelectValue placeholder="Select gender" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="MALE">Male</SelectItem>
+                    <SelectItem value="FEMALE">Female</SelectItem>
+                  </SelectContent>
+                </Select>
+              </Field>
+            </div>
+      
+            {/* Phone & Location */}
+            <div className="grid grid-cols-2 gap-3">
+              <Field label="Phone"><Input name="phone" placeholder="+923110098721" /></Field>
+              <Field label="Location">
+                <Select name="locationSlug">
+                  <SelectTrigger><SelectValue placeholder="Select location" /></SelectTrigger>
+                  <SelectContent>
+                    {/* {mockLocations.map((l) => (
+                      <SelectItem key={l.id} value={l.slug}>{l.name}</SelectItem>
+                    ))} */}
+                  </SelectContent>
+                </Select>
+              </Field>
+            </div>
+      
+            <hr className="my-4 border-muted" />
+            <p className="text-sm ">Guardian Information</p>
+      
+            {/* Guardian Main Details */}
+            <div className="grid grid-cols-2 gap-3">
+              <Field label="Guardian Name"><Input name="guardian.fullName" placeholder="Mohammad Ali" /></Field>
+              <Field label="Relationship"><Input name="guardian.relationship" placeholder="Brother" /></Field>
+            </div>
+      
+            {/* Guardian Contact Details */}
+            <div className="grid grid-cols-2 gap-3">
+              <Field label="Guardian Phone"><Input name="guardian.phone" placeholder="+923220098712" /></Field>
+              <Field label="Guardian Email"><Input name="guardian.email" type="email" placeholder="muhammad.ali@gmail.com" /></Field>
+            </div>
+      
+            <SheetFooter className="pt-4">
+              <Button type="button" variant="outline" onClick={() => setAddOpen(false)}>Cancel</Button>
+              <Button type="submit">Create Participant</Button>
             </SheetFooter>
           </form>
         </SheetContent>

@@ -46,10 +46,12 @@ function CollectionPage() {
   }), [locFilter, sesFilter, planFilter, statusFilter]);
 
   const columns: Column<MockPayment>[] = [
-    { key: "participantName", header: "Participant", sortable: true,
+    {
+      key: "participantName", header: "Participant", sortable: true,
       render: (r) => (
         <button className="text-left font-medium hover:underline" onClick={() => setSelected(r)}>{r.participantName}</button>
-      ) },
+      )
+    },
     { key: "location", header: "Location" },
     { key: "session", header: "Session" },
     { key: "plan", header: "Plan" },
@@ -219,9 +221,9 @@ function CollectionPage() {
             className="space-y-3"
             onSubmit={(e) => { e.preventDefault(); setGlobalRecord(false); setParticipantQuery(""); toast.success("Payment recorded"); }}
           >
-            <Field label="Participant">
-              <Input placeholder="Search participant…" value={participantQuery} onChange={(e) => setParticipantQuery(e.target.value)} />
-              {participantQuery && (
+            <Field label="EnrolmentID">
+              <Input placeholder="EnrolmentID" />
+              {/* {participantQuery && (
                 <ul className="mt-1 max-h-40 overflow-y-auto rounded-md border bg-popover text-sm">
                   {participantMatches.map((p) => (
                     <li key={p.id}>
@@ -232,12 +234,13 @@ function CollectionPage() {
                     </li>
                   ))}
                 </ul>
-              )}
+              )} */}
             </Field>
-            <div className="grid grid-cols-2 gap-3">
-              <Field label="Amount (SAR)"><Input type="number" placeholder="0" /></Field>
-              <Field label="Date"><Input type="date" /></Field>
-            </div>
+            <Field label="InvoiceID"><Input placeholder="InvoiceID"></Input></Field>
+            {/* <div className="grid grid-cols-2 gap-3"> */}
+            <Field label="Amount (SAR)"><Input type="number" placeholder="0" /></Field>
+            {/* <Field label="Date"><Input type="date" /></Field> */}
+            {/* </div> */}
             <Field label="Method">
               <Select defaultValue="Card">
                 <SelectTrigger><SelectValue /></SelectTrigger>

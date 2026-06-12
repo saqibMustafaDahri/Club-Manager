@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as StaffRouteImport } from './routes/staff'
+import { Route as RegistrationFormRouteImport } from './routes/registration-form'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LocationManagerRouteImport } from './routes/location-manager'
 import { Route as GuardianRouteImport } from './routes/guardian'
@@ -56,6 +57,11 @@ import { Route as GuardianPaymentsPayInvoiceIdRouteImport } from './routes/guard
 const StaffRoute = StaffRouteImport.update({
   id: '/staff',
   path: '/staff',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegistrationFormRoute = RegistrationFormRouteImport.update({
+  id: '/registration-form',
+  path: '/registration-form',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -282,6 +288,7 @@ export interface FileRoutesByFullPath {
   '/guardian': typeof GuardianRouteWithChildren
   '/location-manager': typeof LocationManagerRouteWithChildren
   '/login': typeof LoginRoute
+  '/registration-form': typeof RegistrationFormRoute
   '/staff': typeof StaffRouteWithChildren
   '/admin/access': typeof AdminAccessRoute
   '/admin/dashboard': typeof AdminDashboardRoute
@@ -323,6 +330,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/registration-form': typeof RegistrationFormRoute
   '/admin/access': typeof AdminAccessRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/fees': typeof AdminFeesRoute
@@ -368,6 +376,7 @@ export interface FileRoutesById {
   '/guardian': typeof GuardianRouteWithChildren
   '/location-manager': typeof LocationManagerRouteWithChildren
   '/login': typeof LoginRoute
+  '/registration-form': typeof RegistrationFormRoute
   '/staff': typeof StaffRouteWithChildren
   '/admin/access': typeof AdminAccessRoute
   '/admin/dashboard': typeof AdminDashboardRoute
@@ -415,6 +424,7 @@ export interface FileRouteTypes {
     | '/guardian'
     | '/location-manager'
     | '/login'
+    | '/registration-form'
     | '/staff'
     | '/admin/access'
     | '/admin/dashboard'
@@ -456,6 +466,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/login'
+    | '/registration-form'
     | '/admin/access'
     | '/admin/dashboard'
     | '/admin/fees'
@@ -500,6 +511,7 @@ export interface FileRouteTypes {
     | '/guardian'
     | '/location-manager'
     | '/login'
+    | '/registration-form'
     | '/staff'
     | '/admin/access'
     | '/admin/dashboard'
@@ -546,6 +558,7 @@ export interface RootRouteChildren {
   GuardianRoute: typeof GuardianRouteWithChildren
   LocationManagerRoute: typeof LocationManagerRouteWithChildren
   LoginRoute: typeof LoginRoute
+  RegistrationFormRoute: typeof RegistrationFormRoute
   StaffRoute: typeof StaffRouteWithChildren
 }
 
@@ -556,6 +569,13 @@ declare module '@tanstack/react-router' {
       path: '/staff'
       fullPath: '/staff'
       preLoaderRoute: typeof StaffRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/registration-form': {
+      id: '/registration-form'
+      path: '/registration-form'
+      fullPath: '/registration-form'
+      preLoaderRoute: typeof RegistrationFormRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -988,8 +1008,18 @@ const rootRouteChildren: RootRouteChildren = {
   GuardianRoute: GuardianRouteWithChildren,
   LocationManagerRoute: LocationManagerRouteWithChildren,
   LoginRoute: LoginRoute,
+  RegistrationFormRoute: RegistrationFormRoute,
   StaffRoute: StaffRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}

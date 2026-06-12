@@ -106,7 +106,7 @@ function ParticipantsPage() {
         <SelectTrigger className="w-[160px]"><SelectValue placeholder="Status" /></SelectTrigger>
         <SelectContent>
           <SelectItem value="all">All Status</SelectItem>
-          {["Inquiry","Documents Pending","Fee Pending","Active","On Hold","Completed","Withdrawn"].map((s) => (
+          {["Inquiry", "Documents Pending", "Fee Pending", "Active", "On Hold", "Completed", "Withdrawn"].map((s) => (
             <SelectItem key={s} value={s}>{s}</SelectItem>
           ))}
         </SelectContent>
@@ -135,7 +135,7 @@ function ParticipantsPage() {
         />
       </div>
 
-      <Sheet open={!!selected} onOpenChange={(o) => !o && setSelected(null)}>
+      {/* <Sheet open={!!selected} onOpenChange={(o) => !o && setSelected(null)}>
         <SheetContent className="w-full sm:max-w-2xl">
           {selected && <ParticipantDetail p={selected} />}
         </SheetContent>
@@ -185,6 +185,72 @@ function ParticipantsPage() {
               </Select>
             </Field>
             <SheetFooter>
+              <Button type="button" variant="outline" onClick={() => setAddOpen(false)}>Cancel</Button>
+              <Button type="submit">Create Participant</Button>
+            </SheetFooter>
+          </form>
+        </SheetContent>
+      </Sheet> */}
+      <Sheet open={addOpen} onOpenChange={setAddOpen}>
+        <SheetContent className="w-full sm:max-w-lg">
+          <SheetHeader className="my-4">
+            <SheetTitle>Add Participant</SheetTitle>
+            <SheetDescription>Register a new participant.</SheetDescription>
+          </SheetHeader>
+
+          <form className="space-y-3 pb-6" onSubmit={(e) => { e.preventDefault(); setAddOpen(false); }}>
+
+            {/* Name Fields */}
+            <div className="grid grid-cols-2 gap-3">
+              <Field label="First Name (En)"><Input name="firstNameEn" placeholder="Ahmed" /></Field>
+              <Field label="Last Name (En)"><Input name="lastNameEn" placeholder="Ali" /></Field>
+            </div>
+
+            {/* DOB & Gender */}
+            <div className="grid grid-cols-2 gap-3">
+              <Field label="Date of Birth"><Input name="dateOfBirth" type="date" /></Field>
+              <Field label="Gender">
+                <Select name="gender">
+                  <SelectTrigger><SelectValue placeholder="Select gender" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="MALE">Male</SelectItem>
+                    <SelectItem value="FEMALE">Female</SelectItem>
+                  </SelectContent>
+                </Select>
+              </Field>
+            </div>
+
+            {/* Phone & Location */}
+            <div className="grid grid-cols-2 gap-3">
+              <Field label="Phone"><Input name="phone" placeholder="+923110098721" /></Field>
+              <Field label="Location">
+                <Select name="locationSlug">
+                  <SelectTrigger><SelectValue placeholder="Select location" /></SelectTrigger>
+                  <SelectContent>
+                    {/* {mockLocations.map((l) => (
+                <SelectItem key={l.id} value={l.slug}>{l.name}</SelectItem>
+              ))} */}
+                  </SelectContent>
+                </Select>
+              </Field>
+            </div>
+
+            <hr className="my-4 border-muted" />
+            <p className="text-sm ">Guardian Information</p>
+
+            {/* Guardian Main Details */}
+            <div className="grid grid-cols-2 gap-3">
+              <Field label="Guardian Name"><Input name="guardian.fullName" placeholder="Mohammad Ali" /></Field>
+              <Field label="Relationship"><Input name="guardian.relationship" placeholder="Brother" /></Field>
+            </div>
+
+            {/* Guardian Contact Details */}
+            <div className="grid grid-cols-2 gap-3">
+              <Field label="Guardian Phone"><Input name="guardian.phone" placeholder="+923220098712" /></Field>
+              <Field label="Guardian Email"><Input name="guardian.email" type="email" placeholder="muhammad.ali@gmail.com" /></Field>
+            </div>
+
+            <SheetFooter className="pt-4">
               <Button type="button" variant="outline" onClick={() => setAddOpen(false)}>Cancel</Button>
               <Button type="submit">Create Participant</Button>
             </SheetFooter>
@@ -316,3 +382,525 @@ function Info({ label, value }: { label: string; value: React.ReactNode }) {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { createFileRoute } from "@tanstack/react-router";
+// import { useMemo, useState, useEffect } from "react";
+// import { Download, Eye, Pencil } from "lucide-react";
+// import { PageHeader } from "@/components/PageHeader";
+// import { DataTable, type Column } from "@/components/DataTable";
+// import { StatusBadge } from "@/components/StatusBadge";
+// import { Button } from "@/components/ui/button";
+// import { Input } from "@/components/ui/input";
+// import { Label } from "@/components/ui/label";
+// import { Textarea } from "@/components/ui/textarea";
+// import {
+//   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+// } from "@/components/ui/select";
+// import {
+//   Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle,
+// } from "@/components/ui/sheet";
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+// import { participantsApi, type Participant, type Gender } from "@/api/participants";
+// import { locationsApi, type Location } from "@/api/locations";
+// import { mockPayments } from "@/data/mockPayments";
+
+// export const Route = createFileRoute("/admin/participants")({
+//   component: ParticipantsPage,
+// });
+
+// const initials = (n: string) =>
+//   n.split(" ").map((s) => s[0]).join("").slice(0, 2).toUpperCase();
+// const SAR = (n: number) => `SAR ${n.toLocaleString()}`;
+
+// function mapStatus(s: string): string {
+//   if (s === "Documents Pending" || s === "Fee Pending" || s === "Inquiry") return "Pending";
+//   return s;
+// }
+
+// function ParticipantsPage() {
+//   const [locFilter, setLocFilter] = useState("all");
+//   const [statusFilter, setStatusFilter] = useState("all");
+//   const [search, setSearch] = useState("");
+//   const [selected, setSelected] = useState<Participant | null>(null);
+//   const [addOpen, setAddOpen] = useState(false);
+
+//   // ── Real data state ──────────────────────────────────────────────────────
+//   const [participants, setParticipants] = useState<Participant[]>([]);
+//   const [locations, setLocations] = useState<Location[]>([]);
+//   const [loading, setLoading] = useState(true);
+//   const [apiError, setApiError] = useState<string | null>(null);
+
+//   // ── Add form state ───────────────────────────────────────────────────────
+//   const [form, setForm] = useState({
+//     firstNameEn: "",
+//     lastNameEn: "",
+//     dateOfBirth: "",
+//     gender: "" as Gender | "",
+//     phone: "",
+//     locationSlug: "",
+//     guardianFullName: "",
+//     guardianRelationship: "",
+//     guardianPhone: "",
+//     guardianEmail: "",
+//   });
+//   const [formLoading, setFormLoading] = useState(false);
+//   const [formError, setFormError] = useState<string | null>(null);
+
+//   // ── Fetch on mount ───────────────────────────────────────────────────────
+//   useEffect(() => {
+//     const fetchAll = async () => {
+//       try {
+//         const [pData, lData] = await Promise.all([
+//           participantsApi.getAll(),
+//           locationsApi.getAll(),
+//         ]);
+//         setParticipants(pData);
+//         setLocations(lData);
+//       } catch (err) {
+//         setApiError(err instanceof Error ? err.message : "Failed to load data.");
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+//     fetchAll();
+//   }, []);
+
+//   // ── Filtered list ────────────────────────────────────────────────────────
+//   const filtered = useMemo(() => {
+//     const q = search.toLowerCase().trim();
+//     return participants.filter((p) => {
+//       const fullName = `${p.firstNameEn} ${p.lastNameEn}`;
+//       if (locFilter !== "all" && p.locationSlug !== locFilter) return false;
+//       if (statusFilter !== "all" && p.status !== statusFilter) return false;
+//       if (q) {
+//         const hay = `${fullName} ${p.phone} ${p.uniqueId ?? ""}`.toLowerCase();
+//         if (!hay.includes(q)) return false;
+//       }
+//       return true;
+//     });
+//   }, [participants, locFilter, statusFilter, search]);
+
+//   // ── Create participant handler ────────────────────────────────────────────
+//   const handleCreate = async (e: React.FormEvent) => {
+//     e.preventDefault();
+//     if (!form.gender) { setFormError("Please select a gender."); return; }
+//     if (!form.locationSlug) { setFormError("Please select a location."); return; }
+//     setFormError(null);
+//     setFormLoading(true);
+//     try {
+//       const created = await participantsApi.register({
+//         firstNameEn: form.firstNameEn,
+//         lastNameEn: form.lastNameEn,
+//         dateOfBirth: form.dateOfBirth,
+//         gender: form.gender as Gender,
+//         phone: form.phone,
+//         locationSlug: form.locationSlug,
+//         guardian: {
+//           fullName: form.guardianFullName,
+//           relationship: form.guardianRelationship,
+//           phone: form.guardianPhone,
+//           email: form.guardianEmail,
+//         },
+//       });
+//       setParticipants((prev) => [...prev, created]);
+//       setForm({
+//         firstNameEn: "", lastNameEn: "", dateOfBirth: "", gender: "",
+//         phone: "", locationSlug: "",
+//         guardianFullName: "", guardianRelationship: "",
+//         guardianPhone: "", guardianEmail: "",
+//       });
+//       setAddOpen(false);
+//     } catch (err) {
+//       setFormError(err instanceof Error ? err.message : "Failed to register participant.");
+//     } finally {
+//       setFormLoading(false);
+//     }
+//   };
+
+//   // ── Table columns ─────────────────────────────────────────────────────────
+//   const columns: Column<Participant>[] = [
+//     {
+//       key: "firstNameEn", header: "Participant",
+//       render: (r) => {
+//         const fullName = `${r.firstNameEn} ${r.lastNameEn}`;
+//         return (
+//           <button type="button" onClick={() => setSelected(r)} className="flex items-center gap-3 text-left">
+//             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-brand/10 text-xs font-semibold text-brand">
+//               {initials(fullName)}
+//             </div>
+//             <div>
+//               <p className="text-sm font-medium text-foreground hover:text-primary">{fullName}</p>
+//               <p className="text-xs text-muted-foreground">{r.uniqueId ?? "—"}</p>
+//             </div>
+//           </button>
+//         );
+//       },
+//     },
+//     {
+//       key: "guardian", header: "Guardian",
+//       render: (r) => (r.guardian as { fullName: string })?.fullName ?? "—",
+//     },
+//     { key: "locationSlug", header: "Location" },
+//     {
+//       key: "status", header: "Status",
+//       render: (r) => <StatusBadge status={mapStatus(r.status ?? "Pending")} />,
+//     },
+//     { key: "joinedDate", header: "Joined", render: (r) => (r.joinedDate as string) ?? "—" },
+//     {
+//       key: "actions", header: "Actions",
+//       render: (r) => (
+//         <div className="flex gap-1">
+//           <Button variant="ghost" size="icon" onClick={() => setSelected(r)}>
+//             <Eye className="h-4 w-4" />
+//           </Button>
+//           <Button variant="ghost" size="icon">
+//             <Pencil className="h-4 w-4" />
+//           </Button>
+//         </div>
+//       ),
+//     },
+//   ];
+
+//   const filters = (
+//     <>
+//       <Input
+//         value={search}
+//         onChange={(e) => setSearch(e.target.value)}
+//         placeholder="Search name, phone, ID…"
+//         className="w-[220px]"
+//       />
+//       <Select value={locFilter} onValueChange={setLocFilter}>
+//         <SelectTrigger className="w-[160px]"><SelectValue placeholder="Location" /></SelectTrigger>
+//         <SelectContent>
+//           <SelectItem value="all">All Locations</SelectItem>
+//           {locations.map((l) => (
+//             <SelectItem key={l.id} value={l.id}>{l.name}</SelectItem>
+//           ))}
+//         </SelectContent>
+//       </Select>
+//       <Select value={statusFilter} onValueChange={setStatusFilter}>
+//         <SelectTrigger className="w-[160px]"><SelectValue placeholder="Status" /></SelectTrigger>
+//         <SelectContent>
+//           <SelectItem value="all">All Status</SelectItem>
+//           {["Inquiry", "Documents Pending", "Fee Pending", "Active", "On Hold", "Completed", "Withdrawn"].map((s) => (
+//             <SelectItem key={s} value={s}>{s}</SelectItem>
+//           ))}
+//         </SelectContent>
+//       </Select>
+//     </>
+//   );
+
+//   return (
+//     <>
+//       <PageHeader
+//         title="Participants"
+//         description={`${participants.length} total`}
+//         actions={
+//           <>
+//             <Button variant="outline"><Download className="mr-2 h-4 w-4" /> Export</Button>
+//             <Button onClick={() => setAddOpen(true)}>Add Participant</Button>
+//           </>
+//         }
+//       />
+
+//       <div className="p-6">
+//         {loading ? (
+//           <p className="text-sm text-muted-foreground">Loading participants…</p>
+//         ) : apiError ? (
+//           <div className="rounded-md bg-destructive/10 px-3 py-2 text-sm text-destructive">
+//             {apiError}
+//           </div>
+//         ) : (
+//           <DataTable
+//             data={filtered}
+//             columns={columns}
+//             searchPlaceholder="Quick search…"
+//             filters={filters}
+//           />
+//         )}
+//       </div>
+
+//       {/* ── Detail drawer ── */}
+//       <Sheet open={!!selected} onOpenChange={(o) => !o && setSelected(null)}>
+//         <SheetContent className="w-full sm:max-w-2xl">
+//           {selected && <ParticipantDetail p={selected} />}
+//         </SheetContent>
+//       </Sheet>
+
+//       {/* ── Add Participant drawer ── */}
+//       <Sheet open={addOpen} onOpenChange={setAddOpen}>
+//         <SheetContent className="w-full sm:max-w-lg">
+//           <SheetHeader className="my-4">
+//             <SheetTitle>Add Participant</SheetTitle>
+//             <SheetDescription>Register a new participant.</SheetDescription>
+//           </SheetHeader>
+
+//           <form className="space-y-3 pb-6" onSubmit={handleCreate}>
+
+//             {formError && (
+//               <div className="rounded-md bg-destructive/10 px-3 py-2 text-sm text-destructive">
+//                 {formError}
+//               </div>
+//             )}
+
+//             {/* Name */}
+//             <div className="grid grid-cols-2 gap-3">
+//               <Field label="First Name (En)">
+//                 <Input
+//                   placeholder="Ahmed"
+//                   value={form.firstNameEn}
+//                   onChange={(e) => setForm((f) => ({ ...f, firstNameEn: e.target.value }))}
+//                   required
+//                 />
+//               </Field>
+//               <Field label="Last Name (En)">
+//                 <Input
+//                   placeholder="Ali"
+//                   value={form.lastNameEn}
+//                   onChange={(e) => setForm((f) => ({ ...f, lastNameEn: e.target.value }))}
+//                   required
+//                 />
+//               </Field>
+//             </div>
+
+//             {/* DOB & Gender */}
+//             <div className="grid grid-cols-2 gap-3">
+//               <Field label="Date of Birth">
+//                 <Input
+//                   type="date"
+//                   value={form.dateOfBirth}
+//                   onChange={(e) => setForm((f) => ({ ...f, dateOfBirth: e.target.value }))}
+//                   required
+//                 />
+//               </Field>
+//               <Field label="Gender">
+//                 <Select
+//                   value={form.gender}
+//                   onValueChange={(val) => setForm((f) => ({ ...f, gender: val as Gender }))}
+//                 >
+//                   <SelectTrigger><SelectValue placeholder="Select gender" /></SelectTrigger>
+//                   <SelectContent>
+//                     <SelectItem value="MALE">Male</SelectItem>
+//                     <SelectItem value="FEMALE">Female</SelectItem>
+//                   </SelectContent>
+//                 </Select>
+//               </Field>
+//             </div>
+
+//             {/* Phone & Location */}
+//             <div className="grid grid-cols-2 gap-3">
+//               <Field label="Phone">
+//                 <Input
+//                   placeholder="+923110098721"
+//                   value={form.phone}
+//                   onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+//                   required
+//                 />
+//               </Field>
+//               <Field label="Location">
+//                 <Select
+//                   value={form.locationSlug}
+//                   onValueChange={(val) => setForm((f) => ({ ...f, locationSlug: val }))}
+//                 >
+//                   <SelectTrigger><SelectValue placeholder="Select location" /></SelectTrigger>
+//                   <SelectContent>
+//                     {locations.map((l) => (
+//                       <SelectItem key={l.id} value={l.id}>{l.name}</SelectItem>
+//                     ))}
+//                   </SelectContent>
+//                 </Select>
+//               </Field>
+//             </div>
+
+//             <hr className="my-4 border-muted" />
+//             <p className="text-sm">Guardian Information</p>
+
+//             {/* Guardian main */}
+//             <div className="grid grid-cols-2 gap-3">
+//               <Field label="Guardian Name">
+//                 <Input
+//                   placeholder="Mohammad Ali"
+//                   value={form.guardianFullName}
+//                   onChange={(e) => setForm((f) => ({ ...f, guardianFullName: e.target.value }))}
+//                   required
+//                 />
+//               </Field>
+//               <Field label="Relationship">
+//                 <Input
+//                   placeholder="Brother"
+//                   value={form.guardianRelationship}
+//                   onChange={(e) => setForm((f) => ({ ...f, guardianRelationship: e.target.value }))}
+//                   required
+//                 />
+//               </Field>
+//             </div>
+
+//             {/* Guardian contact */}
+//             <div className="grid grid-cols-2 gap-3">
+//               <Field label="Guardian Phone">
+//                 <Input
+//                   placeholder="+923220098712"
+//                   value={form.guardianPhone}
+//                   onChange={(e) => setForm((f) => ({ ...f, guardianPhone: e.target.value }))}
+//                   required
+//                 />
+//               </Field>
+//               <Field label="Guardian Email">
+//                 <Input
+//                   type="email"
+//                   placeholder="muhammad.ali@gmail.com"
+//                   value={form.guardianEmail}
+//                   onChange={(e) => setForm((f) => ({ ...f, guardianEmail: e.target.value }))}
+//                   required
+//                 />
+//               </Field>
+//             </div>
+
+//             <SheetFooter className="pt-4">
+//               <Button type="button" variant="outline" onClick={() => setAddOpen(false)} disabled={formLoading}>
+//                 Cancel
+//               </Button>
+//               <Button type="submit" disabled={formLoading}>
+//                 {formLoading ? "Registering…" : "Create Participant"}
+//               </Button>
+//             </SheetFooter>
+//           </form>
+//         </SheetContent>
+//       </Sheet>
+//     </>
+//   );
+// }
+
+// // ── Detail view ───────────────────────────────────────────────────────────────
+// function ParticipantDetail({ p }: { p: Participant }) {
+//   const fullName = `${p.firstNameEn} ${p.lastNameEn}`;
+//   const payments = mockPayments.filter((pp) => pp.participantId === p.id);
+//   const guardian = p.guardian as {
+//     fullName: string; relationship: string; phone: string; email: string;
+//   };
+
+//   return (
+//     <>
+//       <SheetHeader>
+//         <div className="flex items-center gap-3">
+//           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-sm font-semibold text-brand">
+//             {initials(fullName)}
+//           </div>
+//           <div className="flex-1">
+//             <SheetTitle>{fullName}</SheetTitle>
+//             <SheetDescription>{p.uniqueId ?? "—"}</SheetDescription>
+//           </div>
+//           <StatusBadge status={mapStatus(p.status ?? "Pending")} />
+//         </div>
+//       </SheetHeader>
+
+//       <div className="px-4 pb-6">
+//         <Tabs defaultValue="overview">
+//           <TabsList className="w-full">
+//             <TabsTrigger value="overview" className="flex-1">Overview</TabsTrigger>
+//             <TabsTrigger value="payments" className="flex-1">Payments</TabsTrigger>
+//             <TabsTrigger value="notes" className="flex-1">Notes</TabsTrigger>
+//           </TabsList>
+
+//           <TabsContent value="overview" className="mt-4">
+//             <div className="grid grid-cols-2 gap-3 text-sm">
+//               <Info label="Date of Birth" value={p.dateOfBirth} />
+//               <Info label="Gender" value={p.gender} />
+//               <Info label="Phone" value={p.phone} />
+//               <Info label="Location" value={p.locationSlug} />
+//               <Info label="Status" value={p.status ?? "—"} />
+//               <Info label="Joined" value={(p.joinedDate as string) ?? "—"} />
+//               <Info label="Guardian" value={guardian?.fullName ?? "—"} />
+//               <Info label="Relationship" value={guardian?.relationship ?? "—"} />
+//               <Info label="Guardian Phone" value={guardian?.phone ?? "—"} />
+//               <Info label="Guardian Email" value={guardian?.email ?? "—"} />
+//             </div>
+//           </TabsContent>
+
+//           <TabsContent value="payments" className="mt-4 space-y-3">
+//             {payments.length === 0 && (
+//               <p className="text-sm text-muted-foreground">No payment records yet.</p>
+//             )}
+//             {payments.map((pay) => (
+//               <div key={pay.id} className="rounded-lg border p-4">
+//                 <div className="grid grid-cols-2 gap-3 text-sm">
+//                   <Info label="Plan" value={pay.plan} />
+//                   <Info label="Status" value={<StatusBadge status={pay.status} />} />
+//                   <Info label="Total" value={SAR(pay.totalFee)} />
+//                   <Info label="Paid" value={SAR(pay.paidAmount)} />
+//                   <Info label="Balance" value={SAR(pay.balance)} />
+//                 </div>
+//                 {pay.invoices.length > 0 && (
+//                   <ul className="mt-3 divide-y border-t pt-3">
+//                     {pay.invoices.map((inv) => (
+//                       <li key={inv.id} className="flex items-center justify-between py-2 text-sm">
+//                         <div>
+//                           <p className="font-medium">{inv.id}</p>
+//                           <p className="text-xs text-muted-foreground">{inv.date} • {inv.method}</p>
+//                         </div>
+//                         <div className="flex items-center gap-3">
+//                           <span>{SAR(inv.amount)}</span>
+//                           <Button size="icon" variant="ghost" asChild>
+//                             <a href={inv.receiptUrl}><Download className="h-4 w-4" /></a>
+//                           </Button>
+//                         </div>
+//                       </li>
+//                     ))}
+//                   </ul>
+//                 )}
+//               </div>
+//             ))}
+//           </TabsContent>
+
+//           <TabsContent value="notes" className="mt-4 space-y-3">
+//             <p className="text-sm text-muted-foreground">No notes yet.</p>
+//             <div className="space-y-2 pt-2">
+//               <Textarea placeholder="Add a note…" />
+//               <Button size="sm">Add Note</Button>
+//             </div>
+//           </TabsContent>
+//         </Tabs>
+//       </div>
+//     </>
+//   );
+// }
+
+// function Field({ label, children }: { label: string; children: React.ReactNode }) {
+//   return <div className="space-y-1.5"><Label>{label}</Label>{children}</div>;
+// }
+// function Info({ label, value }: { label: string; value: React.ReactNode }) {
+//   return (
+//     <div className="rounded-md bg-muted/30 p-2.5">
+//       <p className="text-[11px] uppercase tracking-wide text-muted-foreground">{label}</p>
+//       <p className="mt-0.5 text-sm font-medium">{value}</p>
+//     </div>
+//   );
+// }
