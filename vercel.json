@@ -1,13 +1,6 @@
 {
-    "functions": {
-        "api/index.js": {
-            "includeFiles": "api/**"
-        }
-    },
-    "rewrites": [
-        {
-            "source": "/(.*)",
-            "destination": "/api/index.js"
-        }
-    ]
+  "outputDirectory": "dist/client",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }
