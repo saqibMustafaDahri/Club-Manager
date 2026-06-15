@@ -1,6 +1,10 @@
 {
-  "outputDirectory": "dist/client",
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
+    { "source": "/(.*)", "destination": "/api/index.js" }
+  ],
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "dist/**"
+    }
+  }
 }
