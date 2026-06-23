@@ -29,6 +29,7 @@ import { Route as StaffAttendanceRouteImport } from './routes/staff.attendance'
 import { Route as LocationManagerWaitlistRouteImport } from './routes/location-manager.waitlist'
 import { Route as LocationManagerSessionsRouteImport } from './routes/location-manager.sessions'
 import { Route as LocationManagerParticipantsRouteImport } from './routes/location-manager.participants'
+import { Route as LocationManagerEnrolmentsRouteImport } from './routes/location-manager.enrolments'
 import { Route as LocationManagerDashboardRouteImport } from './routes/location-manager.dashboard'
 import { Route as LocationManagerCommunicationsRouteImport } from './routes/location-manager.communications'
 import { Route as GuardianPaymentsRouteImport } from './routes/guardian.payments'
@@ -153,6 +154,12 @@ const LocationManagerParticipantsRoute =
   LocationManagerParticipantsRouteImport.update({
     id: '/participants',
     path: '/participants',
+    getParentRoute: () => LocationManagerRoute,
+  } as any)
+const LocationManagerEnrolmentsRoute =
+  LocationManagerEnrolmentsRouteImport.update({
+    id: '/enrolments',
+    path: '/enrolments',
     getParentRoute: () => LocationManagerRoute,
   } as any)
 const LocationManagerDashboardRoute =
@@ -309,6 +316,7 @@ export interface FileRoutesByFullPath {
   '/guardian/payments': typeof GuardianPaymentsRouteWithChildren
   '/location-manager/communications': typeof LocationManagerCommunicationsRoute
   '/location-manager/dashboard': typeof LocationManagerDashboardRoute
+  '/location-manager/enrolments': typeof LocationManagerEnrolmentsRoute
   '/location-manager/participants': typeof LocationManagerParticipantsRoute
   '/location-manager/sessions': typeof LocationManagerSessionsRoute
   '/location-manager/waitlist': typeof LocationManagerWaitlistRoute
@@ -350,6 +358,7 @@ export interface FileRoutesByTo {
   '/guardian/payments': typeof GuardianPaymentsRouteWithChildren
   '/location-manager/communications': typeof LocationManagerCommunicationsRoute
   '/location-manager/dashboard': typeof LocationManagerDashboardRoute
+  '/location-manager/enrolments': typeof LocationManagerEnrolmentsRoute
   '/location-manager/participants': typeof LocationManagerParticipantsRoute
   '/location-manager/sessions': typeof LocationManagerSessionsRoute
   '/location-manager/waitlist': typeof LocationManagerWaitlistRoute
@@ -397,6 +406,7 @@ export interface FileRoutesById {
   '/guardian/payments': typeof GuardianPaymentsRouteWithChildren
   '/location-manager/communications': typeof LocationManagerCommunicationsRoute
   '/location-manager/dashboard': typeof LocationManagerDashboardRoute
+  '/location-manager/enrolments': typeof LocationManagerEnrolmentsRoute
   '/location-manager/participants': typeof LocationManagerParticipantsRoute
   '/location-manager/sessions': typeof LocationManagerSessionsRoute
   '/location-manager/waitlist': typeof LocationManagerWaitlistRoute
@@ -445,6 +455,7 @@ export interface FileRouteTypes {
     | '/guardian/payments'
     | '/location-manager/communications'
     | '/location-manager/dashboard'
+    | '/location-manager/enrolments'
     | '/location-manager/participants'
     | '/location-manager/sessions'
     | '/location-manager/waitlist'
@@ -486,6 +497,7 @@ export interface FileRouteTypes {
     | '/guardian/payments'
     | '/location-manager/communications'
     | '/location-manager/dashboard'
+    | '/location-manager/enrolments'
     | '/location-manager/participants'
     | '/location-manager/sessions'
     | '/location-manager/waitlist'
@@ -532,6 +544,7 @@ export interface FileRouteTypes {
     | '/guardian/payments'
     | '/location-manager/communications'
     | '/location-manager/dashboard'
+    | '/location-manager/enrolments'
     | '/location-manager/participants'
     | '/location-manager/sessions'
     | '/location-manager/waitlist'
@@ -702,6 +715,13 @@ declare module '@tanstack/react-router' {
       path: '/participants'
       fullPath: '/location-manager/participants'
       preLoaderRoute: typeof LocationManagerParticipantsRouteImport
+      parentRoute: typeof LocationManagerRoute
+    }
+    '/location-manager/enrolments': {
+      id: '/location-manager/enrolments'
+      path: '/enrolments'
+      fullPath: '/location-manager/enrolments'
+      preLoaderRoute: typeof LocationManagerEnrolmentsRouteImport
       parentRoute: typeof LocationManagerRoute
     }
     '/location-manager/dashboard': {
@@ -964,6 +984,7 @@ const GuardianRouteWithChildren = GuardianRoute._addFileChildren(
 interface LocationManagerRouteChildren {
   LocationManagerCommunicationsRoute: typeof LocationManagerCommunicationsRoute
   LocationManagerDashboardRoute: typeof LocationManagerDashboardRoute
+  LocationManagerEnrolmentsRoute: typeof LocationManagerEnrolmentsRoute
   LocationManagerParticipantsRoute: typeof LocationManagerParticipantsRoute
   LocationManagerSessionsRoute: typeof LocationManagerSessionsRoute
   LocationManagerWaitlistRoute: typeof LocationManagerWaitlistRoute
@@ -973,6 +994,7 @@ interface LocationManagerRouteChildren {
 const LocationManagerRouteChildren: LocationManagerRouteChildren = {
   LocationManagerCommunicationsRoute: LocationManagerCommunicationsRoute,
   LocationManagerDashboardRoute: LocationManagerDashboardRoute,
+  LocationManagerEnrolmentsRoute: LocationManagerEnrolmentsRoute,
   LocationManagerParticipantsRoute: LocationManagerParticipantsRoute,
   LocationManagerSessionsRoute: LocationManagerSessionsRoute,
   LocationManagerWaitlistRoute: LocationManagerWaitlistRoute,

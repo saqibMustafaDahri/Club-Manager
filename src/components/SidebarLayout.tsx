@@ -46,7 +46,7 @@ export function SidebarLayout({ navItems, user, portalLabel, homePath, children 
           user={user}
           isActive={isActive}
           portalRoot={portalRoot}
-          onNavClick={() => {}}
+          onNavClick={() => { }}
         />
       </aside>
 
