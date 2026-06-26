@@ -8,34 +8,41 @@ export type StatusType =
   | "Present" | "Absent" | "Late";
 
 const styles: Record<string, string> = {
-  Active: "bg-success/10 text-success ring-success/20",
-  Paid: "bg-success/10 text-success ring-success/20",
-  Approved: "bg-success/10 text-success ring-success/20",
-  Sent: "bg-success/10 text-success ring-success/20",
-  Present: "bg-success/10 text-success ring-success/20",
+  active: "bg-success/10 text-success ring-success/20",
+  paid: "bg-success/10 text-success ring-success/20",
+  approved: "bg-success/10 text-success ring-success/20",
+  sent: "bg-success/10 text-success ring-success/20",
+  present: "bg-success/10 text-success ring-success/20",
+  open: "bg-success/10 text-success ring-success/20",
 
-  Pending: "bg-warning/10 text-warning ring-warning/20",
-  Overdue: "bg-destructive/10 text-destructive ring-destructive/20",
-  "On Hold": "bg-destructive/10 text-destructive ring-destructive/20",
-  Failed: "bg-destructive/10 text-destructive ring-destructive/20",
-  Rejected: "bg-destructive/10 text-destructive ring-destructive/20",
-  Absent: "bg-destructive/10 text-destructive ring-destructive/20",
-  Cancelled: "bg-destructive/10 text-destructive ring-destructive/20",
+  pending: "bg-warning/10 text-warning ring-warning/20",
+  overdue: "bg-destructive/10 text-destructive ring-destructive/20",
+  "on hold": "bg-destructive/10 text-destructive ring-destructive/20",
+  failed: "bg-destructive/10 text-destructive ring-destructive/20",
+  rejected: "bg-destructive/10 text-destructive ring-destructive/20",
+  absent: "bg-destructive/10 text-destructive ring-destructive/20",
+  cancelled: "bg-destructive/10 text-destructive ring-destructive/20",
 
-  Late: "bg-warning/10 text-warning ring-warning/20",
-  Draft: "bg-muted text-muted-foreground ring-border",
-  Withdrawn: "bg-muted text-muted-foreground ring-border",
+  late: "bg-warning/10 text-warning ring-warning/20",
+  maintenance: "bg-warning/10 text-warning ring-warning/20",
+  draft: "bg-muted text-muted-foreground ring-border",
+  withdrawn: "bg-muted text-muted-foreground ring-border",
+  inactive: "bg-muted text-muted-foreground ring-border",
 
-  Completed: "bg-info/10 text-info ring-info/20",
-  Scheduled: "bg-info/10 text-info ring-info/20",
-  Refunded: "bg-info/10 text-info ring-info/20",
+  completed: "bg-info/10 text-info ring-info/20",
+  scheduled: "bg-info/10 text-info ring-info/20",
+  refunded: "bg-info/10 text-info ring-info/20",
+  closed: "bg-info/10 text-info ring-info/20",
 };
 
-export function StatusBadge({ status }: { status: string }) {
-  const cls = styles[status] ?? "bg-muted text-muted-foreground ring-border";
+export function StatusBadge({ status }: { status?: string | null }) {
+  if (!status) return null;
+  const key = status.toLowerCase();
+  const cls = styles[key] ?? "bg-muted text-muted-foreground ring-border";
+  const display = status.charAt(0).toUpperCase() + status.slice(1).toLowerCase();
   return (
     <span className={cn("inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset", cls)}>
-      {status}
+      {display}
     </span>
   );
 }
