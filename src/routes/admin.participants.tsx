@@ -19,7 +19,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   participantsApi, type Participant, type Gender, type ParticipantStatus, STATUS_OPTIONS,
 } from "@/api/participants";
-import { guardianAuthApi } from "@/api/guardianAuth";
+import { guardianAuthApi } from "@/api/guardianauth";
 import { locationsApi, type Location } from "@/api/locations";
 import { sessionsApi, type Session } from "@/api/sessions";
 import { mockPayments } from "@/data/mockPayments";
