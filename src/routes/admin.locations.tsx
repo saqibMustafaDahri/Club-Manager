@@ -203,7 +203,7 @@ function LocationsPage() {
         address: form.address,
         phone: form.phone,
         capacity: Number(form.capacity),
-        status: form.status,
+        // status: form.status,
       });
       setLocations((prev) => [...prev, { ...created, enrolled: 0 }]);
       setForm({ name: "", city: "", address: "", phone: "", capacity: "", status: "active" });
@@ -451,7 +451,7 @@ function LocationsPage() {
               <Input type="number" placeholder="200" value={form.capacity}
                 onChange={(e) => setForm((f) => ({ ...f, capacity: e.target.value }))} required />
             </Field>
-            <Field label="Status">
+           {/* <Field label="Status">
               <Select value={form.status}
                 onValueChange={(val) => setForm((f) => ({ ...f, status: val as Location["status"] }))}>
                 <SelectTrigger><SelectValue /></SelectTrigger>
@@ -461,7 +461,7 @@ function LocationsPage() {
                   <SelectItem value="maintenance">Maintenance</SelectItem>
                 </SelectContent>
               </Select>
-            </Field>
+            </Field>*/}
             <SheetFooter>
               <Button type="button" variant="outline" onClick={() => setAddOpen(false)} disabled={formLoading}>Cancel</Button>
               <Button type="submit" disabled={formLoading}>{formLoading ? "Creating…" : "Create Location"}</Button>
